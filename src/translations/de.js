@@ -2,7 +2,8 @@ export const translationDE = {
     "nav": {
       "about": "Über mich",
       "home": "Zuhause",
-      "portfolio": "Mein portfolio"
+      "portfolio": "Mein portfolio",
+      contact: 'Kontakt'
     },
     "about": {
       "h1": "Hallo, mein Name ist Gustavo Bandeira.",

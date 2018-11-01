@@ -67,7 +67,7 @@ class Portfolio extends Component {
             <h2 className="page-text">{text.portfolio.h2}</h2>
           </div>
           <div className="row">
-            {state.photos.map(photo => <Image photo={photo} />)}
+            {state.photos.map((photo, index) => <Image photo={photo} key={index}/>)}
           </div>
         </div>
       </div>

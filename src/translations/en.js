@@ -2,7 +2,8 @@ export const translationEN = {
     "nav": {
       "about": "About me",
       "home": "Home",
-      "portfolio": "My portfolio"
+      "portfolio": "My portfolio",
+      contact: 'Contact'
     },
     "about": {
       "h1": "Hello, my name is Gustavo Bandeira.",

@@ -2,7 +2,8 @@ export const translationCZ = {
     "nav": {
       "about": "O mě",
       "home": "Domů",
-      "portfolio": "Mé portfolio"
+      "portfolio": "Mé portfolio",
+      contact: 'Kontakt'
     },
     "about": {
       "h1": "Ahoj, jmenuji se Gustavo Bandeira.",

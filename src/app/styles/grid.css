@@ -62,6 +62,11 @@
     margin-top: 32px;
   }
   
+  .col-md-offset-6 {
+    margin-left: 50%;
+  }
+
+
   @media (min-width: 768px) {
     .col-md-6 {
       -ms-flex: 0 0 50%;
@@ -70,6 +75,7 @@
       max-width: 50%;
     }
   
+
     [class*=col-md]:nth-of-type(n+2) {
       margin-top: 0;
     }

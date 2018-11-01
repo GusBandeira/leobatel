@@ -39,6 +39,12 @@ class Header extends Component {
                   </Link>
                 </li>
 
+                <li>
+                  <Link className='link' to="/contact" onClick={this.props.context.toggleNav}>
+                    {text.nav.contact}
+                  </Link>
+                </li>
+
                 <li className="nav-languages">
                   <a
                     className="link"

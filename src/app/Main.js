@@ -6,12 +6,15 @@ import { Route } from 'react-router-dom'
 import { MyContext } from 'context'
 
 // Import pages
-import Home from './pages/Home'
-import Portfolio from './pages/Portfolio'
-import About from './pages/About'
+import asyncComponent from "./AsyncComponent";
 
 // Import components
 import Header from './components/Header'
+const Home = asyncComponent(() => import('./pages/Home'));
+const News = asyncComponent(() => import('./pages/News'));
+const About = asyncComponent(() => import('./pages/About'));
+const Portfolio = asyncComponent(() => import('./pages/Portfolio'));
+const Contact = asyncComponent(() => import('./pages/Contact'));
 
 // Component Implementation
 const Main = () => {
@@ -24,6 +27,8 @@ const Main = () => {
       <Route exact={true} path="/" component={Home} />
       <Route path="/portfolio" component={Portfolio} />
       <Route path="/about" component={About} />
+      <Route path="/news/:id" component={News} />
+      <Route path="/contact" component={Contact} />
     </React.Fragment>
   )
 }

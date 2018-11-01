@@ -1,15 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { Link } from 'react-router-dom'
+
 const ImageLabel = styled.div`
   width: 100%;
   min-height: 50px;
   background-color: ${props => props.color || 'green'};
   color: white;
   padding: 10px;
+  cursor: ${props => props.link ? 'pointer' : 'unset'}
 `
 const ImagePhoto = styled.img`
   opacity: 0.8;
+  cursor: ${props => props.link ? 'pointer' : 'unset'}
 
   :hover {
     opacity: 1;
@@ -24,16 +28,31 @@ const ImageDescription = styled.span`
   font-size: 14px;
 `
 
-export const Image = ({ photo: { photo, name, description }}) => (
+export const ImageLink = ({ photo, photo: { link }}) => (
   <div className="col-sm-12 col-md-6 col-lg-4">
+    <Link to={link || '/'}>
+      <ImageContent photo={photo} />
+    </Link>
+  </div>
+)
+
+export const Image = ({ photo }) => (
+  <div className="col-sm-12 col-md-6 col-lg-4">
+    <ImageContent photo={photo} />
+  </div>
+)
+
+const ImageContent = ({ photo: { photo, name, description, link }}) => (
+  <React.Fragment>
     <ImagePhoto
       src={photo}
       width="100%"
       height="390"
       alt={name}
       title={name}
+      link={link}
     />
-    <ImageLabel>
+    <ImageLabel link={link}>
       <div className='row' style={{ margin: 0 }}>
         <ImageName>{name}</ImageName>
       </div>
@@ -41,5 +60,5 @@ export const Image = ({ photo: { photo, name, description }}) => (
         <ImageDescription>{description}</ImageDescription>
       </div>
     </ImageLabel>
-  </div>
+  </React.Fragment>
 )

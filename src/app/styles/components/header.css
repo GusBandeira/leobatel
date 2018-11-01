@@ -59,9 +59,13 @@ header {
   .nav-list li:nth-child(3){
     width: 280px;
   }
+  .nav-list li:nth-child(4){
+    width: 200px;
+  }
   .nav-list li:last-child{
     border: none;
   }
+
 
   
   .nav-toggler span,
