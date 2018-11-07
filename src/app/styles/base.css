@@ -1,47 +1,77 @@
 @-ms-viewport {
     width: device-width;
-  }
-  
-  html,
-  body,
-  .root {
-    width: 100%;
-    height: 100%;
-  }
-  
-  html {
-    box-sizing: border-box;
-    font-size: 100%;
-    -ms-overflow-style: scrollbar;
-  }
-  
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
-  }
-  
-  body {
-    position: relative;
-    padding: 0;
-    margin: 0;
-    font: 1rem / 1.15 'Montserrat', sans-serif;
-    background-color: hsla(0, 100%, 100%, 1);
-    -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
-  }
-  
-  [hidden] {
-    display: none;
-  }
-  
-  .root {
-    position: relative;
-  }
-  
-  a {
-    cursor: pointer;
-  }
-  
-  img {
-    max-width: 100%;
-  }
+}
+
+html,
+body,
+.root {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  -ms-overflow-style: scrollbar;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font: 1rem / 1.15 'Montserrat', sans-serif;
+  background-color: hsla(0, 100%, 100%, 1);
+  -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
+}
+
+[hidden] {
+  display: none;
+}
+
+.root {
+  position: relative;
+}
+
+a {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+label > input,
+label > textarea {
+  margin-top: 5px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+  font-family: monospace;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+  font-family: monospace;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+  font-family: monospace;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+  font-family: monospace;
+}

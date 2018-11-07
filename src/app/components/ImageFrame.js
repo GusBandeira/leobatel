@@ -28,6 +28,7 @@ const ImageDescription = styled.span`
   font-size: 14px;
 `
 
+
 export const ImageLink = ({ photo, photo: { link }}) => (
   <div className="col-sm-12 col-md-6 col-lg-4">
     <Link to={link || '/'}>

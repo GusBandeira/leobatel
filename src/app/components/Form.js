@@ -14,7 +14,22 @@ export const Input = styled.input`
   height: 35px;
   border: 1px solid #ccc;
   background-color: #fff;
+  padding: 0 10px;
+  border-radius: 5px;
+  height: 30px;
 `;
+  
+export const Textarea = styled.textarea`
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 300px;
+  height: 100px;
+  min-height: 100px;
+  max-height: 200px;
+  resize: vertical;
+  outline: none;
+`
 
 export const Button = styled.button`
   width: 300px;
@@ -40,7 +55,8 @@ export const Title2 = styled.h2`
   font-size: 1.8em;
 `;
 
-export const Text = styled.p`
+export const ErrorText = styled.p`
+  margin: 8px 5px 0px 5px;
   font-family: 'Raleway', sans-serif;
   color: ${props => props.color || '#4d4d4d'}
 `;
