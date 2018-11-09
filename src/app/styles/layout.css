@@ -1,7 +1,7 @@
 .page {
     color: hsla(0, 100%, 3%, 1);
-    margin-top: 45px;
-    padding: 30px;
+    margin-top: 35px;
+    padding: 15px;
   }
   
   .page-absolute {
@@ -12,7 +12,7 @@
   }
   
   .page-static {
-    margin-top: 60px;
+    /* margin-top: 60px; */
     padding-bottom: 60px;
   }
   

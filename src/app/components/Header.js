@@ -12,7 +12,23 @@ import withLanguage from '../withLanguage'
 
 
 const LanguageLink = styled.div`
+  cursor: pointer;
+  display: inline;
+`
+const HeaderBar = styled.div`
+  height: 45px;
+  width: 100%;
+  background-color: black;
+`
+const LinkLogo = styled.div`
+  width: 80%;
+  padding: 5px;
 
+  a {
+    color: white;
+    font-size: 28px;
+    text-decoration: none;
+  }
 `
 
 class Header extends Component {
@@ -23,6 +39,14 @@ class Header extends Component {
 
     return (
       <header className="header">
+
+        <HeaderBar className='md__show'> 
+          <LinkLogo>
+            <Link to='/'> 
+              LEO BATEL
+            </Link>
+          </LinkLogo>
+        </HeaderBar>
         <div>
           <nav className="nav-wrapper">
             {<div className={`js-nav nav ${!this.props.context.state.isNavOpen && 'js-nav-hide'}`}>
@@ -52,56 +76,53 @@ class Header extends Component {
                 </li>
 
                 <li className="nav-languages">
-                  <a
+                  <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
                     data-language="en"
                   >
                     EN
-                  </a>
+                  </LanguageLink>
 
                   <span className="nav-divider"></span>
 
-                  <a
+                  <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
                     data-language="cz"
                   >
                     CZ
-                  </a>
+                  </LanguageLink>
 
                   <span className="nav-divider"></span>
 
-                  <a
+                  <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
                     data-language="de"
                   >
                     DE
-                  </a>
+                  </LanguageLink>
 
                   <span className="nav-divider"></span>
 
-                  <a
+                  <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
                     data-language="fr"
                   >
                     FR
-                  </a>
+                  </LanguageLink>
                 </li>
               </ul>
             </div>}
 
-            <div className='nav-responsive'>
-              {/* {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'} type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}> */}
+          </nav>
               {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'} type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}>
                 <span />
                 <span />
                 <span />
               </button>}
-            </div>
-          </nav>
         </div>
       </header>
     )

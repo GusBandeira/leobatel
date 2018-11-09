@@ -30,7 +30,7 @@ const ImageDescription = styled.span`
 
 
 export const ImageLink = ({ photo, photo: { link }}) => (
-  <div className="col-sm-12 col-md-6 col-lg-4">
+  <div className="col-sm-12 col-md-6 col-lg-4 content">
     <Link to={link || '/'}>
       <ImageContent photo={photo} />
     </Link>
@@ -38,7 +38,7 @@ export const ImageLink = ({ photo, photo: { link }}) => (
 )
 
 export const Image = ({ photo }) => (
-  <div className="col-sm-12 col-md-6 col-lg-4">
+  <div className="col-sm-12 col-md-6 col-lg-4 content">
     <ImageContent photo={photo} />
   </div>
 )

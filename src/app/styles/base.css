@@ -1,3 +1,6 @@
+@import '~react-responsive-carousel/lib/styles/carousel.min.css';
+@import './components/footer.css';
+
 @-ms-viewport {
     width: device-width;
 }
@@ -28,6 +31,11 @@ body {
   font: 1rem / 1.15 'Montserrat', sans-serif;
   background-color: hsla(0, 100%, 100%, 1);
   -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
+}
+
+.content {
+  min-height: calc(100vh - 400px);
+
 }
 
 [hidden] {
