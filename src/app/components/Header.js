@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 // Import CSS
@@ -8,6 +9,11 @@ import 'app/styles/components/links.css'
 // Import translations
 import { translates }  from 'translations/translates'
 import withLanguage from '../withLanguage'
+
+
+const LanguageLink = styled.div`
+
+`
 
 class Header extends Component {
   render() {

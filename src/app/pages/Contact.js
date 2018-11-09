@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 import { Formik } from "formik";
-import { Form, Input, ErrorText, Button, Label, Textarea } from "../components/Form";
+import { Form, Input, ErrorText, Button, Label, TextareaCounter } from "../components/Form";
+
 
 export class Contact extends Component {
 
@@ -73,8 +74,8 @@ render() {
 
               <Label>
                 Mensagem *
-                <Textarea onChange={handleChange} onBlur={handleBlur} value={values.message} border={touched.message && errors.message && "1px solid red"}
-                       type="text" name="message" placeholder="Mensagem" />
+                <TextareaCounter onChange={handleChange} onBlur={handleBlur} value={values.message} border={touched.message && errors.message && "1px solid red"}
+                       type="text" name="message" placeholder="Mensagem" maxLength='250'/>
                 {touched.message && errors.message && <ErrorText color="red">{errors.message}</ErrorText>}
               </Label>
 

@@ -1,12 +1,15 @@
 import styled from 'styled-components';
+import withCounter from '../components/withCounter'
 
 // Forms, inputs, buttons
 
 export const Form = styled.form`
+  padding: 20px 0;
   width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: auto;
 `;
 
 export const Input = styled.input`
@@ -20,6 +23,7 @@ export const Input = styled.input`
 `;
   
 export const Textarea = styled.textarea`
+  border: 1px solid #ccc;
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
@@ -30,6 +34,7 @@ export const Textarea = styled.textarea`
   resize: vertical;
   outline: none;
 `
+export const TextareaCounter = withCounter(Textarea)
 
 export const Button = styled.button`
   width: 300px;
