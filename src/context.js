@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Cookie from 'universal-cookie'
 
 // Create new context
 export const MyContext = React.createContext()
@@ -11,6 +12,8 @@ export class MyProvider extends Component {
   }
 
   changeLanguage = (e) => {
+    const cookie = new Cookie()
+    cookie.set('language', e.target.dataset.language.toUpperCase())
     this.setState({
       isNavOpen: !this.state.isNavOpen,
       language: e.target.dataset.language

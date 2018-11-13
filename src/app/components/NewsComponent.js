@@ -28,14 +28,14 @@ const ImageContainer = ({ image }) => (
 
 export class NewsComponent extends Component {
 
-  renderNewsItem(item){
+  renderNewsItem(item, index){
     switch(item.type){
       case 'p': 
-        return <p>{item.content}</p>
+        return <p key={index}>{item.content}</p>
       case 'q':
-        return <Quotes sign={item.sign}>{item.content}</Quotes>
+        return <Quotes sign={item.sign} key={index}>{item.content}</Quotes>
       case 'i':
-        return <ImageContainer image={item}/>
+        return <ImageContainer image={item} key={index}/>
       default: 
         return ''
     }
@@ -45,7 +45,7 @@ export class NewsComponent extends Component {
     const { props: { news } } = this
     return (
       <div className='page'>
-        {news.map((item, index) => this.renderNewsItem(item))}
+        {news.map((item, index) => this.renderNewsItem(item, index))}
       </div>
     )
   }

@@ -9,8 +9,18 @@ import { MyContext } from 'context'
 // Import pages
 import asyncComponent from "./AsyncComponent";
 
+
+// Import Icons
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+
 // Import components
 import Header from './components/Header'
+
+// Starters 
+
+library.add(fab)
+
 const Home = asyncComponent(() => import('./pages/Home'));
 const News = asyncComponent(() => import('./pages/News'));
 const About = asyncComponent(() => import('./pages/About'));

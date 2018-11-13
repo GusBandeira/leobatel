@@ -30,7 +30,7 @@ class Portfolio extends Component {
         photo: dude,
       },
       {
-        name: 'Girl',
+        name: 'Jude',
         description: 'o.o',
         photo: girl,
       },

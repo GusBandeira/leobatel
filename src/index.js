@@ -14,6 +14,7 @@ import Main from './app/Main'
 // Import CSS
 import 'app/styles/base.css'
 import 'app/styles/layout.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Create App component
 const App = () => {

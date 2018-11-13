@@ -22,7 +22,6 @@ const QuoteSymbol = styled.span`
   font-size: 70px;
   opacity: .4;
   float: left;
-  font-family: Helvetica;
   padding-right: 20px;
   height: 40px;
 `
