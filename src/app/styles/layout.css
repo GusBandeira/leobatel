@@ -4,6 +4,20 @@
     padding: 15px;
   }
   
+  .page-header div:first-child {
+    content: "";
+    width: 100%;
+    height: 800px;
+    position: absolute;
+    background-size: cover;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    left: 0;
+  }
+  .page-header > div{
+    height: 800px;
+  }
+
   .page-absolute {
     position: absolute;
     top: 50%;

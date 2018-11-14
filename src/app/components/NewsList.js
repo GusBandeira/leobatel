@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 //Import Components
-import { ImageLink } from './ImageFrame'
+import { NewsLink } from './NewsFrame'
 
 // Import News
 import { NewsListModel } from '../Models/NewsListModel'
@@ -12,7 +12,7 @@ export class NewsList extends Component {
       <div className="page page-portfolio page-static">
         <div className="container">
           <div className="row">
-            {NewsListModel.map((photo, index) => <ImageLink photo={photo} key={index}/>)}
+            {NewsListModel.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
           </div>
         </div>
       </div>

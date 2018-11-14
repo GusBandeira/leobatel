@@ -19,7 +19,7 @@ const ImageSubtitle = styled.span`
 const ImageWrapper = styled.div`
   text-align: center;
 `
-const ImageContainer = ({ image }) => (
+const ImageContainer = ({ image, link }) => (
   <ImageWrapper>
     <NewsImage src={image.photo} alt={image.name} title={image.name}/>
     <ImageSubtitle>{image.subtitle}</ImageSubtitle>
