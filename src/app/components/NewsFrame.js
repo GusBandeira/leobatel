@@ -34,8 +34,6 @@ const ImageLabel = styled.div`
 const ImagePhoto = styled.img`
   max-height: 200px;
   width: 100%;
-
-  cursor: ${props => props.link ? 'pointer' : 'unset'}
 `
 
 const ImageName = styled.span`
