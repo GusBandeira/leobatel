@@ -5,13 +5,12 @@ import { Row, Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 const ImageLabel = styled.div`
-  width: 80%;
+  width: 100%;
   min-height: 50px;
-  background-color: ${props => props.color || 'rgb(239, 239, 239)' };
+  background-color: ${props => props.color || 'rgb(249, 249, 249)' };
   padding: 10px;
   cursor: ${props => props.link ? 'pointer' : 'unset'}
   margin: auto;
-  margin-top: 3px;
 `
 const ImagePhoto = styled.img`
   opacity: 0.8;
@@ -28,12 +27,13 @@ const ImageName = styled.span`
 const ImageDescription = styled.span`
   margin: auto;
   font-size: 14px;
-  `
-    
-  const CardCol = styled.div`
-    text-align: center;
-    margin: 10px 0;
-  `
+`
+const CardCol = styled.div`
+  text-align: center;
+  margin: 20px auto;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+`
 
 export const ImageLink = ({ photo, photo: { link }}) => (
   <Col sm={12} md={6} lg={4} >
@@ -57,7 +57,7 @@ const ImageContent = ({ photo: { photo, name, description, link }}) => (
   <React.Fragment>
     <ImagePhoto
       src={photo}
-      width="80%"
+      width="100%"
       height="300"
       alt={name}
       title={name}

@@ -9,6 +9,7 @@ export const NewsListModel = [
       description: 'Uma grande família constituida por um casal nascido na decada de 80 e tres lindos filhos. Com o nome Souza, seus descendentes se orgulham cada vez mais por representar a família.',
       photo: familyLesser,
       link: '/news/1',
+      subtitle: 'Saiba tudo que acontece com a família Souza e seu dia-a-dia: onde vivem, o que comem e como se reproduzem.',
       banner: family3
     },
     {
@@ -16,6 +17,7 @@ export const NewsListModel = [
       description: 'Uma bela família de imigrantes finlandeses, os Moderiros chegaram ao Brasil ainda novos, com sua filha recem nascida Kami, após descobrirem problemas de nascença no coração.',
       photo: familyChildrenLesser,
       link: '/news/2',
+      subtitle: 'Toda a rotina da família Medeiros em sua nova casa no Brasil: Finlandeses no Rio de Janeiro.',
       banner: family2
     },
   ]

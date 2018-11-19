@@ -10,25 +10,23 @@ const ImageLabel = styled.div`
   max-height: 100px;
   padding: 10px 0;
   margin-top: 3px;
-  font-size: 14px;
 
   span {
     margin: 0;
     display: block;
+    opacity: .6;
   }
   span:first-child {
     margin-top: 10px;
     margin-bottom: 20px;
+    opacity: 1;
   }
   a {
-    text-align: right;
-    width: 100%;
-    display: block;
-    margin-top: 5px;
-    padding-right: 15px;
+    opacity: 0.9;
 
     :hover{
       text-decoration: none;
+      opacity: 1;
     }
   }
 `
@@ -42,36 +40,15 @@ const ImagePhoto = styled.img`
 
 const ImageName = styled.span`
   font-weight: 700;
-  font-size: 16px;
+  font-size: 18px;
 `
 
 const ImageDescription = styled.span`
-  font-size: 14px;
-  line-height: 14px;
-  max-height: 43px;
+  line-height: 16px;
   text-overflow: elipsis;
   overflow: hidden;
-  position: relative; 
-  text-align: justify;  
+  position: relative;   
   margin-right: 0;
-  padding-right: 1em;
-
-  :before {
-    content: '...';
-    position: absolute;
-    right: 1px;
-    bottom: 1px;
-  }
-
-  :after {
-    content: '';
-    position: absolute;
-    right: 1px;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: white;
-  }
 `
 
 export const NewsLink = ({ photo, photo: { link }}) => (
@@ -86,7 +63,7 @@ export const NewsImage = ({ photo }) => (
   </Col>
 )
 
-const ImageContent = ({ photo: { photo, name, description, link }}) => (
+const ImageContent = ({ photo: { photo, name, subtitle, link }}) => (
   <React.Fragment>
     <ImagePhoto
       src={photo}
@@ -98,8 +75,8 @@ const ImageContent = ({ photo: { photo, name, description, link }}) => (
     />
     <ImageLabel link={link}>
       <ImageName>{name}</ImageName>
-      <ImageDescription>{description}</ImageDescription>
-      <Link to={link || '/'}> Leia mais </Link>
+      <ImageDescription>{subtitle}&nbsp;<Link to={link || '/'}> Leia mais... </Link></ImageDescription>
+      
     </ImageLabel>
   </React.Fragment>
 )

@@ -13,6 +13,7 @@
     background-position: 50%;
     background-repeat: no-repeat;
     left: 0;
+    top: 5px;
   }
   .page-header > div{
     height: 800px;
