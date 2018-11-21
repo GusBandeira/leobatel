@@ -10,11 +10,9 @@ export class NewsList extends Component {
   render() {
     return (
       <div className="page page-portfolio page-static">
-        <div className="container">
           <div className="row">
             {NewsListModel.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
           </div>
-        </div>
       </div>
     )
   }

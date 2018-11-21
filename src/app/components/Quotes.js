@@ -10,7 +10,6 @@ const QuoteContainer = styled.div`
   display: flex;
   padding: 10px;
   margin: 40px 0;
-  margin-left: 50%;
 `
 const QuoteText = styled.span`
   word-break: break-word;
@@ -33,7 +32,7 @@ const QuoteSign = styled.div`
 `
 
 export const Quotes = props => (
-  <QuoteContainer className="col-md-offset-6 col-sm-12 col-md-6" position={props.position}>
+  <QuoteContainer>
     <QuoteStyle />
     <QuoteText>
       <QuoteSymbol>""</QuoteSymbol>

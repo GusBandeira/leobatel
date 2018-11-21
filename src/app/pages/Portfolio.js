@@ -61,7 +61,6 @@ class Portfolio extends Component {
 
     return (
       <div className="page page-portfolio page-static">
-        <div className="container">
           <div>
             <h1 className="page-heading-h2">{text.portfolio.h1}</h1>
             <h2 className="page-text">{text.portfolio.h2}</h2>
@@ -69,7 +68,6 @@ class Portfolio extends Component {
           <div className="row">
             {state.photos.map((photo, index) => <Image photo={photo} key={index}/>)}
           </div>
-        </div>
       </div>
     )
   }

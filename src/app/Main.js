@@ -2,6 +2,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Footer from '../app/components/Footer'
+import { Container } from 'reactstrap'
 
 // Import Context
 import { MyContext } from 'context'
@@ -35,13 +36,13 @@ const Main = () => {
         {context => <Header context={context}/>}
       </MyContext.Consumer>
 
-      <div className='content'>
+      <Container className="content">
         <Route exact={true} path="/" component={Home} />
         <Route path="/portfolio" component={Portfolio} />
         <Route path="/about" component={About} />
         <Route path="/news/:id" component={News} />
         <Route path="/contact" component={Contact} />
-      </div>
+      </Container>
 
       <Footer />
     </React.Fragment>

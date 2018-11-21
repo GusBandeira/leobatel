@@ -31,7 +31,14 @@ const ImageDescription = styled.span`
 const CardCol = styled.div`
   text-align: center;
   margin: 20px auto;
-  width: 80%;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  @media only screen and (min-width: 1200px){
+    width: 80%;
+  }
 `
 
 export const ImageLink = ({ photo, photo: { link }}) => (

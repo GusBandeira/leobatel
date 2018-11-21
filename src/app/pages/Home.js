@@ -13,6 +13,7 @@ import { NewsListModel } from '../Models/NewsListModel'
 
 const BannerImage = styled.img`
   object-fit: cover;
+  object-position: 30% 30%;
   height: 600px;
   width: 100vw;
 `

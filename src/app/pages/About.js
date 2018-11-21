@@ -13,9 +13,7 @@ import 'app/styles/pages/about.css'
 class About extends React.Component {
   render() {    
     return (
-      <div className="page page-about">
         <NewsList />
-      </div>
     )
   }
 }
