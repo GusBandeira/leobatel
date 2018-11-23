@@ -26,6 +26,19 @@ const ImageContainer = ({ image, link }) => (
   </ImageWrapper>
 )
 
+const CoverImage = styled.div`
+  height: 400px;
+  margin -10px 0 30px;;
+
+  img {
+    object-fit: cover;
+    object-position: 20% 20%;
+    height: 400px;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+  }
+`
 export class NewsComponent extends Component {
 
   renderNewsItem(item, index){
@@ -36,6 +49,12 @@ export class NewsComponent extends Component {
         return <Quotes sign={item.sign} key={index}>{item.content}</Quotes>
       case 'i':
         return <ImageContainer image={item} key={index}/>
+      case 'c':
+        return (
+          <CoverImage key={index}>
+            <img src={item.content} alt={item.name}/>
+          </CoverImage>
+        )
       default: 
         return ''
     }
@@ -45,6 +64,7 @@ export class NewsComponent extends Component {
     const { props: { news } } = this
     return (
       <div className='page'>
+        
         {news.map((item, index) => this.renderNewsItem(item, index))}
       </div>
     )

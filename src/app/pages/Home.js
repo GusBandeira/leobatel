@@ -1,15 +1,18 @@
 import React from 'react'
 import  { Link } from 'react-router-dom'
 import  styled from 'styled-components'
+import { Row } from 'reactstrap'
 
 // Import translations
 import withLanguage from '../withLanguage'
 
 // Components
 import { Carousel } from 'react-responsive-carousel'
+import { NewsLink } from '../components/NewsFrame'
 
 // Data
 import { NewsListModel } from '../Models/NewsListModel'
+import { HomeNewsList } from '../Models/HomeNews'
 
 const BannerImage = styled.img`
   object-fit: cover;
@@ -18,9 +21,15 @@ const BannerImage = styled.img`
   width: 100vw;
 `
 const BannerShadow = styled.div`
--webkit-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
--moz-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  bottom: 0;
+  color: transparent;
+
+  -webkit-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
+  -moz-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
+  box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
 `
 const BannerTitle = styled.div`
   height: 300px !important;
@@ -29,6 +38,8 @@ const BannerTitle = styled.div`
   color: white;
   padding-top: 100px;
   display: inline-grid;
+  left: 10%;
+  right: 10%;
 
   span {
     text-align: center;
@@ -48,8 +59,8 @@ class Home extends React.Component {
   renderCarousel(list) {
     return list.map(banner => (
       <Link to={banner.link}>
-        <BannerShadow>
-          <BannerTitle>
+        <BannerShadow/>
+          <BannerTitle className='row'>
             <span>
               {banner.name}
             </span>
@@ -57,7 +68,6 @@ class Home extends React.Component {
               {banner.subtitle}
             </span>
           </BannerTitle>
-        </BannerShadow>
         <BannerImage src={banner.banner} alt={banner.name} height='600'/>
       </Link>
     ))
@@ -67,10 +77,12 @@ class Home extends React.Component {
     return (
           <div className="page page-home">
             <div className="page-header">
-              <div></div>
               <Carousel showThumbs={false} infiniteLoop autoPlay stopOnHover={false} interval={10000} showStatus={false}>
                 {this.renderCarousel(NewsListModel)}
               </Carousel>
+              <Row>
+                {HomeNewsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
+              </Row>
             </div>
           </div>
     )

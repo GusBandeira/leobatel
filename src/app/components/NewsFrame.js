@@ -5,11 +5,9 @@ import { Col } from 'reactstrap'
 import { Link } from 'react-router-dom'
 
 const ImageLabel = styled.div`
-  width: 100%;
-  min-height: 50px;
-  max-height: 100px;
   padding: 10px 0;
   margin-top: 3px;
+  margin-bottom: 25px;
 
   span {
     margin: 0;
@@ -32,6 +30,7 @@ const ImageLabel = styled.div`
 `
 
 const ImagePhoto = styled.img`
+  margin-top: 15px;
   max-height: 200px;
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -45,11 +44,6 @@ const ImageName = styled.span`
 `
 
 const ImageDescription = styled.span`
-  line-height: 16px;
-  text-overflow: elipsis;
-  overflow: hidden;
-  position: relative;   
-  margin-right: 0;
 `
 
 export const NewsLink = ({ photo, photo: { link }}) => (
