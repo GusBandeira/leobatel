@@ -5,7 +5,7 @@ import { translates }  from 'translations/translates'
 import withLanguage from '../withLanguage'
 
 //Import Components
-import { Image } from '../components/ImageFrame'
+import { Image, CoverImage } from '../components/ImageFrame'
 
 // Import images
 import sir from '../../images/sir.jpg'
@@ -14,6 +14,7 @@ import girl from '../../images/girl.jpg'
 import napa from '../../images/napa.jpg'
 import silvio from '../../images/silvio.jpg'
 import belchior from '../../images/belchior.jpg'
+import group from '../../images/Group.png'
 
 class Portfolio extends Component {
 
@@ -61,6 +62,9 @@ class Portfolio extends Component {
 
     return (
       <div className="page page-portfolio page-static">
+          <CoverImage>
+            <img src={group} alt={'Imagem do grupo'}/>
+          </CoverImage>
           <div>
             <h1 className="page-heading-h2">{text.portfolio.h1}</h1>
             <h2 className="page-text">{text.portfolio.h2}</h2>

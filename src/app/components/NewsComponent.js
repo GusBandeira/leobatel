@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { Quotes } from './Quotes'
+import { CoverImage } from './ImageFrame'
 
 const NewsImage = styled.img`
   margin: auto;
@@ -19,6 +20,15 @@ const ImageSubtitle = styled.span`
 const ImageWrapper = styled.div`
   text-align: center;
 `
+const Title = styled.h2`
+  text-align: center;
+`
+const SubTitle = styled.h5`
+  text-align: center;
+  opacity: 0.8;
+  margin-bottom: 30px;
+`
+
 const ImageContainer = ({ image, link }) => (
   <ImageWrapper>
     <NewsImage src={image.photo} alt={image.name} title={image.name}/>
@@ -26,19 +36,7 @@ const ImageContainer = ({ image, link }) => (
   </ImageWrapper>
 )
 
-const CoverImage = styled.div`
-  height: 400px;
-  margin -10px 0 30px;;
 
-  img {
-    object-fit: cover;
-    object-position: 20% 20%;
-    height: 400px;
-    width: 100vw;
-    position: absolute;
-    left: 0;
-  }
-`
 export class NewsComponent extends Component {
 
   renderNewsItem(item, index){
@@ -55,6 +53,10 @@ export class NewsComponent extends Component {
             <img src={item.content} alt={item.name}/>
           </CoverImage>
         )
+      case 't':
+        return <Title>{item.content}</Title>
+      case 's':
+        return <SubTitle>{item.content}</SubTitle>
       default: 
         return ''
     }

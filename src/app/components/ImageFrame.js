@@ -4,6 +4,20 @@ import { Row, Col } from 'reactstrap'
 
 import { Link } from 'react-router-dom'
 
+
+export const CoverImage = styled.div`
+  height: 400px;
+  margin -10px 0 30px;;
+
+  img {
+    object-fit: cover;
+    object-position: 20% 20%;
+    height: 400px;
+    width: 100vw;
+    position: absolute;
+    left: 0;
+  }
+`
 const ImageLabel = styled.div`
   width: 100%;
   min-height: 50px;

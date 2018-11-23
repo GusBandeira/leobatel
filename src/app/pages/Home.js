@@ -57,8 +57,8 @@ const BannerTitle = styled.div`
 class Home extends React.Component {
   
   renderCarousel(list) {
-    return list.map(banner => (
-      <Link to={banner.link}>
+    return list.map((banner, index) => (
+      <Link to={banner.link} key={index}>
         <BannerShadow/>
           <BannerTitle className='row'>
             <span>
