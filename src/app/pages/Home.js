@@ -16,7 +16,7 @@ import { HomeNewsList } from '../Models/HomeNews'
 
 const BannerImage = styled.img`
   object-fit: cover;
-  object-position: 30% 30%;
+  object-position: ${props => props.coverCenter || "30% 30%"};
   height: 600px;
   width: 100vw;
 `
@@ -27,16 +27,16 @@ const BannerShadow = styled.div`
   bottom: 0;
   color: transparent;
 
-  -webkit-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
-  -moz-box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
-  box-shadow: inset 0px -300px 300px -115px rgba(0,0,0,0.9);
+  -webkit-box-shadow: inset 0px -225px 300px -65px rgba(0,0,0,0.9);
+  -moz-box-shadow: inset 0px -225px 300px -65px rgba(0,0,0,0.9);
+  box-shadow: inset 0px -225px 300px -65px rgba(0,0,0,0.9);
 `
 const BannerTitle = styled.div`
   height: 300px !important;
   position: absolute;
   top: 50% !important;
   color: white;
-  padding-top: 100px;
+  padding-top: 150px;
   display: inline-grid;
   left: 10%;
   right: 10%;
@@ -49,9 +49,18 @@ const BannerTitle = styled.div`
   span:first-child{
     font-size: 36px;
     margin: auto;
+    
   }
   span:nth-child(2){
     font-size: 22px;
+  }
+  @media screen and (max-width: 576px) {
+    span:first-child{
+      font-size: 22px;
+    }
+    span:nth-child(2){
+      font-size: 16px;
+    }
   }
 `
 class Home extends React.Component {
@@ -68,7 +77,7 @@ class Home extends React.Component {
               {banner.subtitle}
             </span>
           </BannerTitle>
-        <BannerImage src={banner.banner} alt={banner.name} height='600'/>
+        <BannerImage src={banner.banner} alt={banner.name} height='600' coverCenter={banner.coverCenter}/>
       </Link>
     ))
   }

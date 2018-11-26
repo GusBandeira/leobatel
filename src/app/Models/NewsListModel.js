@@ -2,6 +2,7 @@ import familyLesser from '../../images/familyLesser.jpg'
 import familyChildrenLesser from '../../images/familyChildrenLesser.jpg'
 import family2 from '../../images/family2.jpg'
 import family3 from '../../images/family3.jpg'
+import Crotalarias from '../../images/Crotalarias.jpg'
 
 export const NewsListModel = [ 
     {
@@ -19,5 +20,14 @@ export const NewsListModel = [
       link: '/news/2',
       subtitle: 'Toda a rotina da família Medeiros em sua nova casa no Brasil: Finlandeses no Rio de Janeiro.',
       banner: family2
+    },
+    {
+      name: 'Plantação de Crotalárias',
+      description: 'Nesta tarde de domingo, foi realizado o cultivo das Crotalárias para combate a dengue.',
+      photo: Crotalarias,
+      link: '/news/2',
+      subtitle: 'Nesta tarde de domingo, foi realizado o cultivo das Crotalárias para combate a dengue.',
+      banner: Crotalarias,
+      coverCenter: '60% 60%'
     },
   ]
