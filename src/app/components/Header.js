@@ -58,14 +58,14 @@ class Header extends Component {
                 </li>
 
                 <li>
-                  <Link className='link' to="/portfolio" onClick={this.props.context.toggleNav}> 
-                    {text.nav.portfolio}
+                  <Link className='link' to="/members" onClick={this.props.context.toggleNav}> 
+                    {text.nav.members}
                   </Link>
                 </li>
 
                 <li>
-                  <Link className='link' to="/about" onClick={this.props.context.toggleNav}>
-                    {text.nav.about}
+                  <Link className='link' to="/campaigns" onClick={this.props.context.toggleNav}>
+                    {text.nav.campaigns}
                   </Link>
                 </li>
 
@@ -89,29 +89,9 @@ class Header extends Component {
                   <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
-                    data-language="cz"
+                    data-language="pt"
                   >
-                    CZ
-                  </LanguageLink>
-
-                  <span className="nav-divider"></span>
-
-                  <LanguageLink
-                    className="link"
-                    onClick={this.props.context.changeLanguage}
-                    data-language="de"
-                  >
-                    DE
-                  </LanguageLink>
-
-                  <span className="nav-divider"></span>
-
-                  <LanguageLink
-                    className="link"
-                    onClick={this.props.context.changeLanguage}
-                    data-language="fr"
-                  >
-                    FR
+                    PT
                   </LanguageLink>
                 </li>
               </ul>

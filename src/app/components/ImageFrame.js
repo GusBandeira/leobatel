@@ -11,7 +11,7 @@ export const CoverImage = styled.div`
 
   img {
     object-fit: cover;
-    object-position: 20% 20%;
+    object-position: ${props => props.cover || '20% 20%'};
     height: 400px;
     width: 100vw;
     position: absolute;
@@ -56,21 +56,21 @@ const CardCol = styled.div`
 `
 
 export const ImageLink = ({ photo, photo: { link }}) => (
-  <Col sm={12} md={6} lg={4} >
-    <CardCol>
-      <Link to={link || '/'}>
-        <ImageContent photo={photo} />
-      </Link>
-    </CardCol>
-  </Col>
+    <Col sm={12} md={6} lg={4} data-aos="fade-down">
+      <CardCol>
+        <Link to={link || '/'}>
+          <ImageContent photo={photo} />
+        </Link>
+      </CardCol>
+    </Col>
 )
 
 export const Image = ({ photo }) => (
-  <Col sm={12} md={6} lg={4} >
-    <CardCol>
-      <ImageContent photo={photo} />
-    </CardCol>
-  </Col>
+    <Col sm={12} md={6} lg={4} data-aos="fade-down">
+      <CardCol>
+        <ImageContent photo={photo} />
+      </CardCol>
+    </Col>
 )
 
 const ImageContent = ({ photo: { photo, name, description, link }}) => (

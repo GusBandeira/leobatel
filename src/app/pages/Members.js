@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import AOS from 'aos'
 
 // Import translations
 import { translates }  from 'translations/translates'
@@ -16,7 +17,11 @@ import silvio from '../../images/silvio.jpg'
 import belchior from '../../images/belchior.jpg'
 import group from '../../images/Group.png'
 
-class Portfolio extends Component {
+class Members extends Component {
+
+  componentDidMount(){
+    AOS.init();
+  }
 
   state = {
     photos: [ 
@@ -53,8 +58,6 @@ class Portfolio extends Component {
     ]
   }
 
-
-
   render() {
 
     const { state, props: { language } } = this
@@ -66,8 +69,8 @@ class Portfolio extends Component {
             <img src={group} alt={'Imagem do grupo'}/>
           </CoverImage>
           <div>
-            <h1 className="page-heading-h2">{text.portfolio.h1}</h1>
-            <h2 className="page-text">{text.portfolio.h2}</h2>
+            <h1 className="page-heading-h2">{text.members.h1}</h1>
+            <h2 className="page-text">{text.members.h2}</h2>
           </div>
           <div className="row">
             {state.photos.map((photo, index) => <Image photo={photo} key={index}/>)}
@@ -77,4 +80,4 @@ class Portfolio extends Component {
   }
 }
 
-export default withLanguage(Portfolio)
+export default withLanguage(Members)

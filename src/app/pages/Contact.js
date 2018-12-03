@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 import { Formik } from "formik";
 import { Form, Input, ErrorText, Button, Label, TextareaCounter } from "../components/Form";
-
+import { CoverImage } from '../components/ImageFrame'
+import friends from '../../images/friends.jpg'
 
 export class Contact extends Component {
 
@@ -36,7 +37,10 @@ export class Contact extends Component {
 render() {
     return (
       <div className='page'>
-      <Formik
+        <CoverImage>
+          <img src={friends} alt='contact' />
+        </CoverImage>
+        <Formik
           initialValues={{ email: "", password: "" }}
           validate={this.validate}
           onSubmit={values => {

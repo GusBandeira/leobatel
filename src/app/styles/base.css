@@ -80,3 +80,16 @@ label > textarea {
   opacity: 0.8;
   font-size: 14px;
 }
+
+.carousel .control-dots {
+  padding: 0;
+  display: none;
+}
+.carousel .control-dots .dot{
+  background: green; 
+}
+.carousel.carousel-slider {
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.75);
+}

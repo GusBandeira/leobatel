@@ -24,8 +24,8 @@ library.add(fab)
 
 const Home = asyncComponent(() => import('./pages/Home'));
 const News = asyncComponent(() => import('./pages/News'));
-const About = asyncComponent(() => import('./pages/About'));
-const Portfolio = asyncComponent(() => import('./pages/Portfolio'));
+const Campaigns = asyncComponent(() => import('./pages/Campaigns'));
+const Members = asyncComponent(() => import('./pages/Members'));
 const Contact = asyncComponent(() => import('./pages/Contact'));
 
 // Component Implementation
@@ -38,8 +38,8 @@ const Main = () => {
 
       <Container className="content">
         <Route exact={true} path="/" component={Home} />
-        <Route path="/portfolio" component={Portfolio} />
-        <Route path="/about" component={About} />
+        <Route path="/members" component={Members} />
+        <Route path="/campaigns" component={Campaigns} />
         <Route path="/news/:id" component={News} />
         <Route path="/contact" component={Contact} />
       </Container>

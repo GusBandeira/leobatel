@@ -1,5 +1,5 @@
 import React from 'react'
-
+import AOS from 'aos'
 import withLanguage from '../withLanguage'
 
 //Import Components
@@ -14,7 +14,12 @@ import 'app/styles/grid.css'
 import 'app/styles/components/links.css'
 import 'app/styles/pages/about.css'
 
-class About extends React.Component {
+class Campaigns extends React.Component {
+
+  componentDidMount(){
+    AOS.init();
+  }
+
   render() {    
     return (
         <React.Fragment>
@@ -27,4 +32,4 @@ class About extends React.Component {
   }
 }
 
-export default withLanguage(About)
+export default withLanguage(Campaigns)

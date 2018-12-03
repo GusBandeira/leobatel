@@ -49,14 +49,14 @@ export class NewsComponent extends Component {
         return <ImageContainer image={item} key={index}/>
       case 'c':
         return (
-          <CoverImage key={index}>
+          <CoverImage key={index} cover={item.cover}>
             <img src={item.content} alt={item.name}/>
           </CoverImage>
         )
       case 't':
-        return <Title>{item.content}</Title>
+        return <Title key={index}>{item.content}</Title>
       case 's':
-        return <SubTitle>{item.content}</SubTitle>
+        return <SubTitle key={index}>{item.content}</SubTitle>
       default: 
         return ''
     }

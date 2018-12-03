@@ -11,7 +11,7 @@ const withLanguage = (Component) => {
             return (
                 <MyContext.Consumer>
                     {context => (
-                        <Component {...this.props} withLanguage={context} language={context.language.toUpperCase() || language || 'DE'} />  
+                        <Component {...this.props} withLanguage={context} language={context.language.toUpperCase() || language || 'PT'} />  
                     )}
                 </MyContext.Consumer>
             )

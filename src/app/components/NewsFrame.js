@@ -47,13 +47,13 @@ const ImageDescription = styled.span`
 `
 
 export const NewsLink = ({ photo, photo: { link }}) => (
-  <Col sm={12} md={6} lg={4} >
+  <Col sm={12} md={6} lg={4} data-aos="fade-down">
     <ImageContent photo={photo} />
   </Col>
 )
 
 export const NewsImage = ({ photo }) => (
-  <Col sm={12} md={6} lg={4} >
+  <Col sm={12} md={6} lg={4} data-aos="fade-down">
     <ImageContent photo={photo} />
   </Col>
 )

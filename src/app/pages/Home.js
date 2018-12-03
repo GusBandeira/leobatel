@@ -2,6 +2,7 @@ import React from 'react'
 import  { Link } from 'react-router-dom'
 import  styled from 'styled-components'
 import { Row } from 'reactstrap'
+import AOS from 'aos'
 
 // Import translations
 import withLanguage from '../withLanguage'
@@ -16,20 +17,20 @@ import { HomeNewsList } from '../Models/HomeNews'
 
 const BannerImage = styled.img`
   object-fit: cover;
-  object-position: ${props => props.coverCenter || "30% 30%"};
+  object-position: ${props => props.cover || "30% 30%"};
   height: 600px;
   width: 100vw;
 `
 const BannerShadow = styled.div`
   width: 100%;
-  height: 400px;
+  height: 600px;
   position: absolute;
   bottom: 0;
   color: transparent;
 
-  -webkit-box-shadow: inset 0px -225px 300px -65px rgba(0,0,0,0.9);
-  -moz-box-shadow: inset 0px -225px 300px -65px rgba(0,0,0,0.9);
-  box-shadow: inset 0px -225px 300px -65px rgba(0,0,0,0.9);
+  -webkit-box-shadow: inset 0px -225px 300px -100px rgba(30, 30, 30, 0.9);
+  -moz-box-shadow: inset 0px -225px 300px -100px rgba(30, 30, 30, 0.9);
+  box-shadow: inset 0px -225px 300px -100px rgba(30, 30, 30, 0.9);
 `
 const BannerTitle = styled.div`
   height: 300px !important;
@@ -65,6 +66,10 @@ const BannerTitle = styled.div`
 `
 class Home extends React.Component {
   
+  componentDidMount() {
+    AOS.init();
+  }
+
   renderCarousel(list) {
     return list.map((banner, index) => (
       <Link to={banner.link} key={index}>
@@ -77,7 +82,7 @@ class Home extends React.Component {
               {banner.subtitle}
             </span>
           </BannerTitle>
-        <BannerImage src={banner.banner} alt={banner.name} height='600' coverCenter={banner.coverCenter}/>
+        <BannerImage src={banner.banner} alt={banner.name} height='600' cover={banner.cover}/>
       </Link>
     ))
   }
