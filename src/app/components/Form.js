@@ -1,19 +1,17 @@
+import React from 'react'
 import styled from 'styled-components';
 import withCounter from '../components/withCounter'
+import { Row, Col } from 'reactstrap'
 
-// Forms, inputs, buttons
-
-export const Form = styled.form`
-  padding: 20px 0;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-`;
+export const FormRow = (props) => (
+  <Row>
+    <Col lg={{ offset: props.offset, size: props.size }} sm="12">
+      {props.children}
+    </Col>
+  </Row>
+)
 
 export const Input = styled.input`
-  width: 300px;
   height: 35px;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -27,7 +25,6 @@ export const Textarea = styled.textarea`
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
-  width: 300px;
   height: 100px;
   min-height: 100px;
   max-height: 200px;
@@ -37,14 +34,11 @@ export const Textarea = styled.textarea`
 export const TextareaCounter = withCounter(Textarea)
 
 export const Button = styled.button`
-  width: 300px;
   height: 35px;
   background-color: #5995ef;
   color: #fff;
   border-radius: 3px;
 `;
-
-// Text
 
 export const Title = styled.h1`
   font-weight: 600;
@@ -59,8 +53,22 @@ export const Title2 = styled.h2`
 `;
 
 export const ErrorText = styled.p`
-  margin: 8px 5px 0px 5px;
-  color: ${props => props.color || '#4d4d4d'}
+    font-size: 12px;
+    font-size: .85714rem;
+    margin: 0;
+    color: ${props => props.color || "#ff4031"};
+    height: ${props => props.error ? "15px" : 0};
+    opacity: ${props => props.error ? 1 : 0};
+    visibility: ${props => props.error ? "visible" : "hidden"};
+    -webkit-transform: ${props => props.error ? "translateX(0)" : "translateX(2%)"};
+    -ms-transform: ${props => props.error ? "translateX(0)" : "translateX(2%)"};
+    transform: ${props => props.error ? "translateX(0)" : "translateX(2%)"};
+    overflow: hidden;
+    -webkit-transition: opacity .2s ease .2s,visibility .2s ease .2s,height .2s ease-in,-webkit-transform .2s ease-in .2s;
+    transition: opacity .2s ease .2s,visibility .2s ease .2s,height .2s ease-in,-webkit-transform .2s ease-in .2s;
+    -o-transition: opacity .2s ease .2s,visibility .2s ease .2s,transform .2s ease-in .2s,height .2s ease-in;
+    transition: opacity .2s ease .2s,visibility .2s ease .2s,transform .2s ease-in .2s,height .2s ease-in;
+    transition: opacity .2s ease .2s,visibility .2s ease .2s,transform .2s ease-in .2s,height .2s ease-in,-webkit-transform .2s ease-in .2s;
 `;
 
 export const Label = styled.label`
@@ -68,6 +76,5 @@ export const Label = styled.label`
   flex-direction: column;
   color: #777;
   font-size: 0.8em;
-  margin: 0.5em 0;
   position: relative;
 `;
