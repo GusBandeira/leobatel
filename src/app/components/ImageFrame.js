@@ -66,17 +66,17 @@ export const ImageLink = ({ photo, photo: { link }}) => (
 )
 
 export const Image = ({ photo }) => (
-    <Col sm={12} md={6} lg={4} data-aos="fade-down">
-      <CardCol>
-        <ImageContent photo={photo} />
-      </CardCol>
-    </Col>
+  <Col sm={12} md={6} lg={4} data-aos="fade-down">
+    <CardCol>
+      <ImageContent photo={photo} />
+    </CardCol>
+  </Col>
 )
 
 const ImageContent = ({ photo: { photo, name, description, link }}) => (
   <React.Fragment>
     <ImagePhoto
-      src={photo}
+      src={`data:image/png;base64, ${photo}`}
       width="100%"
       height="300"
       alt={name}

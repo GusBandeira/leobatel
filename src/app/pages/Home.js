@@ -11,8 +11,10 @@ import withLanguage from '../withLanguage'
 import { Carousel } from 'react-responsive-carousel'
 import { NewsLink } from '../components/NewsFrame'
 
+// Import Service
+import NewsService from '../../services/news'
+
 // Data
-import { NewsListModel } from '../Models/NewsListModel'
 import { HomeNewsList } from '../Models/HomeNews'
 
 const BannerImage = styled.img`
@@ -64,10 +66,36 @@ const BannerTitle = styled.div`
     }
   }
 `
+const CarousselContainer = styled.div`
+  height: 600px;
+`
 class Home extends React.Component {
   
+  state = {
+    newsList: [],
+    homeNewsList: []
+  }
+
   componentDidMount() {
     AOS.init();
+    this.getNewsList('news');
+    this.getNewsList('home');
+  }
+
+  getNewsList = async(context) => {
+    try {
+      if(context === 'news'){
+        const { data } = await NewsService.getNewsList()
+        this.setState({ newsList: data })
+      }
+      else if(context === 'home'){
+        const { data } = await NewsService.getHomeList()
+        this.setState({ homeNewsList: data })
+      }
+    }
+    catch(e){
+      console.log('falha ao gerar lista de notícias')
+    }
   }
 
   renderCarousel(list) {
@@ -82,23 +110,28 @@ class Home extends React.Component {
               {banner.subtitle}
             </span>
           </BannerTitle>
-        <BannerImage src={banner.banner} alt={banner.name} height='600' cover={banner.cover}/>
+        <BannerImage src={`data:image/png;base64, ${banner.banner}`} alt={banner.name} height='600' cover={banner.cover}/>
       </Link>
     ))
   }
 
   render() {
+
+    const { state } = this;
+
     return (
-          <div className="page page-home">
-            <div className="page-header">
-              <Carousel showThumbs={false} infiniteLoop autoPlay stopOnHover={false} interval={10000} showStatus={false}>
-                {this.renderCarousel(NewsListModel)}
-              </Carousel>
-              <Row>
-                {HomeNewsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
-              </Row>
-            </div>
-          </div>
+      <div className="page page-home">
+        <div className="page-header">
+          <CarousselContainer>
+            <Carousel showThumbs={false} infiniteLoop autoPlay stopOnHover={false} interval={10000} showStatus={false}>
+              {this.renderCarousel(state.newsList)}
+            </Carousel>
+          </CarousselContainer>
+          <Row>
+            {state.homeNewsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
+          </Row>
+        </div>
+      </div>
     )
   }
 }

@@ -8,54 +8,32 @@ import withLanguage from '../withLanguage'
 //Import Components
 import { Image, CoverImage } from '../components/ImageFrame'
 
+// Import Service
+import MembersService from '../../services/members'
+
 // Import images
-import sir from '../../images/sir.jpg'
-import dude from '../../images/dude.jpg'
-import girl from '../../images/girl.jpg'
-import napa from '../../images/napa.jpg'
-import silvio from '../../images/silvio.jpg'
-import belchior from '../../images/belchior.jpg'
 import group from '../../images/Group.png'
 
 class Members extends Component {
 
-  componentDidMount(){
-    AOS.init();
+  state = {
+    membersList: [],
+    photos: []
   }
 
-  state = {
-    photos: [ 
-      {
-        name: 'Sir',
-        description: 'Senhor dos anos 50',
-        photo: sir,
-      },
-      {
-        name: 'Dude',
-        description: 'Eae rapá',
-        photo: dude,
-      },
-      {
-        name: 'Jude',
-        description: 'o.o',
-        photo: girl,
-      },
-      {
-        name: 'Napa',
-        description: 'Luciana Huck',
-        photo: napa,
-      },
-      {
-        name: 'Silivo',
-        description: 'Ma oe, quem quer dinheiro?',
-        photo: silvio,
-      },
-      {
-        name: 'Belchior',
-        description: 'Apenas um rapaz latino americano',
-        photo: belchior,
-      }
-    ]
+  componentDidMount(){
+    AOS.init();
+    this.getNewsList();
+  }
+
+  getNewsList = async() => {
+    try {
+      const { data } = await MembersService.getMembersList()
+      this.setState({ membersList: data })
+    }
+    catch(e){
+      console.log('falha ao gerar lista de notícias')
+    }
   }
 
   render() {
@@ -73,7 +51,7 @@ class Members extends Component {
             <h2 className="page-text">{text.members.h2}</h2>
           </div>
           <div className="row">
-            {state.photos.map((photo, index) => <Image photo={photo} key={index}/>)}
+            {state.membersList && state.membersList.map((photo, index) => <Image photo={photo} key={index}/>)}
           </div>
       </div>
     )

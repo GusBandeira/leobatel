@@ -59,19 +59,19 @@ export const NewsImage = ({ photo }) => (
 )
 
 const ImageContent = ({ photo: { photo, name, subtitle, link }}) => (
-  <React.Fragment>
-    <ImagePhoto
-      src={photo}
-      width="80%"
-      height="300"
-      alt={name}
-      title={name}
-      link={link}
-    />
-    <ImageLabel link={link}>
-      <ImageName>{name}</ImageName>
-      <ImageDescription>{subtitle}&nbsp;<Link to={link || '/'}> Leia mais... </Link></ImageDescription>
-      
-    </ImageLabel>
-  </React.Fragment>
-)
+    <React.Fragment>
+      <ImagePhoto
+        src={`data:image/png;base64, ${photo}`}
+        width="80%"
+        height="300"
+        alt={name}
+        title={name}
+        link={link}
+      />
+      <ImageLabel link={link}>
+        <ImageName>{name}</ImageName>
+        <ImageDescription>{subtitle}&nbsp;<Link to={link || '/'}> Leia mais... </Link></ImageDescription>
+        
+      </ImageLabel>
+    </React.Fragment>
+  )

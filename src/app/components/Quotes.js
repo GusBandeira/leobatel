@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Row, Col } from 'reactstrap'
 
 const QuoteStyle = styled.div`
   padding: 3px;
@@ -32,14 +33,18 @@ const QuoteSign = styled.div`
 `
 
 export const Quotes = props => (
-  <QuoteContainer>
-    <QuoteStyle />
-    <QuoteText>
-      <QuoteSymbol>""</QuoteSymbol>
-      {props.children}
-      <QuoteSign>
-        {props.sign}
-      </QuoteSign>
-    </QuoteText>
-  </QuoteContainer>
+  <Row>
+    <Col lg={{ offset: 2, size: 8 }} sm={12}>
+      <QuoteContainer>
+        <QuoteStyle />
+        <QuoteText>
+          <QuoteSymbol>""</QuoteSymbol>
+          {props.children}
+          <QuoteSign>
+            {props.sign}
+          </QuoteSign>
+        </QuoteText>
+      </QuoteContainer>
+    </Col>
+  </Row>
 )

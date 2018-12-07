@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { NewsExpanded } from '../Models/NewsModel'
 import NewsComponent from '../components/NewsComponent'
 
+
 export class News extends Component {
   render() {
 
