@@ -5,10 +5,10 @@ export const validate = values => {
         errors.name = 'Insira seu nome!';
     } 
     if (!values.subject) {
-        errors.subject = 'Insira seu nome!';
+        errors.subject = 'Insira um assunto!';
     } 
     if (!values.message) {
-        errors.message = 'Insira seu nome!';
+        errors.message = 'Insira uma mensagem!';
     } 
 
     if (!values.email) {

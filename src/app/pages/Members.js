@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import AOS from 'aos'
 
 // Import translations
-import { translates }  from 'translations/translates'
+//import { translates }  from 'translations/translates'
 import withLanguage from '../withLanguage'
 
 //Import Components
@@ -22,7 +22,7 @@ class Members extends Component {
   }
 
   componentDidMount(){
-    AOS.init();
+    AOS.init({ once: true });
     this.getNewsList();
   }
 
@@ -38,18 +38,13 @@ class Members extends Component {
 
   render() {
 
-    const { state, props: { language } } = this
-    const text = translates[`translation${language}`]
+    const { state } = this
 
     return (
       <div className="page page-portfolio page-static">
           <CoverImage>
             <img src={group} alt={'Imagem do grupo'}/>
           </CoverImage>
-          <div>
-            <h1 className="page-heading-h2">{text.members.h1}</h1>
-            <h2 className="page-text">{text.members.h2}</h2>
-          </div>
           <div className="row">
             {state.membersList && state.membersList.map((photo, index) => <Image photo={photo} key={index}/>)}
           </div>

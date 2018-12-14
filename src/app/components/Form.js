@@ -31,13 +31,25 @@ export const Textarea = styled.textarea`
   resize: vertical;
   outline: none;
 `
-export const TextareaCounter = withCounter(Textarea)
+export const TextareaCounter = withCounter(props => <Textarea {...props} />)
 
 export const Button = styled.button`
   height: 35px;
-  background-color: #5995ef;
+  background-color: hsl(140, 100%, 30%);
   color: #fff;
   border-radius: 3px;
+  border: none;
+  width: 100px;
+  float: ${props => props.right ? 'right' : "none"};
+  cursor: pointer;
+
+  :hover{
+    background-color: hsl(120, 60%, 50%);
+  }
+
+  @media screen and (max-width: 768px){
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`

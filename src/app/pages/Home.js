@@ -20,7 +20,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    AOS.init();
+    AOS.init({ once: true });
     this.getNewsList('news');
     this.getNewsList('home');
   }

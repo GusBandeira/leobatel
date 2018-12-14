@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
+import { Title, SubTitle, ImageWrapper, ImageSubtitle } from '../components/Page.js'
 import { Quotes } from './Quotes'
 import { CoverImage } from './ImageFrame'
 
@@ -9,25 +10,7 @@ const NewsImage = styled.img`
   max-height: 500px;
   text-align: center;
 `
-const ImageSubtitle = styled.span`
-  width: 100%;
-  margin: auto;
-  font-weight: 700;
-  text-align: center;
-  display: block;
-  padding: 20px 0;
-`
-const ImageWrapper = styled.div`
-  text-align: center;
-`
-const Title = styled.h2`
-  text-align: center;
-`
-const SubTitle = styled.h5`
-  text-align: center;
-  opacity: 0.8;
-  margin-bottom: 30px;
-`
+
 
 const ImageContainer = ({ image, link }) => (
   <ImageWrapper>
@@ -66,7 +49,6 @@ export class NewsComponent extends Component {
     const { props: { news } } = this
     return (
       <div className='page'>
-        
         {news.map((item, index) => this.renderNewsItem(item, index))}
       </div>
     )

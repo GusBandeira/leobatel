@@ -14,10 +14,10 @@ import 'app/styles/grid.css'
 import 'app/styles/components/links.css'
 import 'app/styles/pages/about.css'
 
-class Campaigns extends React.Component {
+class NewsPageList extends React.Component {
 
   componentDidMount(){
-    AOS.init();
+    AOS.init({ once: true });
   }
 
   render() {    
@@ -32,4 +32,4 @@ class Campaigns extends React.Component {
   }
 }
 
-export default withLanguage(Campaigns)
+export default withLanguage(NewsPageList)

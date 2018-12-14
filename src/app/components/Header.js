@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { Container } from 'reactstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Import CSS
 import 'app/styles/components/header.css'
@@ -9,6 +11,9 @@ import 'app/styles/components/links.css'
 // Import translations
 import { translates }  from 'translations/translates'
 import withLanguage from '../withLanguage'
+
+// Import Image
+import LEOLogo from '../../images/LEOLogo.png'
 
 
 const LanguageLink = styled.div`
@@ -30,6 +35,21 @@ const LinkLogo = styled.div`
     text-decoration: none;
   }
 `
+const Logo = styled.div`
+  img{
+    position: absolute;
+    top: 10px;
+    left: 280px;
+  }
+`
+const MenuListItem = styled.li`
+  a {
+    margin: auto;
+    span{
+      margin-left: 10px;
+    }
+  }
+`
 
 class Header extends Component {
   render() {
@@ -47,35 +67,55 @@ class Header extends Component {
             </Link>
           </LinkLogo>
         </HeaderBar>
-        <div>
+        <Container>
           <nav className="nav-wrapper">
             {<div className={`js-nav nav ${!this.props.context.state.isNavOpen && 'js-nav-hide'}`}>
+              <Logo>
+                <Link className='link' to="/" onClick={this.props.context.toggleNav}>
+                  <img src={LEOLogo} alt="LEO Logo" width="100" height="100"/>
+                </Link>
+              </Logo>
               <ul className="nav-list">
-                <li>
-                  <Link className='link' to="/" onClick={this.props.context.toggleNav}>
-                    {text.nav.home}
+                <MenuListItem>
+                  <Link className='link' to="/about" onClick={this.props.context.toggleNav}> 
+                    <FontAwesomeIcon icon={['fas', 'info-circle']} />
+                    <span>{text.nav.about}</span>
                   </Link>
-                </li>
-
-                <li>
-                  <Link className='link' to="/members" onClick={this.props.context.toggleNav}> 
-                    {text.nav.members}
+                </MenuListItem>
+                <MenuListItem>
+                  <Link className='link' to="/members" onClick={this.props.context.toggleNav}>
+                    <FontAwesomeIcon icon={['fas', 'user-circle']} />
+                    <span>{text.nav.members}</span>
                   </Link>
-                </li>
-
-                <li>
-                  <Link className='link' to="/campaigns" onClick={this.props.context.toggleNav}>
-                    {text.nav.campaigns}
+                </MenuListItem>
+                <MenuListItem>
+                  <Link className='link' to="/projects" onClick={this.props.context.toggleNav}>
+                    <FontAwesomeIcon icon={['fas', 'cannabis']} />
+                    <span>{text.nav.projects}</span>
                   </Link>
-                </li>
-
-                <li>
+                </MenuListItem>
+                <MenuListItem>
+                  <Link className='link' to="/news" onClick={this.props.context.toggleNav}>
+                    <FontAwesomeIcon icon={['fas', 'globe-americas']} />
+                    <span>{text.nav.news}</span>
+                  </Link>
+                </MenuListItem>
+                <MenuListItem>
                   <Link className='link' to="/contact" onClick={this.props.context.toggleNav}>
-                    {text.nav.contact}
+                    <FontAwesomeIcon icon={['fas', 'paw']} />
+                    <span>{text.nav.join}</span>
                   </Link>
-                </li>
-
-                <li className="nav-languages">
+                </MenuListItem>
+              </ul>
+            </div>}
+          </nav>
+              {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'} type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}>
+                <span />
+                <span />
+                <span />
+              </button>}
+        </Container>
+              <div>
                   <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
@@ -93,17 +133,7 @@ class Header extends Component {
                   >
                     PT
                   </LanguageLink>
-                </li>
-              </ul>
-            </div>}
-
-          </nav>
-              {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'} type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}>
-                <span />
-                <span />
-                <span />
-              </button>}
-        </div>
+              </div>
       </header>
     )
   }

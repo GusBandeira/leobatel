@@ -16,7 +16,7 @@ html {
   box-sizing: border-box;
   font-size: 100%;
   -ms-overflow-style: scrollbar;
-  font-family: 'Helvetica', monospace;
+  font-family: 'Montserrat';
 }
 
 *,
@@ -29,7 +29,7 @@ body {
   position: relative;
   padding: 0;
   margin: 0;
-  font: 1rem / 1.15 'Helvetica', monospace !important;
+  font: 1rem / 1.15 'Montserrat' !important;
   background-color: hsla(0, 100%, 100%, 1);
   -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
 }
@@ -58,6 +58,14 @@ img {
 label > input,
 label > textarea {
   margin-top: 5px;
+}
+
+.no-padding{
+  padding: 0 !important;
+}
+
+.margin-auto{
+  margin: auto;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */

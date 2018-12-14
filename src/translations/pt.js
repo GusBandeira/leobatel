@@ -1,20 +1,18 @@
 export const translationPT = {
     "nav": {
-      "campaigns": "Campanhas",
-      "home": "Home",
+      "about": "Sobre",
       "members": "Membros",
-      contact: 'Contato'
+      "projects": 'Projetos',
+      "news": 'Notícias',
+      "join": 'Seja um LEO'
     },
-    "campaigns": {
-      "h1": "Olá, meu nome é Gustavo Bandeira.",
-      "p": "I'm a web designer and developer from Sydney with over 10 years experience. I have a passion for creating beautiful, intuitive and highly crafted solutions. I have wide ranging experience in web design and development. Previously, I worked at Instagram and Square, both in San Francisco."
+    "contact": {
+      title: 'Entre em contato!'
     },
-    "home": {
-      "h1": "Hello, I'm Gustavo.",
-      "h2": "I am a web designer and developer."
+    about: {
+      title: "Sobre nós"
     },
-    "members": {
-      "h1": "Here are the most recent examples of my work.",
-      "h2": "If you want to see more, please contact me by mail or on social media links on about page."
+    LEO: {
+      title: "O que é o LEO?"
     }
   }

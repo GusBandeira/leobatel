@@ -14,19 +14,23 @@ import asyncComponent from "./AsyncComponent";
 // Import Icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 
 // Import components
 import Header from './components/Header'
 
 // Starters 
 
-library.add(fab)
+library.add(fab, fas)
 
 const Home = asyncComponent(() => import('./pages/Home'));
 const News = asyncComponent(() => import('./pages/News'));
-const Campaigns = asyncComponent(() => import('./pages/Campaigns'));
+const NewsPageList = asyncComponent(() => import('./pages/NewsPageList'));
 const Members = asyncComponent(() => import('./pages/Members'));
 const Contact = asyncComponent(() => import('./pages/Contact'));
+const Projects = asyncComponent(() => import('./pages/Projects'));
+const About = asyncComponent(() => import('./pages/About'));
+const LEO = asyncComponent(() => import('./pages/LEO'));
 
 // Component Implementation
 const Main = () => {
@@ -39,9 +43,12 @@ const Main = () => {
       <Container className="content">
         <Route exact={true} path="/" component={Home} />
         <Route path="/members" component={Members} />
-        <Route path="/campaigns" component={Campaigns} />
+        <Route exact path="/news" component={NewsPageList} />
         <Route path="/news/:id" component={News} />
+        <Route exact path="/projects" component={Projects} />
         <Route path="/contact" component={Contact} />
+        <Route path="/about" component={About} />
+        <Route path="/LEO" component={LEO} />
       </Container>
 
       <Footer />

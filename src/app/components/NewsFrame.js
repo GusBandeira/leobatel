@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom'
 
 const ImageLabel = styled.div`
   padding: 10px 0;
-  margin-top: 3px;
-  margin-bottom: 25px;
+  margin-top: 5px;
 
   span {
     margin: 0;
