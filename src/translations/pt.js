@@ -4,7 +4,7 @@ export const translationPT = {
       "members": "Membros",
       "projects": 'Projetos',
       "news": 'Notícias',
-      "join": 'Seja um LEO'
+      "join": 'Seja LEO'
     },
     "contact": {
       title: 'Entre em contato!'

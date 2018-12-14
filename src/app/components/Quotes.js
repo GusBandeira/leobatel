@@ -20,6 +20,7 @@ const QuoteText = styled.span`
 `
 const QuoteSymbol = styled.span`
   font-size: 70px;
+  font-weight: 700;
   opacity: .4;
   float: left;
   padding-right: 20px;

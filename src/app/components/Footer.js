@@ -27,9 +27,6 @@ const SocialLink = styled.a`
     color: unset;
   }
 `
-const SocialContainer = styled.div`
-  margin: auto;
-`
 
 class Footer extends Component {
   render() {

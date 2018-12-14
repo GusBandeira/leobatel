@@ -16,30 +16,29 @@ import withLanguage from '../withLanguage'
 import LEOLogo from '../../images/LEOLogo.png'
 
 
-const LanguageLink = styled.div`
-  cursor: pointer;
-  display: inline;
-`
+// const LanguageLink = styled.div`
+//   cursor: pointer;
+//   display: inline;
+// `
 const HeaderBar = styled.div`
   height: 45px;
+  background-color: green;
   width: 100%;
-  background-color: black;
+  text-align: center;
+  position: absolute;
 `
 const LinkLogo = styled.div`
-  width: 80%;
-  padding: 5px;
 
-  a {
-    color: white;
-    font-size: 28px;
-    text-decoration: none;
-  }
 `
 const Logo = styled.div`
-  img{
-    position: absolute;
-    top: 10px;
-    left: 280px;
+
+`
+const Menu = styled.div`
+  width: 90%;
+  text-align: right;
+
+  @media screen and (max-width: 1200px) {
+    width: 85%;
   }
 `
 const MenuListItem = styled.li`
@@ -59,54 +58,53 @@ class Header extends Component {
 
     return (
       <header className="header">
-
         <HeaderBar className='md__show'> 
-          <LinkLogo>
-            <Link to='/'> 
-              LEO BATEL
-            </Link>
-          </LinkLogo>
+          <Link to='/'> 
+            <img src={LEOLogo} alt="LEO Logo" width="100" height="100"/>
+          </Link>
         </HeaderBar>
         <Container>
           <nav className="nav-wrapper">
             {<div className={`js-nav nav ${!this.props.context.state.isNavOpen && 'js-nav-hide'}`}>
-              <Logo>
+              <Logo className="lg__show">
                 <Link className='link' to="/" onClick={this.props.context.toggleNav}>
                   <img src={LEOLogo} alt="LEO Logo" width="100" height="100"/>
                 </Link>
               </Logo>
-              <ul className="nav-list">
-                <MenuListItem>
-                  <Link className='link' to="/about" onClick={this.props.context.toggleNav}> 
-                    <FontAwesomeIcon icon={['fas', 'info-circle']} />
-                    <span>{text.nav.about}</span>
-                  </Link>
-                </MenuListItem>
-                <MenuListItem>
-                  <Link className='link' to="/members" onClick={this.props.context.toggleNav}>
-                    <FontAwesomeIcon icon={['fas', 'user-circle']} />
-                    <span>{text.nav.members}</span>
-                  </Link>
-                </MenuListItem>
-                <MenuListItem>
-                  <Link className='link' to="/projects" onClick={this.props.context.toggleNav}>
-                    <FontAwesomeIcon icon={['fas', 'cannabis']} />
-                    <span>{text.nav.projects}</span>
-                  </Link>
-                </MenuListItem>
-                <MenuListItem>
-                  <Link className='link' to="/news" onClick={this.props.context.toggleNav}>
-                    <FontAwesomeIcon icon={['fas', 'globe-americas']} />
-                    <span>{text.nav.news}</span>
-                  </Link>
-                </MenuListItem>
-                <MenuListItem>
-                  <Link className='link' to="/contact" onClick={this.props.context.toggleNav}>
-                    <FontAwesomeIcon icon={['fas', 'paw']} />
-                    <span>{text.nav.join}</span>
-                  </Link>
-                </MenuListItem>
-              </ul>
+              <Menu>
+                <ul className="nav-list">
+                  <MenuListItem>
+                    <Link className='link' to="/about" onClick={this.props.context.toggleNav}> 
+                      <FontAwesomeIcon icon={['fas', 'info-circle']} />
+                      <span>{text.nav.about}</span>
+                    </Link>
+                  </MenuListItem>
+                  <MenuListItem>
+                    <Link className='link' to="/members" onClick={this.props.context.toggleNav}>
+                      <FontAwesomeIcon icon={['fas', 'user-circle']} />
+                      <span>{text.nav.members}</span>
+                    </Link>
+                  </MenuListItem>
+                  <MenuListItem>
+                    <Link className='link' to="/projects" onClick={this.props.context.toggleNav}>
+                      <FontAwesomeIcon icon={['fas', 'cannabis']} />
+                      <span>{text.nav.projects}</span>
+                    </Link>
+                  </MenuListItem>
+                  <MenuListItem>
+                    <Link className='link' to="/news" onClick={this.props.context.toggleNav}>
+                      <FontAwesomeIcon icon={['fas', 'globe-americas']} />
+                      <span>{text.nav.news}</span>
+                    </Link>
+                  </MenuListItem>
+                  <MenuListItem>
+                    <Link className='link' to="/contact" onClick={this.props.context.toggleNav}>
+                      <FontAwesomeIcon icon={['fas', 'paw']} />
+                      <span>{text.nav.join}</span>
+                    </Link>
+                  </MenuListItem>
+                </ul>
+              </Menu>
             </div>}
           </nav>
               {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'} type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}>
@@ -115,7 +113,7 @@ class Header extends Component {
                 <span />
               </button>}
         </Container>
-              <div>
+              {/* <div>
                   <LanguageLink
                     className="link"
                     onClick={this.props.context.changeLanguage}
@@ -133,7 +131,7 @@ class Header extends Component {
                   >
                     PT
                   </LanguageLink>
-              </div>
+              </div> */}
       </header>
     )
   }
