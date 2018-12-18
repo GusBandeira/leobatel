@@ -12,9 +12,10 @@ import { MyProvider } from 'context'
 import Main from './app/Main'
 
 // Import CSS
-import 'app/styles/base.css'
+import 'app/styles/base.scss'
 import 'app/styles/layout.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-block-ui/style.css';
 
 // Create App component
 const App = () => {

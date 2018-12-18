@@ -11,6 +11,12 @@ const CopyRight = styled.div`
   padding: 20px 0;
   font-size: 12px;
 
+  img {
+    @media screen and (max-width: 768px) {
+      margin-bottom: 10px;
+    }
+  }
+
   svg{
     margin: 0 10px;
     cursor: pointer;

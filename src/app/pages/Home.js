@@ -1,6 +1,7 @@
 import React from 'react'
 import { Row } from 'reactstrap'
 import AOS from 'aos'
+import BlockUi from 'react-block-ui';
 
 // Import translations
 import withLanguage from '../withLanguage'
@@ -11,34 +12,42 @@ import { NewsLink } from '../components/NewsFrame'
 
 // Import Service
 import NewsService from '../../services/news'
+import LoadingContent from '../components/LoadingContent';
 
 class Home extends React.Component {
   
   state = {
-    newsList: [],
+    bannerList: [],
     homeNewsList: []
   }
 
   componentDidMount() {
     AOS.init({ once: true });
-    this.getNewsList('news');
-    this.getNewsList('home');
+    this.getBannerList();
+    this.getNewsList();
   }
 
-  getNewsList = async(context) => {
+  getBannerList = async() => {
     try {
-      if(context === 'news'){
-        const { data } = await NewsService.getNewsList()
-        this.setState({ newsList: data })
-      }
-      else if(context === 'home'){
-        const { data } = await NewsService.getHomeList()
-        this.setState({ homeNewsList: data })
-      }
+        this.setState({ bannerList: [], bannerLoading: true })
+        const { data } = await NewsService.getBannerList()
+        this.setState({ bannerList: data, bannerLoading: false })
+    } catch(e){
+      this.setState({ bannerList: [], bannerLoading: false })
+      //TODO: Mensagem de erro
+      console.log('falha ao gerar lista de banners')
     }
-    catch(e){
-      console.log('falha ao gerar lista de notícias')
-    }
+  }
+  
+  getNewsList = async(context) => {
+    this.setState({ newsList: [], newsLoading: true })
+    const { data } = await NewsService.getNewsList()
+    this.setState({ newsList: data, newsLoading: false })
+  }
+  catch(e){
+    this.setState({ newsList: [], newsLoading: false })
+    //TODO: Mensagem de erro
+    console.log('falha ao gerar lista de notícias')
   }
 
   render() {
@@ -46,14 +55,14 @@ class Home extends React.Component {
     const { state } = this;
 
     return (
-      <div className="page page-home">
-        <div className="page-header">
-          <Carousel list={state.newsList} />
-          <Row>
-            {state.homeNewsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
-          </Row>
-        </div>
-      </div>
+      <BlockUi tag="div" blocking={state.bannerLoading} renderChildren={false} className="page page-home" loader={<span className="custom-loader loading g margin-auto" />}>
+        <Carousel list={state.bannerList}/>
+        <Row>
+          <LoadingContent isLoading={state.newsLoading}>
+            {state.newsList && state.newsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
+          </LoadingContent>
+        </Row>
+      </BlockUi>
     )
   }
 }

@@ -7,6 +7,7 @@ import withLanguage from '../withLanguage'
 
 //Import Components
 import { Image, CoverImage } from '../components/ImageFrame'
+import LoadingContent from '../components/LoadingContent'
 
 // Import Service
 import MembersService from '../../services/members'
@@ -18,7 +19,7 @@ class Members extends Component {
 
   state = {
     membersList: [],
-    photos: []
+    membersLoading: false
   }
 
   componentDidMount(){
@@ -28,8 +29,9 @@ class Members extends Component {
 
   getNewsList = async() => {
     try {
+      this.setState({ membersLoading: true })
       const { data } = await MembersService.getMembersList()
-      this.setState({ membersList: data })
+      this.setState({ membersList: data, membersLoading: false })
     }
     catch(e){
       console.log('falha ao gerar lista de notícias')
@@ -45,9 +47,11 @@ class Members extends Component {
           <CoverImage>
             <img src={group} alt={'Imagem do grupo'}/>
           </CoverImage>
-          <div className="row">
-            {state.membersList && state.membersList.map((photo, index) => <Image photo={photo} key={index}/>)}
-          </div>
+          <LoadingContent isLoading={state.membersLoading} className="margin-auto">
+            <div className="row">
+              {state.membersList && state.membersList.map((photo, index) => <Image photo={photo} key={index}/>)}
+            </div>
+          </LoadingContent>
       </div>
     )
   }

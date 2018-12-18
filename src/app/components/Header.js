@@ -37,8 +37,12 @@ const Menu = styled.div`
   width: 90%;
   text-align: right;
 
+
   @media screen and (max-width: 1200px) {
     width: 85%;
+  }
+  @media screen and (max-width: 768px) {
+    margin: 0 auto;
   }
 `
 const MenuListItem = styled.li`

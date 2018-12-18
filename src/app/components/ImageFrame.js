@@ -27,7 +27,7 @@ const ImageLabel = styled.div`
   margin: auto;
 `
 const ImagePhoto = styled.img`
-  opacity: 0.8;
+  opacity: 1;
   cursor: ${props => props.link ? 'pointer' : 'unset'}
 
   :hover {
