@@ -195,3 +195,28 @@ $load-lista: (
     transform: rotate(360deg);
   }
 }
+
+
+/**
+ * Custom Modal
+ */
+
+.modal-content{
+  padding: 10px 25px;
+}
+
+.modal-body{
+  padding: 1.5rem 1rem !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+  margin: auto;
+}
+
+ @media screen and (min-width: 576px){
+   .modal-dialog {
+      max-width: 500px;
+      margin: 14.75rem auto !important;
+   }
+ }

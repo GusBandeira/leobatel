@@ -35,6 +35,7 @@ class Members extends Component {
     }
     catch(e){
       console.log('falha ao gerar lista de notícias')
+      this.setState({ membersList: [], membersLoading: false })
     }
   }
 

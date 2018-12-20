@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 // Import Components
 import { BannerImage, BannerShadow, BannerTitle, CarousselContainer } from '../components/Banner'
-import LoadingContent from './LoadingContent';
 
 export class Carousel extends Component {
 
@@ -27,7 +26,7 @@ export class Carousel extends Component {
 
   render() {
 
-    const { props: { list, isLoading } } = this;
+    const { props: { list } } = this;
 
     return (
         <CarousselContainer>

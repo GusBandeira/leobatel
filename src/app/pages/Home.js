@@ -18,7 +18,9 @@ class Home extends React.Component {
   
   state = {
     bannerList: [],
-    homeNewsList: []
+    homeNewsList: [],
+    bannerLoading: false,
+    cardsLoading: false,
   }
 
   componentDidMount() {
@@ -40,12 +42,12 @@ class Home extends React.Component {
   }
   
   getNewsList = async(context) => {
-    this.setState({ newsList: [], newsLoading: true })
-    const { data } = await NewsService.getNewsList()
-    this.setState({ newsList: data, newsLoading: false })
+    this.setState({ homeCards: [], cardsLoading: true })
+    const { data } = await NewsService.getHomeCards()
+    this.setState({ homeCards: data, cardsLoading: false })
   }
   catch(e){
-    this.setState({ newsList: [], newsLoading: false })
+    this.setState({ homeCards: [], cardsLoading: false })
     //TODO: Mensagem de erro
     console.log('falha ao gerar lista de notícias')
   }
@@ -58,8 +60,8 @@ class Home extends React.Component {
       <BlockUi tag="div" blocking={state.bannerLoading} renderChildren={false} className="page page-home" loader={<span className="custom-loader loading g margin-auto" />}>
         <Carousel list={state.bannerList}/>
         <Row>
-          <LoadingContent isLoading={state.newsLoading}>
-            {state.newsList && state.newsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
+          <LoadingContent isLoading={state.cardsLoading}>
+            {state.homeCards && state.homeCards.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
           </LoadingContent>
         </Row>
       </BlockUi>

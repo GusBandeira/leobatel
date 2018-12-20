@@ -27,9 +27,6 @@ const HeaderBar = styled.div`
   text-align: center;
   position: absolute;
 `
-const LinkLogo = styled.div`
-
-`
 const Logo = styled.div`
 
 `

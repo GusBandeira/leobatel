@@ -16,11 +16,13 @@ import ProjectsService from '../../services/projects'
 import 'app/styles/grid.css'
 import 'app/styles/components/links.css'
 import 'app/styles/pages/about.css'
+import LoadingContent from '../components/LoadingContent';
 
 class Projects extends React.Component {
 
     state = {
-        projectsList: []
+        projectsList: [],
+        loadingProjects: false
     }
 
   componentDidMount(){
@@ -30,11 +32,13 @@ class Projects extends React.Component {
 
   getProjectsList = async() => {
     try {
-        const { data } = await ProjectsService.getProjectsList()
-        this.setState({ projectsList: data })
+      this.setState({ projectsList: [], loadingProjects: true })
+      const { data } = await ProjectsService.getProjectsList()
+      this.setState({ projectsList: data, loadingProjects: false })
     }
     catch(e){
       console.log('falha ao gerar lista de projetos')
+      this.setState({ projectsList: [], loadingProjects: false })
     }
   }
 
@@ -47,7 +51,9 @@ class Projects extends React.Component {
           <CoverImage>
             <img src={cat} alt={'Imagem de ajuda'}/>
           </CoverImage>
-          {state.projectsList && state.projectsList.map((proj, index) => <Project project={proj} key={index} index={index} />)}
+          <LoadingContent isLoading={state.loadingProjects}>
+            {state.projectsList && state.projectsList.map((proj, index) => <Project project={proj} key={index} index={index} />)}
+          </LoadingContent>
         </React.Fragment>
     )
   }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Row, Col } from 'reactstrap';
+import { Col } from 'reactstrap';
 import styled from 'styled-components'
+import { Modal } from './Modal';
+import { ModalContent } from './ModalContent';
 
 const LoadingRow = styled.div`
     display: flex;
@@ -13,13 +15,33 @@ const LoadingRow = styled.div`
 
 class LoadingContent extends Component {
     state = {
-        isLoading: false
+        isLoading: false,
+        modalError: false
+    }
+
+    componentDidUpdate(prevProps){
+        const { props: { error, isLoading } } = this
+        if(error && prevProps.isLoading !== isLoading && !isLoading){
+            this.toggleModal()
+        }
+    }
+
+    toggleModal = () => {
+        const { state } = this
+        this.setState({ modalError: !state.modalError })
     }
 
     render() {
-        const { props: { isLoading } } = this
+        const { state, props: { isLoading } } = this
         return (
             <React.Fragment>
+                {state.modalError && 
+                    <Modal buttonConfirm="Entendi" isOpen={state.modalError} toggle={this.toggleModal} cancel={this.toggleModal} confirm={this.toggleModal} noHeader>
+                        <ModalContent icon={['fas', 'exclamation-circle']} color={'red'}>
+                            Ocorreu um erro, mas nossos programadores de prontidão já estão trabalhando arduamente para resolvê-lo. Recarregue a página ou tente mais tarde.
+                        </ModalContent>
+                    </Modal>
+                }
                 {isLoading ? 
                     <LoadingRow>
                         <Col xs="12" className="">
@@ -33,11 +55,5 @@ class LoadingContent extends Component {
         )
     }
 }
-
-LoadingContent.propTypes = {
-    isLoading: PropTypes.bool, // show or hide loading icon
-    loadingType: PropTypes.string, // loading type. if 'table', the entire table will have a loading icon
-    centerIcon: PropTypes.bool, // bool value to center the icon
-};
 
 export default LoadingContent;

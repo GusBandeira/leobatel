@@ -5,12 +5,14 @@ import { NewsLink } from './NewsFrame'
 
 // Import Service
 import NewsService from '../../services/news'
+import LoadingContent from './LoadingContent';
 
 
 export class NewsList extends Component {
 
   state = {
-    newsList: []
+    newsList: [],
+    modalErrorIsOpen: false
   }
 
   componentDidMount(){
@@ -19,24 +21,28 @@ export class NewsList extends Component {
 
   getNewsList = async() => {
     try {
+      this.setState({ newsList: [], loadingNews: true, localError: false })
       const { data } = await NewsService.getNewsList()
-      this.setState({ newsList: data })
+      this.setState({ newsList: data, loadingNews: false })
     }
     catch(e){
-      console.log('falha ao gerar lista de notícias')
+      this.setState({ newsList: [], loadingNews: false, localError: true })
     }
   }
+
 
   render() {
 
     const { state } = this;
 
     return (
-      <div className="page page-portfolio page-static">
-          <div className="row">
-            {state.newsList && state.newsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
-          </div>
-      </div>
+      <LoadingContent isLoading={state.loadingNews} error={state.localError}>
+        <div className="page page-portfolio page-static">
+            <div className="row">
+              {state.newsList && state.newsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
+            </div>
+        </div>
+      </LoadingContent>
     )
   }
 }
