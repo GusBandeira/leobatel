@@ -12,10 +12,21 @@ import { Title } from '../components/Page.js'
 import friends from '../../images/friends.jpg'
 import logo from '../../images/LEOBatelLogo.png'
 
+// Import Services
+import ContactService from '../../services/contact'
+
 // Import translations
 import { translates }  from 'translations/translates'
 import withLanguage from '../withLanguage'
 export class Contact extends Component {
+
+  onSubmit = async(values) => {
+    try {
+      await ContactService.postContact(values)
+    } catch (e){  
+      console.log("falhou")
+    }
+  }
 
   render() {
 
@@ -38,7 +49,7 @@ export class Contact extends Component {
           <Formik
             validate={validate}
             onSubmit={values => {
-              console.log(values);
+              this.onSubmit(values)
             }}
             render={({touched, errors, values, handleChange, handleBlur, handleSubmit}) => (
               <form onSubmit={handleSubmit}>

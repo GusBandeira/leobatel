@@ -9,10 +9,13 @@ import withLanguage from '../withLanguage'
 // Components
 import { Carousel } from '../components/Carousel'
 import { NewsLink } from '../components/NewsFrame'
+import { LoadingImage } from '../components/Loaders'
 
 // Import Service
 import NewsService from '../../services/news'
-import LoadingContent from '../components/LoadingContent';
+
+//Import Images
+import LEOBatelLogo from '../../images/LEOBatelLogoPB.png'
 
 class Home extends React.Component {
   
@@ -35,6 +38,7 @@ class Home extends React.Component {
         const { data } = await NewsService.getBannerList()
         this.setState({ bannerList: data, bannerLoading: false })
     } catch(e){
+      
       this.setState({ bannerList: [], bannerLoading: false })
       //TODO: Mensagem de erro
       console.log('falha ao gerar lista de banners')
@@ -44,7 +48,7 @@ class Home extends React.Component {
   getNewsList = async(context) => {
     this.setState({ homeCards: [], cardsLoading: true })
     const { data } = await NewsService.getHomeCards()
-    this.setState({ homeCards: data, cardsLoading: false })
+   this.setState({ homeCards: data, cardsLoading: false })
   }
   catch(e){
     this.setState({ homeCards: [], cardsLoading: false })
@@ -57,12 +61,10 @@ class Home extends React.Component {
     const { state } = this;
 
     return (
-      <BlockUi tag="div" blocking={state.bannerLoading} renderChildren={false} className="page page-home" loader={<span className="custom-loader loading g margin-auto" />}>
+      <BlockUi tag="div" blocking={state.bannerLoading} renderChildren={false} className="page page-home" loader={<LoadingImage src={LEOBatelLogo} alt="Logo Leo Batel"/>}>
         <Carousel list={state.bannerList}/>
         <Row>
-          <LoadingContent isLoading={state.cardsLoading}>
-            {state.homeCards && state.homeCards.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
-          </LoadingContent>
+          {state.homeCards && state.homeCards.map((photo, index) => <NewsLink photo={photo} key={index}/>)}
         </Row>
       </BlockUi>
     )

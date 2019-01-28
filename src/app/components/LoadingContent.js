@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Col } from 'reactstrap';
 import styled from 'styled-components'
 import { Modal } from './Modal';
 import { ModalContent } from './ModalContent';
+import { LoadingImage } from './Loaders';
+import LEOBatelLogo from '../../images/LEOBatelLogoPB.png'
 
 const LoadingRow = styled.div`
     display: flex;
@@ -45,7 +46,8 @@ class LoadingContent extends Component {
                 {isLoading ? 
                     <LoadingRow>
                         <Col xs="12" className="">
-                            <span className="custom-loader loading g margin-auto" />
+                            {/* <span className="custom-loader loading g margin-auto" /> */}
+                            <LoadingImage src={LEOBatelLogo} alt="Logo Leo Batel"/>
                         </Col>
                     </LoadingRow>
                     :

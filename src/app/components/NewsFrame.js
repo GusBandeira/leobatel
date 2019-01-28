@@ -69,7 +69,12 @@ const ImageContent = ({ photo: { photo, name, subtitle, link }}) => (
       />
       <ImageLabel link={link}>
         <ImageName>{name}</ImageName>
-        <ImageDescription>{subtitle}&nbsp;<Link to={link || '/'}> Leia mais... </Link></ImageDescription>
+        <ImageDescription>{subtitle}&nbsp;
+          {link && link.charAt(0) === '/' ? 
+            <Link to={link}> Leia mais... </Link> : 
+            <a href={link} target="_blank" rel="noopener noreferrer"> Leia mais... </a>
+          }
+        </ImageDescription>
         
       </ImageLabel>
     </React.Fragment>

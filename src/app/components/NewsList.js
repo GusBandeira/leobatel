@@ -21,12 +21,12 @@ export class NewsList extends Component {
 
   getNewsList = async() => {
     try {
-      this.setState({ newsList: [], loadingNews: true, localError: false })
+      this.setState({ newsList: [], loadingNews: true, error: false })
       const { data } = await NewsService.getNewsList()
       this.setState({ newsList: data, loadingNews: false })
     }
     catch(e){
-      this.setState({ newsList: [], loadingNews: false, localError: true })
+      this.setState({ newsList: [], loadingNews: false, error: true })
     }
   }
 
@@ -36,7 +36,7 @@ export class NewsList extends Component {
     const { state } = this;
 
     return (
-      <LoadingContent isLoading={state.loadingNews} error={state.localError}>
+      <LoadingContent isLoading={state.loadingNews} error={state.error}>
         <div className="page page-portfolio page-static">
             <div className="row">
               {state.newsList && state.newsList.map((photo, index) => <NewsLink photo={photo} key={index}/>)}

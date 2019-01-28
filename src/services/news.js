@@ -8,10 +8,10 @@ class NewsService {
         return Api.get(`news/home`);
     }
     static getNewsList() {
-        // return Api.get(`news/list`);
-        return new Promise(async (resolve, reject) => {
-          setTimeout(() => reject({response:{data:'', status: 500 }}), 1000  )
-        }) ;
+        return Api.get(`news/list`);
+        // return new Promise(async (resolve, reject) => {
+        //   setTimeout(() => reject({response:{data:'', status: 500 }}), 1000  )
+        // }) ;
     }
 }
 

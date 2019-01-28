@@ -32,7 +32,15 @@ const ImagePhoto = styled.img`
 
   :hover {
     opacity: 1;
+    -webkit-transform: scale(1.1, 1.1);
+    -moz-transform: scale(1.1, 1.1);
+    -ms-transform: scale(1.1, 1.1);
+    -o-transform: scale(1.1, 1.1);
+    transform: scale(1.1, 1.1);
   }
+  `
+const ImageBack = styled.div`
+  overflow: hidden;
 `
 const ImageName = styled.span`
   font-weight: 700;
@@ -75,14 +83,16 @@ export const Image = ({ photo }) => (
 
 const ImageContent = ({ photo: { photo, name, description, link }}) => (
   <React.Fragment>
-    <ImagePhoto
-      src={`data:image/png;base64, ${photo}`}
-      width="100%"
-      height="300"
-      alt={name}
-      title={name}
-      link={link}
-    />
+    <ImageBack>
+      <ImagePhoto
+        src={`data:image/png;base64, ${photo}`}
+        width="100%"
+        height="300"
+        alt={name}
+        title={name}
+        link={link}
+      />
+    </ImageBack>
     <ImageLabel link={link}>
       <Row style={{ margin: 0, marginBottom: '10px' }}>
         <ImageName>{name}</ImageName>

@@ -30,12 +30,12 @@ export class ModalContent extends Component {
 
     return (
       <ContentRow>
-        <Col xs="4">
+        <Col sm="12" md="3">
             <IconDetail color={color}>
                 <FontAwesomeIcon icon={icon} size='3x'/>
             </IconDetail>
         </Col>
-        <Col xs="8">
+        <Col sm="12" md="9">
             {children}
         </Col>
       </ContentRow>

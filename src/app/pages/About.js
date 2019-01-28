@@ -35,7 +35,7 @@ export class About extends Component {
                 },
                 {
                     type: "p",
-                    content: "Lorem ipsum nam eget ultricies viverra odio ullamcorper hac platea eu elementum, vitae curae ante netus sodales dui etiam vehicula nulla interdum sagittis, tortor curabitur habitant odio aptent quam imperdiet posuere turpis consequat. inceptos cras gravida elementum dapibus sollicitudin libero ultricies hendrerit, curabitur etiam potenti dapibus curabitur imperdiet nec quisque fusce, donec nam ut donec imperdiet eu blandit. felis metus commodo eget nostra aliquam diam turpis ullamcorper aliquet, etiam torquent curae lobortis donec magna vitae neque lorem himenaeos, habitant elementum feugiat egestas cras congue fusce taciti. phasellus mattis hac odio eleifend neque luctus est adipiscing, lobortis hac himenaeos eros netus aenean arcu facilisis, metus ut pharetra quisque aenean libero class." 
+                    content: "O LEO." 
                 },
                 {
                     type: "i",
