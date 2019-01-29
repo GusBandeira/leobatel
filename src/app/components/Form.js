@@ -11,6 +11,54 @@ export const FormRow = (props) => (
   </Row>
 )
 
+
+export const SelectSpan = styled.span`
+
+  select {
+    border-radius: 5px;
+    padding: 3px 5px;
+    height: 30px;
+    -webkit-appearance: custom;
+    width: 100%;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  ::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 100%;
+    border-radius: 0 5px 5px 0;
+    background-color: darkcyan;
+    right: 15px;
+    pointer-events: none;
+  }
+
+  ::before{
+    content: "";
+    position: absolute;
+    width: 0; 
+    height: 0; 
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid white;
+    right: 23px;
+    TOP: 12px;
+    z-index: 1;
+    pointer-events: none;
+  }
+`
+
+export const Select = props => (
+  <SelectSpan>
+    <select>
+      {props.children}
+    </select>
+  </SelectSpan>
+)
+
 export const Input = styled.input`
   height: 35px;
   border: 1px solid #ccc;

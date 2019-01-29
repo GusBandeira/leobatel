@@ -31,6 +31,7 @@ const Contact = asyncComponent(() => import('./pages/Contact'));
 const Projects = asyncComponent(() => import('./pages/Projects'));
 const About = asyncComponent(() => import('./pages/About'));
 const LEO = asyncComponent(() => import('./pages/LEO'));
+const InsertContent = asyncComponent(() => import('./pages/InsertContent'));
 
 // Component Implementation
 const Main = () => {
@@ -49,6 +50,8 @@ const Main = () => {
         <Route path="/contact" component={Contact} />
         <Route path="/about" component={About} />
         <Route path="/LEO" component={LEO} />
+
+        <Route path="/insert-content" component={InsertContent} />
       </Container>
 
       <Footer />

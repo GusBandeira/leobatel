@@ -4,9 +4,9 @@ import { Container, Row, Col } from 'reactstrap'
 
 // Import Components
 import { FormRow, Input, ErrorText, Button, Label, Textarea } from "../components/Form";
+import { Title } from '../components/Page.js'
 import { CoverImage } from '../components/ImageFrame'
 import { validate } from '../validations/ContactValidation'
-import { Title } from '../components/Page.js'
 
 // Import Image
 import friends from '../../images/friends.jpg'
