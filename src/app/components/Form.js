@@ -53,7 +53,7 @@ export const SelectSpan = styled.span`
 
 export const Select = props => (
   <SelectSpan>
-    <select>
+    <select name={props.name} onChange={props.onChange}>
       {props.children}
     </select>
   </SelectSpan>
@@ -132,6 +132,14 @@ export const ErrorText = styled.p`
 `;
 
 export const Label = styled.label`
+  display: flex;
+  flex-direction: column;
+  color: #777;
+  font-size: 0.8em;
+  position: relative;
+`;
+
+export const LabelDiv = styled.div`
   display: flex;
   flex-direction: column;
   color: #777;

@@ -4,12 +4,16 @@ import Drop from 'react-dropzone'
 
 class Dropzone extends React.Component {
    onDrop = (acceptedFiles, rejectedFiles) => {
-     // Do something with files
+     console.log(acceptedFiles)
+     console.log(rejectedFiles)
    }
 
    render() {
+
+    const { props: { maxSize, accept } } = this
+
     return (
-      <Drop onDrop={this.onDrop}>
+      <Drop onDrop={this.onDrop} maxSize={maxSize} accept={accept}>
         {({getRootProps, getInputProps, isDragActive}) => {
           return (
             <div

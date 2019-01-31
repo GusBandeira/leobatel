@@ -6,14 +6,26 @@ import { Container, Row, Col } from 'reactstrap'
 import friends from '../../images/friends.jpg'
 
 // Import Components
-import { FormRow, Input, ErrorText, Button, Label, Textarea, Select } from "../components/Form";
+import { FormRow, Input, ErrorText, Button, Label, Textarea, Select, LabelDiv } from "../components/Form";
 import { Title } from '../components/Page.js'
 import { CoverImage } from '../components/ImageFrame'
 import { validate } from '../validations/ContactValidation'
-import Dropzone from '../components/Dropzone'
+import DropzonePreview from '../components/DropzonePreview'
 
 export class InsertContent extends Component {
+
+    state = {
+        contentType: ""
+    }
+
+    onSubmit = values => {
+        console.log(values)
+    }
+
     render() {
+
+        const { state } = this
+
         return (
             <div className='page'>
                 <CoverImage>
@@ -36,53 +48,47 @@ export class InsertContent extends Component {
                                         <Label>
                                             <FormRow offset="1">
                                                 <Col lg={3}>
-                                                    <Select>
+                                                    <Select name="type" onChange={e => this.setState({ contentType: e.target.value })}>
                                                         <option value="news">Notícia</option>
                                                         <option value="project">Projeto</option>
-                                                        <option value="membro">Membro</option>
+                                                        <option value="member">Membro</option>
                                                     </Select>
                                                 </Col>
                                             </FormRow>
                                         </Label>
-                                        <FormRow offset="1">
-                                            <Label>
-                                                Titulo
-                                                <Input value={values.title} border={touched.title && errors.title && "1px solid red"}
-                                                    type="text" name="title" placeholder="Título" max="30"/>
-                                                <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
-                                            </Label>
-                                        </FormRow>
 
-                                        <FormRow offset="1">
-                                            <Label>
-                                                Email *
-                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.email} border={touched.email && errors.email && "1px solid red"}
-                                                    type="text" name="email" placeholder="Email" />
-                                                <ErrorText color="red" error={touched.email && errors.email}>{errors.email}</ErrorText>
-                                            </Label>
-                                        </FormRow>
+                                        {state.contentType === "member" && (
+                                            <React.Fragment>
+                                                <FormRow>
+                                                    <Label>
+                                                        Nome
+                                                        <Input value={values.name} border={touched.name && errors.name && "1px solid red"}
+                                                            type="text" name="name" placeholder="Nome" max="30"/>
+                                                        <ErrorText color="red" error={touched.name && errors.name}>{errors.name}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <Label>
+                                                        Posição
+                                                        <Input value={values.grade} border={touched.grade && errors.grade && "1px solid red"}
+                                                            type="text" name="grade" placeholder="Posição" max="30"/>
+                                                        <ErrorText color="red" error={touched.grade && errors.grade}>{errors.grade}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <LabelDiv>
+                                                        Foto
+                                                        <DropzonePreview 
+                                                            maxSize={1 * 1024 * 1024} //1MB
+                                                            accept={'image/png, image/jpg, image/jpeg'}
+                                                        />
+                                                    </LabelDiv>
+                                                </FormRow>
+                                            </React.Fragment>
+                                        )}
 
-                                        <FormRow offset="1">
-                                            <Label>
-                                                Assunto *
-                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.subject} border={touched.subject && errors.subject && "1px solid red"}
-                                                    type="text" name="subject" placeholder="Assunto" />
-                                                <ErrorText color="red" error={touched.subject && errors.subject}>{errors.subject}</ErrorText>
-                                            </Label>
-                                        </FormRow>
 
-                                        <FormRow offset="1">
-                                            <Label>
-                                                Mensagem *
-                                                <Textarea onChange={handleChange} onBlur={handleBlur} value={values.message} border={touched.message && errors.message && "1px solid red"}
-                                                    type="text" name="message" placeholder="Mensagem" maxLength='250' />
-                                                <ErrorText color="red" error={touched.message && errors.message}>{errors.message}</ErrorText>
-                                            </Label>
-                                        </FormRow>
-                                        <Dropzone />
-                                        <FormRow offset="1">
-                                            <Button right type="submit">Enviar</Button>
-                                        </FormRow>
+                                        
                                     </Col>
                                 </Row>
 
