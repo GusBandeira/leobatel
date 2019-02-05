@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Dropzone from 'react-dropzone'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const getColor = (props) => {
     if (props.isDragReject) {
@@ -19,8 +20,27 @@ const ThumbsContainer = styled.aside`
     margin-top: 16px;
   `;
   
+const Remove = styled.div`
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+  cursor: pointer;
+  margin: 10px 0;
+
+  svg{
+    color: red;
+  }
+  span{
+    font-weight: 700;
+    margin-left: 5px;
+  }
+  :hover{
+    opacity: 1;
+  }
+`
+
   const Thumb = styled.div`
-    display: inline-flex;
+    display: block;
     border-radius: 2px;
     border: 1px solid #eaeaea;
     margin-bottom: 8px;
@@ -28,6 +48,7 @@ const ThumbsContainer = styled.aside`
     padding: 4px;
     box-sizing: border-box;
     margin: auto;
+    margin-top: 10px;
   `;
   
   const ThumbInner = styled.div`
@@ -111,10 +132,12 @@ const ThumbsContainer = styled.aside`
     }
   
     onDrop(files) {
+      console.log(files)
+      const { state } = this
       this.setState({
-        files: files.map(file => Object.assign(file, {
+        files: state.files.concat(files.map(file => Object.assign(file, {
           preview: URL.createObjectURL(file)
-        }))
+        })))
       });
     }
   
@@ -128,27 +151,36 @@ const ThumbsContainer = styled.aside`
         this.setState({ close: value })
     }
 
-    removeFile = () => {
-        this.setState({ files: [] })
+    removeFile = (index) => {
+        const { state } = this 
+        let files = state.files
+        console.log(index)
+        files.splice(index, 1)
+        this.setState({ files: files })
     }
 
     render() {
-      const { state, props: { accept, maxSize } } = this;
+      const { state, props: { accept, maxSize, multi } } = this;
   
-      const thumbs = state.files.map(file => (
-        <Thumb key={file.name} onMouseEnter={() => this.imageMouseEvent(false)} onMouseLeave={() => this.imageMouseEvent(false)}>
-            <ThumbInner>
-                <ThumbImg src={file.preview} alt="imagem de perfil" onMouseOver={() => this.imageMouseEvent(true)} />
-                {state.close &&
-                    <ThumbClose onClick={this.removeFile}/>
-                }
-            </ThumbInner>
-        </Thumb>
+      const thumbs = state.files.map((file, index) => (
+          <Thumb key={file.name} onMouseEnter={() => this.imageMouseEvent(false)} onMouseLeave={() => this.imageMouseEvent(false)}>
+              <ThumbInner>
+                  <ThumbImg src={file.preview} alt="imagem de perfil" onMouseOver={() => this.imageMouseEvent(true)} />
+                  {state.close && !multi &&
+                      <ThumbClose onClick={() => this.removeFile(index)}/>
+                  }
+              </ThumbInner>
+              <Remove onClick={() => this.removeFile(index)}>
+                <span> Imagem {index + 1} </span>
+                <FontAwesomeIcon icon={['fas', 'times']}  size='lg'/>
+                <span>Remover</span>
+              </Remove>
+          </Thumb>
       ));
   
       return (
         <section>
-          {state.files.length === 0 ? 
+          {state.files.length === 0 || multi ? 
             <Dropzone onDrop={this.onDrop.bind(this)} accept={accept} maxSize={maxSize}>
                 {({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
                     return (
@@ -158,17 +190,22 @@ const ThumbsContainer = styled.aside`
                         {...getRootProps()}
                     >
                         <input {...getInputProps()} />
-                        <InfoMessage>
-                            Clique ou arraste sua imagem
-                            <span>
-                                Tamanho máximo 1MB.
-                            </span>
-                        </InfoMessage>
+                          <InfoMessage>
+                              Clique ou arraste sua imagem
+                              <span>
+                                  Tamanho máximo 1MB.
+                              </span>
+                          </InfoMessage>
                     </Container>
                     )
                 }}
             </Dropzone>
             :
+            <ThumbsContainer >
+                {thumbs}
+            </ThumbsContainer>
+          }
+          {multi && state.files.length > 0 &&
             <ThumbsContainer >
                 {thumbs}
             </ThumbsContainer>

@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'reactstrap'
 import friends from '../../images/friends.jpg'
 
 // Import Components
-import { FormRow, Input, ErrorText, Button, Label, Textarea, Select, LabelDiv } from "../components/Form";
+import { FormRow, Input, ErrorText, Button, Label, Textarea, Select, LabelDiv, TextareaNews } from "../components/Form";
 import { Title } from '../components/Page.js'
 import { CoverImage } from '../components/ImageFrame'
 import { validate } from '../validations/ContactValidation'
@@ -15,7 +15,8 @@ import DropzonePreview from '../components/DropzonePreview'
 export class InsertContent extends Component {
 
     state = {
-        contentType: ""
+        contentType: "",
+        scriptString: " "
     }
 
     onSubmit = values => {
@@ -36,9 +37,8 @@ export class InsertContent extends Component {
         </Title>
 
                 <Formik
-                    validate={validate}
                     onSubmit={values => {
-                        this.onSubmit(values)
+                        console.log(values)
                     }}
                     render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
                         <form onSubmit={handleSubmit}>
@@ -63,7 +63,7 @@ export class InsertContent extends Component {
                                                     <Label>
                                                         Nome
                                                         <Input value={values.name} border={touched.name && errors.name && "1px solid red"}
-                                                            type="text" name="name" placeholder="Nome" max="30"/>
+                                                            type="text" name="name" placeholder="Nome do indivíduo" max="70"/>
                                                         <ErrorText color="red" error={touched.name && errors.name}>{errors.name}</ErrorText>
                                                     </Label>
                                                 </FormRow>
@@ -71,7 +71,7 @@ export class InsertContent extends Component {
                                                     <Label>
                                                         Posição
                                                         <Input value={values.grade} border={touched.grade && errors.grade && "1px solid red"}
-                                                            type="text" name="grade" placeholder="Posição" max="30"/>
+                                                            type="text" name="grade" placeholder="Posição que o indivíduo se encontra dentro do LEO" max="30"/>
                                                         <ErrorText color="red" error={touched.grade && errors.grade}>{errors.grade}</ErrorText>
                                                     </Label>
                                                 </FormRow>
@@ -86,9 +86,74 @@ export class InsertContent extends Component {
                                                 </FormRow>
                                             </React.Fragment>
                                         )}
-
-
-                                        
+                                        {state.contentType === "project" && (
+                                            <React.Fragment>
+                                                <FormRow>
+                                                    <Label>
+                                                        Título
+                                                        <Input value={values.title} border={touched.title && errors.title && "1px solid red"}
+                                                            type="text" name="title" placeholder="Insira o nome do projeto" max="70"/>
+                                                        <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <Label>
+                                                        Descrição
+                                                        <Textarea onChange={handleChange} onBlur={handleBlur} value={values.description} border={touched.description && errors.description && "1px solid red"}
+                                                                type="text" name="description" placeholder="Comente um pouco sobre o pojeto" maxLength='500'/>
+                                                        <ErrorText color="red" error={touched.description && errors.description}>{errors.description}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <LabelDiv>
+                                                        Foto
+                                                        <DropzonePreview 
+                                                            maxSize={1 * 1024 * 1024} //1MB
+                                                            accept={'image/png, image/jpg, image/jpeg'}
+                                                        />
+                                                    </LabelDiv>
+                                                </FormRow>
+                                            </React.Fragment>
+                                        )}
+                                        {state.contentType === "news" && (
+                                            <React.Fragment>
+                                                <FormRow>
+                                                    <Label>
+                                                        Título
+                                                        <Input value={values.title} border={touched.title && errors.title && "1px solid red"}
+                                                            type="text" name="title" placeholder="Qual a manchete de hoje?" max="100"/>
+                                                        <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <Label>
+                                                        Subtítulo
+                                                        <Input value={values.subtitle} border={touched.subtitle && errors.subtitle && "1px solid red"}
+                                                            type="text" name="subtitle" placeholder="Faça uma breve descrição do ocorrido" max="140"/>
+                                                        <ErrorText color="red" error={touched.subtitle && errors.subtitle}>{errors.subtitle}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <Label>
+                                                        Corpo do texto
+                                                        <TextareaNews onChange={handleChange} onBlur={handleBlur} value={values.body} border={touched.body && errors.body && "1px solid red"}
+                                                                type="text" name="body" placeholder="Mensagem" onKeyDown={this.add}/>
+                                                        <ErrorText color="red" error={touched.body && errors.body}>{errors.body}</ErrorText>
+                                                    </Label>
+                                                </FormRow>
+                                                <FormRow>
+                                                    <LabelDiv>
+                                                        Foto
+                                                        <DropzonePreview 
+                                                            maxSize={1 * 1024 * 1024} //1MB
+                                                            accept={'image/png, image/jpg, image/jpeg'}
+                                                            multi
+                                                        />
+                                                    </LabelDiv>
+                                                </FormRow>
+                                                <Button type="submit">Preview</Button>
+                                            </React.Fragment>
+                                        )}
                                     </Col>
                                 </Row>
 

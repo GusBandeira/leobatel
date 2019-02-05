@@ -79,6 +79,17 @@ export const Textarea = styled.textarea`
   resize: vertical;
   outline: none;
 `
+export const TextareaNews = styled.textarea`
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  height: 500px;
+  min-height: 400px;
+  max-height: 8000px;
+  resize: vertical;
+  outline: none;
+`
 export const TextareaCounter = withCounter(props => <Textarea {...props} />)
 
 export const Button = styled.button`
