@@ -23,6 +23,44 @@ export class InsertContent extends Component {
         console.log(values)
     }
 
+    formatImage = (sp) => {
+        let params = sp.substring(6, sp.length)
+        params = params.split(',')
+        const image = {
+            type: "i",
+            photo: Number(params[0].trim()),
+            name: params[1].trim(),
+            subtitle: params[2].trim()
+        }
+        return image
+    }
+
+    formatTextType = (sp, type) => {
+        const paragraph = {
+            type: type,
+            content: sp.trim()
+        }
+        return paragraph
+    }
+
+    makeJSON(values){
+        const split = values.body.split("\n")
+        let data = []
+        split.forEach(sp => {
+            if(sp.trim().substring(0,6).includes('/image')){
+                data.push(this.formatImage(sp))
+            }
+            else if(sp.trim()) {
+                data.push(this.formatTextType(sp, 'p'))
+            }
+        })
+
+        data.unshift(this.formatTextType(values.subtitle, 's'))
+        data.unshift(this.formatTextType(values.title, 't'))
+
+        console.log(data)
+    }
+
     render() {
 
         const { state } = this
@@ -38,8 +76,9 @@ export class InsertContent extends Component {
 
                 <Formik
                     onSubmit={values => {
-                        console.log(values)
+                        this.makeJSON(values)
                     }}
+                    initialValues={{ title: '', subtitle: '', body: '' }}
                     render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
                         <form onSubmit={handleSubmit}>
                             <Container>
@@ -120,7 +159,7 @@ export class InsertContent extends Component {
                                                 <FormRow>
                                                     <Label>
                                                         Título
-                                                        <Input value={values.title} border={touched.title && errors.title && "1px solid red"}
+                                                        <Input onChange={handleChange} value={values.title} border={touched.title && errors.title && "1px solid red"}
                                                             type="text" name="title" placeholder="Qual a manchete de hoje?" max="100"/>
                                                         <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
                                                     </Label>
@@ -128,7 +167,7 @@ export class InsertContent extends Component {
                                                 <FormRow>
                                                     <Label>
                                                         Subtítulo
-                                                        <Input value={values.subtitle} border={touched.subtitle && errors.subtitle && "1px solid red"}
+                                                        <Input onChange={handleChange} value={values.subtitle} border={touched.subtitle && errors.subtitle && "1px solid red"}
                                                             type="text" name="subtitle" placeholder="Faça uma breve descrição do ocorrido" max="140"/>
                                                         <ErrorText color="red" error={touched.subtitle && errors.subtitle}>{errors.subtitle}</ErrorText>
                                                     </Label>
@@ -137,7 +176,7 @@ export class InsertContent extends Component {
                                                     <Label>
                                                         Corpo do texto
                                                         <TextareaNews onChange={handleChange} onBlur={handleBlur} value={values.body} border={touched.body && errors.body && "1px solid red"}
-                                                                type="text" name="body" placeholder="Mensagem" onKeyDown={this.add}/>
+                                                                type="text" name="body" placeholder="Mensagem" />
                                                         <ErrorText color="red" error={touched.body && errors.body}>{errors.body}</ErrorText>
                                                     </Label>
                                                 </FormRow>

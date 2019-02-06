@@ -154,7 +154,6 @@ const Remove = styled.div`
     removeFile = (index) => {
         const { state } = this 
         let files = state.files
-        console.log(index)
         files.splice(index, 1)
         this.setState({ files: files })
     }
@@ -170,8 +169,10 @@ const Remove = styled.div`
                       <ThumbClose onClick={() => this.removeFile(index)}/>
                   }
               </ThumbInner>
-              <Remove onClick={() => this.removeFile(index)}>
+              <Remove >
                 <span> Imagem {index + 1} </span>
+              </Remove>
+              <Remove onClick={() => this.removeFile(index)}>
                 <FontAwesomeIcon icon={['fas', 'times']}  size='lg'/>
                 <span>Remover</span>
               </Remove>
