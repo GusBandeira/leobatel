@@ -61,15 +61,16 @@ export const Select = props => (
 
 export const Input = styled.input`
   height: 35px;
-  border: 1px solid #ccc;
+  border: 1px solid ${props => props.error ? '#ff0000' : '#ccc'};
   background-color: #fff;
   padding: 0 10px;
   border-radius: 5px;
   height: 30px;
+  outline: none;
 `;
   
 export const Textarea = styled.textarea`
-  border: 1px solid #ccc;
+  border: 1px solid ${props => props.error ? '#ff0000' : '#ccc'};
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
@@ -80,13 +81,13 @@ export const Textarea = styled.textarea`
   outline: none;
 `
 export const TextareaNews = styled.textarea`
-  border: 1px solid #ccc;
+  border: 1px solid ${props => props.error ? '#ff0000' : '#ccc'};
   padding: 10px;
   background-color: #fff;
   border-radius: 5px;
-  height: 500px;
-  min-height: 400px;
-  max-height: 8000px;
+  height: 400px;
+  min-height: 300px;
+  max-height: 600px;
   resize: vertical;
   outline: none;
 `
@@ -98,7 +99,7 @@ export const Button = styled.button`
   color: #fff;
   border-radius: 3px;
   border: none;
-  width: 100px;
+  padding: 10px 20px;
   float: ${props => props.right ? 'right' : "none"};
   cursor: pointer;
 
@@ -124,17 +125,23 @@ export const Title2 = styled.h2`
 `;
 
 export const ErrorText = styled.p`
-    font-size: 12px;
     font-size: .85714rem;
     margin: 0;
-    color: ${props => props.color || "#ff4031"};
+    margin-top: 5px;
+    text-align: center;
+    font-weight: 700;
+    color: ${props => props.color || "#ff0000"};
     height: ${props => props.error ? "15px" : 0};
     opacity: ${props => props.error ? 1 : 0};
     visibility: ${props => props.error ? "visible" : "hidden"};
+    overflow: hidden;
+
+
+    
+    //animation
     -webkit-transform: ${props => props.error ? "translateX(0)" : "translateX(2%)"};
     -ms-transform: ${props => props.error ? "translateX(0)" : "translateX(2%)"};
     transform: ${props => props.error ? "translateX(0)" : "translateX(2%)"};
-    overflow: hidden;
     -webkit-transition: opacity .2s ease .2s,visibility .2s ease .2s,height .2s ease-in,-webkit-transform .2s ease-in .2s;
     transition: opacity .2s ease .2s,visibility .2s ease .2s,height .2s ease-in,-webkit-transform .2s ease-in .2s;
     -o-transition: opacity .2s ease .2s,visibility .2s ease .2s,transform .2s ease-in .2s,height .2s ease-in;
@@ -156,4 +163,5 @@ export const LabelDiv = styled.div`
   color: #777;
   font-size: 0.8em;
   position: relative;
+  margin-bottom: ${props => props.last ? '20px' : '0'};
 `;

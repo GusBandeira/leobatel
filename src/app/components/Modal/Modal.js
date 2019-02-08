@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Button } from '../components/Form'
+import { Button } from '../Form'
 import { Modal as Model, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 export class Modal extends Component {
