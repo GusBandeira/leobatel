@@ -206,7 +206,7 @@ $load-lista: (
 }
 
 .modal-body{
-  padding: 1.5rem 1rem !important;
+  padding: 2.5rem 1rem !important;
 }
 
 .modal-footer {
@@ -214,9 +214,46 @@ $load-lista: (
   margin: auto;
 }
 
+.close-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background: transparent;
+  border-top: 50px solid hsl(140, 100%, 30%);
+  border-left: 50px solid transparent;
+
+  cursor: pointer;
+
+  &:hover {
+    border-top: 50px solid hsl(120, 60%, 50%);
+  } // &:hover
+
+  &:before {
+    font-size: 25px;
+    font-weight: 700;
+
+    content: '×';
+    position: absolute;
+    top: -36px;
+    right: 7px;
+    width: 15px;
+    line-height: 0;
+
+    color: white;
+  } // :before
+} // .close-modal
+
  @media screen and (min-width: 576px){
    .modal-dialog {
-      max-width: 500px;
-      margin: 14.75rem auto !important;
-   }
- }
+     max-width: 500px;
+     margin: 14.75rem auto !important;
+    }
+    
+  }
+
+  @media screen and (max-width: 576px){
+    .modal-body{
+      padding: 2.5rem 1rem 1.5rem !important;
+    }
+  }

@@ -27,7 +27,7 @@ class DropzonePreview extends React.Component {
 			files: state.files.concat(files.map(file => Object.assign(file, {
 				preview: URL.createObjectURL(file)
 			})))
-		}, this.setError);
+		}, this.setImage);
 	}
 
 	onDropRejected = () => {
@@ -38,20 +38,20 @@ class DropzonePreview extends React.Component {
 		const { state } = this
 		let files = state.files
 		files.splice(index, 1)
-		this.setState({ files: files }, this.setError)
+		this.setState({ files: files }, this.setImage)
 	}
 
 	imageMouseEvent(value) {
 		this.setState({ close: value })
 	}
 
-	setError = () => {
-		const { state, props: { setError, multi } } = this
-		if(setError) {
-			setError(state.files.length > 0 ? '' : `Adicione ${multi ? 'pelo menos' : ''} uma imagem!`)
+	setImage = () => {
+		const { state, props: { setImage } } = this
+		if(setImage) {
+			setImage(state.files)
 		}
 	}
-
+	
 	toggleModal = () => {
         const { state } = this
         this.setState({ modalError: !state.modalError })
@@ -104,7 +104,7 @@ class DropzonePreview extends React.Component {
 					</ThumbsContainer>
 				}
 				{state.files.length === 0 || multi ?
-					<Dropzone onDrop={this.onDrop.bind(this)} onDropRejected={this.onDropRejected.bind(this)} accept={accept} maxSize={maxSize} onClick={() => this.setError()}>
+					<Dropzone onDrop={this.onDrop.bind(this)} onDropRejected={this.onDropRejected.bind(this)} accept={accept} maxSize={maxSize} >
 						{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
 							return (
 								<DropzoneContainer

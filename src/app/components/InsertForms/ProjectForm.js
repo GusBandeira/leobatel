@@ -11,16 +11,20 @@ export class ProjectForm extends Component {
         files: []
     }
 
-    submitForm = () => { }
+    submitForm = values => { 
+        const { state } = this
+        console.log(values)
+        console.log(state)
+    }
     
-    setImages = files => {
-        this.setState({ errorImage : files })
+    setImage = files => {
+        this.setState({ files : files, errorImage: files.length > 0 ? "" : "Adicione uma imagem!" })
     }
     
     checkValidation = () => {
         const { state } = this
         if(!state.files.length){
-            this.setState({ errorImage: 'Adicione uma imagem' })
+            this.setState({ errorImage: 'Adicione uma imagem!' })
         }
     }
 
@@ -60,7 +64,7 @@ export class ProjectForm extends Component {
                                     <DropzonePreview
                                         maxSize={1 * 1024 * 1024} //1MB
                                         accept={'image/png, image/jpg, image/jpeg'}
-                                        setError={e => this.setImages(e)}
+                                        setImage={e => this.setImage(e)}
                                         error={state.errorImage}
                                     />
                                     <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>

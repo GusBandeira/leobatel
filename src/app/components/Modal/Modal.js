@@ -7,10 +7,15 @@ export class Modal extends Component {
       const { props: { isOpen, toggle, confirm, cancel, modalTitle, children, buttonConfirm, buttonCancel, disabled, noHeader } } = this
     return (
        <Model isOpen={isOpen} toggle={() => { toggle(false) }} backdrop>
+        <span
+          onClick={() => {
+            cancel ? this.props.cancel(false) : this.props.confirm(false);
+          }}
+          className="close-modal"
+        />
         {!noHeader && 
             <ModalHeader>
                 {modalTitle}
-                <span onClick={() => cancel(false) } className="close-modal"> </span>
             </ModalHeader>
         }
 

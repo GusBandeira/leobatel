@@ -77,8 +77,8 @@ export class InsertContent extends Component {
                     <Row>
                         <Col lg="12" className="no-padding margin-auto">
                             <Label>
-                                <FormRow offset="1">
-                                    <Col lg={3}>
+                                <FormRow>
+                                    <Col sm="xs" sm={{ size: 4, offset: 4 }} >
                                         <Select name="type" onChange={e => this.setState({ contentType: e.target.value })} 
                                                 readOnly={false}>
                                             <option default hidden>Selecione</option>
