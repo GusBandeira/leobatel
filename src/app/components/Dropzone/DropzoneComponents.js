@@ -24,8 +24,11 @@ export const Remove = styled.div`
   cursor: pointer;
   margin: 10px 0;
 
-  svg{
+  svg.red{
     color: red;
+  }
+  svg.green{
+    color: green;
   }
   span{
     font-weight: 700;
@@ -35,11 +38,22 @@ export const Remove = styled.div`
     opacity: 1;
   }
 `
+export const ImageTitle = styled.div`
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+  margin: 10px 0;
+
+  span{
+    font-weight: 700;
+    margin-left: 5px;
+  }
+`
 
 export const Thumb = styled.div`
     display: block;
     border-radius: 2px;
-    border: 1px solid #eaeaea;
+    border: ${props => props.noBorder ? "" : "1px solid #eaeaea"};
     margin-bottom: 8px;
     margin-right: 8px;
     padding: 4px;
@@ -55,7 +69,6 @@ export const ThumbInner = styled.div`
     max-width: 200px;
     min-height: 100px;
     max-height: 200px;
-    // :hover{
   `
 
 export const ThumbImg = styled.img`

@@ -22,43 +22,7 @@ export class InsertContent extends Component {
         console.log(values)
     }
 
-    formatImage = (sp) => {
-        let params = sp.substring(6, sp.length)
-        params = params.split(',')
-        const image = {
-            type: "i",
-            photo: Number(params[0].trim()),
-            name: params[1].trim(),
-            subtitle: params[2].trim()
-        }
-        return image
-    }
-
-    formatTextType = (sp, type) => {
-        const paragraph = {
-            type: type,
-            content: sp.trim()
-        }
-        return paragraph
-    }
-
-    makeJSON(values){
-        const split = values.body.split("\n")
-        let data = []
-        split.forEach(sp => {
-            if(sp.trim().substring(0,6).includes('/image')){
-                data.push(this.formatImage(sp))
-            }
-            else if(sp.trim()) {
-                data.push(this.formatTextType(sp, 'p'))
-            }
-        })
-
-        data.unshift(this.formatTextType(values.subtitle, 's'))
-        data.unshift(this.formatTextType(values.title, 't'))
-
-        console.log(data)
-    }
+    
 
     render() {
 
@@ -78,7 +42,7 @@ export class InsertContent extends Component {
                         <Col lg="12" className="no-padding margin-auto">
                             <Label>
                                 <FormRow>
-                                    <Col sm="xs" sm={{ size: 4, offset: 4 }} >
+                                    <Col sm={{ size: 4, offset: 4 }} >
                                         <Select name="type" onChange={e => this.setState({ contentType: e.target.value })} 
                                                 readOnly={false}>
                                             <option default hidden>Selecione</option>

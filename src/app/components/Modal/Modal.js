@@ -24,7 +24,9 @@ export class Modal extends Component {
         </ModalBody>
 
         <ModalFooter>
-        <Button color="primary" onClick={() => confirm() } disabled={disabled}> {buttonConfirm} </Button>{' '}
+        {buttonConfirm &&
+          <Button color="primary" onClick={() => confirm() } disabled={disabled}> {buttonConfirm} </Button>
+        }
         {buttonCancel &&
             <Button color="secondary" onClick={() => cancel(false) }> {buttonCancel} </Button>
         }

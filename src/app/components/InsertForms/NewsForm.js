@@ -8,17 +8,18 @@ export class NewsForm extends Component {
 
     state = {
         errorImage: '',
-        files: []
+        files: [],
+        imageDetails: [],
+        imageCounter: 0
     }
 
-    submitForm = values => {
-        const { state } = this
-        console.log(values)
-        console.log(state)
-    }
     
-    setImage = files => {
-        this.setState({ files : files, errorImage: files.length > 0 ? "" : "Adicione uma imagem!" })
+    setImage = (files, imageDetails) => {
+        this.setState({ 
+            files : files,
+            errorImage: files.length > 0 ? "" : "Adicione uma imagem!",
+            imageDetails: imageDetails
+        })
     }
     
     checkValidation = () => {
@@ -26,6 +27,57 @@ export class NewsForm extends Component {
         if(!state.files.length){
             this.setState({ errorImage: 'Adicione pelo menos uma imagem!' })
         }
+    }
+    
+    submitForm = values => {
+        const { state } = this
+        const bodyText = this.formatBodyText(values)
+
+        this.setState({ imageCoutner: 0 })
+
+        console.log(bodyText)
+    }
+
+    formatImage = (sp) => {
+
+        const { state } = this
+
+        
+
+        const image = {
+            type: "i",
+            photo: Number(state.imageCounter),
+            name: state.imageDetails[state.imageCounter].title,
+            subtitle: state.imageDetails[state.imageCounter].description
+        }
+        return image
+    }
+
+    formatTextType = (sp, type) => {
+        const paragraph = {
+            type: type,
+            content: sp.trim()
+        }
+        return paragraph
+    }
+
+    formatBodyText(values){
+        const split = values.body.split("\n")
+        let data = []
+        split.forEach(sp => {
+            if(sp.trim().substring(0,6).includes('/image')){
+                data.push(this.formatImage(sp))
+            }
+            else if(sp.trim()) {
+                data.push(this.formatTextType(sp, 'p'))
+            }
+        })
+
+        data.unshift(this.formatTextType(values.subtitle, 's'))
+        data.unshift(this.formatTextType(values.title, 't'))
+
+        console.log(data)
+        return data
     }
 
     render() {
@@ -71,6 +123,7 @@ export class NewsForm extends Component {
                                     Fotos
                                     <DropzonePreview
                                         multi
+                                        imageDetails
                                         maxSize={1 * 1024 * 1024} //1MB
                                         accept={'image/png, image/jpg, image/jpeg'}
                                         setImage={e => this.setImage(e)}
