@@ -1,0 +1,259 @@
+@import '~react-responsive-carousel/lib/styles/carousel.min.css';
+@import './components/footer.css';
+
+@-ms-viewport {
+    width: device-width;
+}
+
+html,
+body,
+.root {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  -ms-overflow-style: scrollbar;
+  font-family: 'Montserrat';
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  font: 1rem / 1.15 'Montserrat' !important;
+  background-color: hsla(0, 100%, 100%, 1);
+  -webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
+}
+
+.content {
+  min-height: calc(100vh - 140px);
+
+}
+
+[hidden] {
+  display: none;
+}
+
+.root {
+  position: relative;
+}
+
+a {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+}
+
+label > input,
+label > textarea {
+  margin-top: 5px;
+}
+
+.no-padding{
+  padding: 0 !important;
+}
+
+.margin-auto{
+  margin: auto;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-style: italic;
+  opacity: 0.8;
+  font-size: 14px;
+}
+
+.carousel .control-dots {
+  padding: 0;
+  display: none;
+}
+.carousel .control-dots .dot{
+  background: green; 
+}
+.carousel.carousel-slider {
+  -webkit-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 2px 15px 0px rgba(0,0,0,0.75);
+}
+
+/*********** LOADER ***********/
+
+$load-lista: (
+  p: (
+    border-size: 0.4em,
+    border-color: hsl(180, 100%, 30%),
+    size: getFontSize(medium)
+  ),
+//   m: (
+//     border-size: 0.5em,
+//     border-color: setColor(geral),
+//     size: (getFontSize(medium) * 3)
+//   ),
+  g: (
+    border-size: 0.6em,
+    border-color: hsl(180, 100%, 30%),
+    size: (12px * 5)
+  ),
+//   p-light: (
+//     border-size: 0.4em,
+//     border-color: setColor(geral, light),
+//     size: getFontSize(medium)
+//   ),
+//   m-light: (
+//     border-size: 0.5em,
+//     border-color: setColor(geral, light),
+//     size: (getFontSize(medium) * 3)
+//   ),
+//   g-light: (
+//     border-size: 0.6em,
+//     border-color: setColor(geral, light),
+//     size: (getFontSize(medium) * 5)
+//   )
+);
+
+.loading {
+  display: block;
+  font-size: 1em;
+  overflow: hidden;
+  position: relative;
+  text-indent: -9999em;
+
+  animation: load-amil 0.45s infinite linear;
+
+  transform: translateZ(0);
+
+  &,
+  &:after {
+    border-radius: 50%;
+  }
+
+  @each $classe, $configs in $load-lista {
+    &.#{$classe} {
+      border-top: solid
+        map-get($configs, border-size)
+        transparentize(
+          map-get($configs, border-color),
+          0.8
+        ); /* parametrizar todas as unidades de cores pelo sass maps */
+      border-right: solid
+        map-get($configs, border-size)
+        transparentize(map-get($configs, border-color), 0.8);
+      border-bottom: solid
+        map-get($configs, border-size)
+        transparentize(map-get($configs, border-color), 0.8);
+      border-left: solid
+        map-get($configs, border-size)
+        transparentize(map-get($configs, border-color), 0);
+      /* borders top, right e bottom são da cor padrão do site com opacidade baixa (0.2), border-left é com opacidade total (1) */
+
+      height: map-get($configs, size); /* Altura e largura do loading.  */
+      width: map-get($configs, size);
+    }
+  }
+}
+
+@-webkit-keyframes load-amil {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes load-amil {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/**
+ * Custom Modal
+ */
+
+.modal-content{
+  padding: 10px 25px;
+}
+
+.modal-body{
+  padding: 2.5rem 1rem !important;
+}
+
+.modal-footer {
+  border-top: none !important;
+  margin: auto;
+}
+
+.close-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  background: transparent;
+  border-top: 50px solid hsl(140, 100%, 30%);
+  border-left: 50px solid transparent;
+
+  cursor: pointer;
+
+  &:hover {
+    border-top: 50px solid hsl(120, 60%, 50%);
+  } // &:hover
+
+  &:before {
+    font-size: 25px;
+    font-weight: 700;
+
+    content: '×';
+    position: absolute;
+    top: -36px;
+    right: 7px;
+    width: 15px;
+    line-height: 0;
+
+    color: white;
+  } // :before
+} // .close-modal
+
+ @media screen and (min-width: 576px){
+   .modal-dialog {
+     max-width: 500px;
+     margin: 14.75rem auto !important;
+    }
+    
+  }
+
+  @media screen and (max-width: 576px){
+    .modal-body{
+      padding: 2.5rem 1rem 1.5rem !important;
+    }
+  }
