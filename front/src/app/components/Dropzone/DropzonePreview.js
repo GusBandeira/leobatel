@@ -19,6 +19,14 @@ class DropzonePreview extends React.Component {
 		};
 	}
 
+	componentDidUpdate(prevProps){
+		const { props } = this
+
+		if(props.removeFile !== prevProps.removeFile && props.removeFile){
+			this.removeFile(0)
+		}
+	}
+
 	componentWillUnmount() {
 		// Make sure to revoke the data uris to avoid memory leaks
 		const { state } = this

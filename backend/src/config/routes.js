@@ -27,8 +27,8 @@ module.exports = function(server) {
             photo: req.file.path
         })
         member.save()
-            .then(success => res.status(200).json({ message: 'Success' }))
-            .catch(err => res.status(500).json({ error: err }))
+            .then(success => res.status(200).json({ status: 200, message: 'Membro adicionado com sucesso' }))
+            .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção do Membro', error: err }))
     })
 
     // Rotas de Ciclo de Pagamento 
