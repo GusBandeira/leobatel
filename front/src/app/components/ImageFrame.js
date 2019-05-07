@@ -75,7 +75,7 @@ export const ImageLink = ({ photo, photo: { link }}) => (
 )
 
 export const Image = ({ photo }) => (
-  <Col sm={12} md={6} lg={4} data-aos="fade-down">
+  <Col sm={12} md={6} lg={4} data-aos="fade-down" className="no-padding--col">
     <CardCol>
       <ImageContent photo={photo} />
     </CardCol>
