@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Row, Col } from 'reactstrap'
 
 import { Link } from 'react-router-dom'
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+import { BASE_URL } from '../../utils/constants'
 
 
 export const CoverImage = styled.div`

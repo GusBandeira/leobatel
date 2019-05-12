@@ -1,6 +1,7 @@
 import React from 'react'
 import { Col } from 'reactstrap'
 import styled from 'styled-components'
+import { BASE_URL } from '../../utils/constants'
 
 const LineRow = styled.div`
     display: flex;
@@ -36,7 +37,7 @@ export const Project = props => (
     <LineRow data-aos={(props.index % 2 === 1) ? 'fade-right' : 'fade-left'}>
         {(props.index % 2 === 0) &&
             <Col lg="5">
-                <ProjectImage src={`data:image/png;base64, ${props.project.photo}`} alt={props.project.alt} />
+                <ProjectImage src={`${BASE_URL}${props.project.photo.replace('\\', '/')}`} alt={props.project.alt} />
             </Col>
         }
         <Col lg="7">
@@ -49,7 +50,7 @@ export const Project = props => (
         </Col>
         {(props.index % 2 === 1) &&
             <Col lg="5">
-                <ProjectImage src={`data:image/png;base64, ${props.project.photo}`} alt={props.project.alt} />
+                <ProjectImage src={`${BASE_URL}${props.project.photo.replace('\\', '/')}`} alt={props.project.alt} />
             </Col>
         }
     </LineRow>

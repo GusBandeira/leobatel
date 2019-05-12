@@ -4,19 +4,9 @@ import { FormRow, Input, ErrorText, Button, Label, LabelDiv } from "../Form";
 import DropzonePreview from '../Dropzone/DropzonePreview'
 import { validateMember } from '../../validations/ContentValidation';
 import MembersService from '../../../services/members'
+import { ModalSuccess, ModalError } from '../../../utils/constants'
 import { Modal } from '../Modal/Modal';
 import { ModalContent } from '../Modal/ModalContent';
-
-const ModalError = {
-    message: 'Ocorreu um erro na comunicação com o servidor',
-    icon: 'exclamation-circle',
-    color: 'red'
-}
-const ModalSuccess = {
-    message: 'Chamada de serviço realizada com sucesso!',
-    icon: 'exclamation-circle',
-    color: 'green'
-}
 
 export class MemberForm extends Component {
 

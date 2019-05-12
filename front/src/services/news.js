@@ -13,6 +13,10 @@ class NewsService {
         //   setTimeout(() => reject({response:{data:'', status: 500 }}), 1000  )
         // }) ;
     }
+
+    static postNews(obj, headers = {}) {
+        return Api.post(`News`, obj, headers);
+    }
 }
 
 export default NewsService;

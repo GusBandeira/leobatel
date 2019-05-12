@@ -30,9 +30,41 @@ module.exports = function(server) {
             .then(success => res.status(200).json({ status: 200, message: 'Membro adicionado com sucesso' }))
             .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção do Membro', error: err }))
     })
+    router.post('/Projects', upload.single('project'), (req, res, next) => {
+        const project = new Projects({
+            _id: new mongoose.Types.ObjectId(),
+            title: req.body.title,
+            description: req.body.description,
+            photo: req.file.path
+        })
+        project.save()
+            .then(success => res.status(200).json({ status: 200, message: 'Projeto adicionado com sucesso' }))
+            .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção do Projeto', error: err }))
+    })
+    router.post('/News', upload.array('news', 12), (req, res, next) => {
+        console.log(req.files)
+        const paths = req.files.map(file => file.path)
+        const news = new News({
+            _id: new mongoose.Types.ObjectId(),
+            title: req.body.title,
+            subtitle: req.body.subtitle,
+            body: req.body.body,
+            photo: paths,
+            detail: req.body.detail
+        })
+        news.save()
+            .then(success => res.status(200).json({ status: 200, message: 'Notícia adicionada com sucesso' }))
+            .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção da Notícia', error: err }))
+    })
 
-    // Rotas de Ciclo de Pagamento 
+    // Rotas de Membros
     const Members = require('../api/members/membersService')
     Members.register(router, '/Members')
+    // Rotas de Projetos
+    const Projects = require('../api/projects/projectsService')
+    Projects.register(router, '/Projects')
+    // Rotas de Notícias
+    const News = require('../api/news/newsService')
+    News.register(router, '/News')
 
 }
