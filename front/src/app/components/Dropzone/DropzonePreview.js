@@ -39,7 +39,7 @@ class DropzonePreview extends React.Component {
 		state.files.forEach(file => URL.revokeObjectURL(file.preview))
 	}
 
-	onDrop(files) {
+	onDropAccepted(files) {
 		const { state } = this
 		this.setState({
 			files: state.files.concat(files.map(file => Object.assign(file, {
@@ -75,8 +75,7 @@ class DropzonePreview extends React.Component {
 		const { state, props: { setImage, imageDetails } } = this
 
 		if(imageDetails && !remove){
-			this.setState({ detailIndex: state.files.length })
-			this.toggleModalDetails()
+			this.setState({ detailIndex: state.files.length }, () => this.toggleModalDetails())
 		}
 
 		if(setImage) {
@@ -204,7 +203,7 @@ class DropzonePreview extends React.Component {
 					</ThumbsContainer>
 				}
 				{state.files.length === 0 || multi ?
-					<Dropzone onDrop={this.onDrop.bind(this)} onDropRejected={this.onDropRejected.bind(this)} accept={accept} maxSize={maxSize} >
+					<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} accept={accept} maxSize={maxSize} >
 						{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
 							return (
 								<DropzoneContainer

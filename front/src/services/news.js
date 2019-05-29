@@ -8,7 +8,7 @@ class NewsService {
         return Api.get(`news/home`);
     }
     static getNewsList(limit) {
-        return Api.get(`News${limit ? '?limit=' + limit : ''}`);
+        return Api.get(`News${limit ? '?limit=' + limit + '&sort=-date' : ''}`);
         // return new Promise(async (resolve, reject) => {
         //   setTimeout(() => reject({response:{data:'', status: 500 }}), 1000  )
         // }) ;

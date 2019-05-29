@@ -9,7 +9,6 @@ import { BannerImage, BannerShadow, BannerTitle, CarousselContainer } from '../c
 export class Carousel extends Component {
 
     renderCarousel(list) {
-        console.log(list)
         return list.map((banner, index) => (
             <Link to={'news/' + banner._id} key={index}>
                 <BannerShadow/>
