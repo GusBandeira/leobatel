@@ -8,13 +8,18 @@ const LineRow = styled.div`
     flex-wrap: wrap;
     margin: 15px 0;
     padding: 30px 0;
+    text-align: ${props => props.side ? 'right' : 'left'};
+    
+    @media screen and (max-width: 992px) {
+        text-align: left;
+    }
     
     // box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.19);
     // -webkit-box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.19);
     // -moz-box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.19);
     `
 const Title = styled.span`
-    display: flex;
+    display: block;
     flex-wrap: wrap;
     font-weight: 700;
     color: #4d4d4d;
@@ -34,7 +39,7 @@ const DescriptionSpan = styled.span`
 `
 
 export const Project = props => (
-    <LineRow data-aos={(props.index % 2 === 1) ? 'fade-right' : 'fade-left'}>
+    <LineRow data-aos={(props.index % 2 === 1) ? 'fade-right' : 'fade-left'} side={(props.index % 2 === 1)}>
         {(props.index % 2 === 0) &&
             <Col lg="5">
                 <ProjectImage src={`${BASE_URL}${props.project.photo.replace('\\', '/')}`} alt={props.project.alt} />

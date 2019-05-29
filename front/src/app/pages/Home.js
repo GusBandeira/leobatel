@@ -14,14 +14,18 @@ import { LoadingImage } from '../components/Loaders'
 // Import Service
 import NewsService from '../../services/news'
 
-//Import Images
+// Import Images
 import LEOBatelLogo from '../../images/LEOBatelLogoPB.png'
+
+// Import Models
+import { HomeNews } from '../Models/NewsModel'
 
 class Home extends React.Component {
   
   state = {
     bannerList: [],
     homeNewsList: [],
+    homeCards: HomeNews, 
     bannerLoading: false,
     cardsLoading: false,
   }
@@ -29,13 +33,13 @@ class Home extends React.Component {
   componentDidMount() {
     AOS.init({ once: true });
     this.getBannerList();
-    this.getNewsList();
+    //this.getNewsList();
   }
 
   getBannerList = async() => {
     try {
         this.setState({ bannerList: [], bannerLoading: true })
-        const { data } = await NewsService.getBannerList()
+        const { data } = await NewsService.getNewsList(5)
         this.setState({ bannerList: data, bannerLoading: false })
     } catch(e){
       
@@ -45,16 +49,16 @@ class Home extends React.Component {
     }
   }
   
-  getNewsList = async(context) => {
-    this.setState({ homeCards: [], cardsLoading: true })
-    const { data } = await NewsService.getHomeCards()
-   this.setState({ homeCards: data, cardsLoading: false })
-  }
-  catch(e){
-    this.setState({ homeCards: [], cardsLoading: false })
-    //TODO: Mensagem de erro
-    console.log('falha ao gerar lista de notícias')
-  }
+  // getNewsList = async(context) => {
+  //   this.setState({ homeCards: [], cardsLoading: true })
+  //   const { data } = await NewsService.getHomeCards()
+  //  this.setState({ homeCards: data, cardsLoading: false })
+  // }
+  // catch(e){
+  //   this.setState({ homeCards: [], cardsLoading: false })
+  //   //TODO: Mensagem de erro
+  //   console.log('falha ao gerar lista de notícias')
+  // }
 
   render() {
 

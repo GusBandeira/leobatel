@@ -1,9 +1,35 @@
 import family2 from '../../images/family2.jpg'
 import Crotalarias from '../../images/Crotalarias.jpg'
 
+// import Banners from '../../images/Banners.jpg'
+// import LionsBatel from '../../images/LionsBatel.jpg'
+// import LEOCampanhaIdoso from '../../images/LEOCampanhaIdoso.png'
+
 import reuniaoFinal from '../../images/news/1/reuniaoFinal.jpg'
 import reuniao from '../../images/news/1/reuniao.jpg'
 import maria from '../../images/news/1/mariaFumaca.png'
+
+export const HomeNews = [
+    {
+        name: "O que é o LEO?",
+        photo: ['uploads/Banners.jpg'],
+        link: '/LEO',
+        subtitle: "Conheça o movimento LEO, o Lions e o movimento LEOístico presente no Brasil e no mundo."
+    },
+    {
+        name: "Lions Clube Batel",
+        photo: ['uploads/LionsBatel.jpg'],
+        link: 'https://lionsbatel.lions.org.br',
+        subtitle: "Fique ligado nas atividades de nosso clube padrinho."
+    },
+    {
+        name: "Quer nos ajudar?",
+        photo: ['uploads/LEOCampanhaIdoso.png'],
+        link: '/contact',
+        subtitle: "Quer fazer uma doação? Quer ajudar em alguma campanha? Quer participar do LEO? Fala com a gente!."
+    },
+]
+
 
 export const NewsExpanded = [
     {},

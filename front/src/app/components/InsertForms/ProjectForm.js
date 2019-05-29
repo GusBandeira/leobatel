@@ -90,7 +90,7 @@ export class ProjectForm extends Component {
                 }
                 <Formik
                     onSubmit={(values, { resetForm }) => {
-                        this.submitForm(values)
+                        this.submitForm(values, resetForm)
                     }}
                     validate={validateProject}
                     initialValues={{ title: '', description: '' }}

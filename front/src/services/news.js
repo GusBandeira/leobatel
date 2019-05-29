@@ -7,11 +7,15 @@ class NewsService {
     static getHomeCards() {
         return Api.get(`news/home`);
     }
-    static getNewsList() {
-        return Api.get(`news/list`);
+    static getNewsList(limit) {
+        return Api.get(`News${limit ? '?limit=' + limit : ''}`);
         // return new Promise(async (resolve, reject) => {
         //   setTimeout(() => reject({response:{data:'', status: 500 }}), 1000  )
         // }) ;
+    }
+
+    static getSingleNews(id) {
+        return Api.get(`News/${id}`);
     }
 
     static postNews(obj, headers = {}) {

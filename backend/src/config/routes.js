@@ -42,7 +42,6 @@ module.exports = function(server) {
             .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção do Projeto', error: err }))
     })
     router.post('/News', upload.array('news', 12), (req, res, next) => {
-        console.log(req.files)
         const paths = req.files.map(file => file.path)
         const news = new News({
             _id: new mongoose.Types.ObjectId(),
@@ -50,7 +49,9 @@ module.exports = function(server) {
             subtitle: req.body.subtitle,
             body: req.body.body,
             photo: paths,
-            detail: req.body.detail
+            detail: req.body.detail,
+            author: req.body.author,
+            date: req.body.date
         })
         news.save()
             .then(success => res.status(200).json({ status: 200, message: 'Notícia adicionada com sucesso' }))

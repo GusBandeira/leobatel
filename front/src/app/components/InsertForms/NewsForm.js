@@ -40,19 +40,14 @@ export class NewsForm extends Component {
     }
     
     submitForm = async(values, resetForm) => {
-        // const { state } = this
-        // const bodyText = this.formatBodyText(values)
-        // this.setState({ imageCoutner: 0 })
-        // console.log(bodyText)
-
         const { state } = this
 
         let formData = new FormData()
         formData.append('title', values.title)
         formData.append('subtitle', values.subtitle)
         formData.append('body', values.body)
-        // formData.append(`news`, state.files)
-        // formData.append(`detail`, JSON.stringify(state.imageDetails))
+        formData.append(`date`, new Date())
+        formData.append(`author`, 'Gustavo Bandeira')
         state.files.forEach((file, index) => formData.append(`news`, file));
         state.imageDetails.forEach((file, index) => formData.append(`detail`, file.title));
         
@@ -66,7 +61,7 @@ export class NewsForm extends Component {
 
             if(result.status === 200) {
                 this.toggleModal(true, result.data.message)
-                resetForm({ title: '', subtitle: '', description: '' })
+                resetForm({ title: '', subtitle: '', body: '' })
                 this.resetImage()
             }
         }
@@ -111,7 +106,6 @@ export class NewsForm extends Component {
         data.unshift(this.formatTextType(values.subtitle, 's'))
         data.unshift(this.formatTextType(values.title, 't'))
 
-        console.log(data)
         return data
     }
 
@@ -144,7 +138,7 @@ export class NewsForm extends Component {
                 }
                 <Formik
                     onSubmit={(values, { resetForm }) => {
-                        this.submitForm(values)
+                        this.submitForm(values, resetForm)
                     }}
                     validate={validateNews}
                     initialValues={{ title: '', subtitle: '', body: '' }}
@@ -185,6 +179,7 @@ export class NewsForm extends Component {
                                             accept={'image/png, image/jpg, image/jpeg'}
                                             setImage={(e, k) => this.setImage(e, k)}
                                             error={state.errorImage}
+                                            removeFile={state.removingFile}
                                         />
                                         <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>
                                     </LabelDiv>

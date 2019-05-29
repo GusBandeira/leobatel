@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Col } from 'reactstrap'
+import { BASE_URL } from '../../utils/constants'
 
 import { Link } from 'react-router-dom'
 
@@ -45,7 +46,7 @@ const ImageName = styled.span`
 const ImageDescription = styled.span`
 `
 
-export const NewsLink = ({ photo, photo: { link }}) => (
+export const NewsLink = ({ photo, photo: { _id }}) => (
   <Col sm={12} md={6} lg={4} data-aos="fade-down">
     <ImageContent photo={photo} />
   </Col>
@@ -57,25 +58,24 @@ export const NewsImage = ({ photo }) => (
   </Col>
 )
 
-const ImageContent = ({ photo: { photo, name, subtitle, link }}) => (
+const ImageContent = ({ photo: { photo, name, subtitle, _id, link }}) => (
     <React.Fragment>
       <ImagePhoto
-        src={`data:image/png;base64, ${photo}`}
+        src={`${BASE_URL}${photo[0].replace('\\', '/')}`}
         width="80%"
         height="300"
         alt={name}
         title={name}
-        link={link}
+        link={_id}
       />
-      <ImageLabel link={link}>
+      <ImageLabel link={'News/' + _id}>
         <ImageName>{name}</ImageName>
         <ImageDescription>{subtitle}&nbsp;
           {link && link.charAt(0) === '/' ? 
-            <Link to={link}> Leia mais... </Link> : 
+            <Link to={_id ? 'News/' + _id : link}> Leia mais... </Link> :
             <a href={link} target="_blank" rel="noopener noreferrer"> Leia mais... </a>
           }
         </ImageDescription>
-        
       </ImageLabel>
     </React.Fragment>
   )

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Carousel as CarouselComponent} from 'react-responsive-carousel'
 import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../utils/constants'
 
 // Import Components
 import { BannerImage, BannerShadow, BannerTitle, CarousselContainer } from '../components/Banner'
@@ -8,18 +9,19 @@ import { BannerImage, BannerShadow, BannerTitle, CarousselContainer } from '../c
 export class Carousel extends Component {
 
     renderCarousel(list) {
+        console.log(list)
         return list.map((banner, index) => (
-            <Link to={banner.link} key={index}>
+            <Link to={'news/' + banner._id} key={index}>
                 <BannerShadow/>
                     <BannerTitle className='row'>
                         <span>
-                            {banner.name}
+                            {banner.title}
                         </span>
                         <span>
                             {banner.subtitle}
                         </span>
                     </BannerTitle>
-                <BannerImage src={`data:image/png;base64, ${banner.banner}`} alt={banner.name} height='600' cover={banner.cover}/>
+                <BannerImage src={`${BASE_URL}${banner.photo[0].replace('\\', '/')}`} alt={banner.title} height='600' cover={banner.cover}/>
             </Link>
         ))
     }

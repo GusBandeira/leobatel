@@ -20,10 +20,16 @@ class DropzonePreview extends React.Component {
 	}
 
 	componentDidUpdate(prevProps){
-		const { props } = this
+		const { props, state } = this
 
 		if(props.removeFile !== prevProps.removeFile && props.removeFile){
-			this.removeFile(0)
+			if(props.multi){
+				const files = [...state.files]
+				this.setState({ files: [], imageDetails: [] })
+			}
+			else {
+				this.removeFile(0)
+			}
 		}
 	}
 
@@ -84,7 +90,7 @@ class DropzonePreview extends React.Component {
 
 		imageDetails[index] = {
 			title: values.title,
-			description: values.description
+			description: values.description || ''
 		}
 
 		this.setState({ imageDetails: imageDetails, editting: false })

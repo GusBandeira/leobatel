@@ -4,8 +4,7 @@ import Drop from 'react-dropzone'
 
 class Dropzone extends React.Component {
    onDrop = (acceptedFiles, rejectedFiles) => {
-     console.log(acceptedFiles)
-     console.log(rejectedFiles)
+
    }
 
    render() {

@@ -8,6 +8,8 @@ const newsSchema = new mongoose.Schema({
     body: { type: String, required: true },
     detail: { type: [String], required: true },
     photo: { type: [String], required: true },
+    date: { type: Date, required: false },
+    author: { type: String, required: false },
 })
 
 module.exports = restful.model('News', newsSchema)
