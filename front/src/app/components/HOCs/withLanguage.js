@@ -1,5 +1,5 @@
 import React from 'react'
-import { MyContext } from '../context'
+import { MyContext } from '../../contexts/language/languageContext'
 import Cookies from 'universal-cookie'
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import withCounter from '../components/withCounter'
+import withCounter from '../HOCs/withCounter'
 import { Row, Col } from 'reactstrap'
 
 export const FormRow = (props) => (

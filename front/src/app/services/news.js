@@ -7,8 +7,14 @@ class NewsService {
     static getHomeCards() {
         return Api.get(`news/home`);
     }
-    static getNewsList(limit) {
-        return Api.get(`News${limit ? '?limit=' + limit + '&sort=-date' : ''}`);
+    static getNewsList({ limit, desc }) {
+        let queryString = `?
+            ${limit ? 'limit=' + limit + '&' : ''}    
+            ${desc ? 'sort=-date' + '&' : ''}    
+        `
+        queryString = queryString.replace(new RegExp(' ', 'g'), '')
+
+        return Api.get(`News${queryString}`);
         // return new Promise(async (resolve, reject) => {
         //   setTimeout(() => reject({response:{data:'', status: 500 }}), 1000  )
         // }) ;

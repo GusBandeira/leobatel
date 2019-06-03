@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import moment from 'moment'
 
-import { Title, SubTitle, ImageWrapper, ImageSubtitle, Author } from '../components/Page.js'
-import { Quotes } from './Quotes'
-import { CoverImage } from './ImageFrame'
+import { Title, SubTitle, ImageWrapper, ImageSubtitle, Author } from '../Page/Page.js'
+import { Quotes } from '../Page/Quotes'
+import { CoverImage } from '../Page/ImageFrame'
 import { BASE_URL } from '../../utils/constants'
 
 const NewsImage = styled.img`

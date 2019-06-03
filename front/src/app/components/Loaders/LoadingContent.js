@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Col } from 'reactstrap';
 import styled from 'styled-components'
-import { Modal } from './Modal/Modal';
-import { ModalContent } from './Modal/ModalContent';
+import { Modal } from '../Modal/Modal';
+import { ModalContent } from '../Modal/ModalContent';
 import { LoadingImage } from './Loaders';
-import LEOBatelLogo from '../../images/LEOBatelLogoPB.png'
+import LEOBatelLogo from '../../../images/LEOBatelLogoPB.png'
 
 const LoadingRow = styled.div`
     display: flex;

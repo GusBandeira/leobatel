@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 
-import { NewsExpanded } from '../Models/NewsModel'
-import NewsComponent from '../components/NewsComponent'
-import NewsService from '../../services/news'
+import NewsComponent from '../components/News/NewsComponent'
+import NewsService from '../services/news'
 
 
 const INITIAL_STATE = {

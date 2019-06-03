@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { BASE_URL } from '../../utils/constants'
 
 // Import Components
-import { BannerImage, BannerShadow, BannerTitle, CarousselContainer } from '../components/Banner'
+import { BannerImage, BannerShadow, BannerTitle, CarousselContainer } from '../../components/Slider/Banner'
 
 export class Carousel extends Component {
 

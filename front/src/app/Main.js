@@ -1,14 +1,14 @@
 // Imports
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Footer from '../app/components/Footer'
+import Footer from '../app/components/Static/Footer'
 import { Container } from 'reactstrap'
 
 // Import Context
-import { MyContext } from 'context'
+import { MyContext } from './contexts/language/languageContext'
 
 // Import pages
-import asyncComponent from "./AsyncComponent";
+import AsyncComponent from "./utils/AsyncComponent";
 
 
 // Import Icons
@@ -17,21 +17,21 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 
 // Import components
-import Header from './components/Header'
+import Header from './components/Static/Header'
 
 // Starters 
 
 library.add(fab, fas)
 
-const Home = asyncComponent(() => import('./pages/Home'));
-const News = asyncComponent(() => import('./pages/News'));
-const NewsPageList = asyncComponent(() => import('./pages/NewsPageList'));
-const Members = asyncComponent(() => import('./pages/Members'));
-const Contact = asyncComponent(() => import('./pages/Contact'));
-const Projects = asyncComponent(() => import('./pages/Projects'));
-const About = asyncComponent(() => import('./pages/About'));
-const LEO = asyncComponent(() => import('./pages/LEO'));
-const InsertContent = asyncComponent(() => import('./pages/InsertContent'));
+const Home = AsyncComponent(() => import('./pages/Home'));
+const News = AsyncComponent(() => import('./pages/News'));
+const NewsPageList = AsyncComponent(() => import('./pages/NewsPageList'));
+const Members = AsyncComponent(() => import('./pages/Members'));
+const Contact = AsyncComponent(() => import('./pages/Contact'));
+const Projects = AsyncComponent(() => import('./pages/Projects'));
+const About = AsyncComponent(() => import('./pages/About'));
+const LEO = AsyncComponent(() => import('./pages/LEO'));
+const InsertContent = AsyncComponent(() => import('./pages/InsertContent'));
 
 // Component Implementation
 const Main = () => {

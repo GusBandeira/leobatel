@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 
 
 // Import Components
-import { CoverImage } from '../components/ImageFrame'
-import NewsComponent from '../components/NewsComponent'
+import { CoverImage } from '../components/Page/ImageFrame'
+import NewsComponent from '../components/News/NewsComponent'
 
 // Import Image
 import friends from '../../images/friends.jpg'
 import family from '../../images/family.jpg'
 
 // Import translations
-import { translates }  from 'translations/translates'
-import withLanguage from '../withLanguage'
+import { translates }  from '../contexts/language/translations/translates'
+import withLanguage from '../components/HOCs/withLanguage'
 
 
 export class About extends Component {

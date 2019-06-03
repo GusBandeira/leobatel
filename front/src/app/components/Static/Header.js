@@ -9,11 +9,11 @@ import 'app/styles/components/header.css'
 import 'app/styles/components/links.css'
 
 // Import translations
-import { translates }  from 'translations/translates'
-import withLanguage from '../withLanguage'
+import { translates }  from '../../contexts/language/translations/translates'
+import withLanguage from '../HOCs/withLanguage'
 
 // Import Image
-import LEOLogo from '../../images/LEOLogo.png'
+import LEOLogo from '../../../images/LEOLogo.png'
 
 
 // const LanguageLink = styled.div`

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 
 // Import Components
-import { CoverImage } from '../components/ImageFrame'
-import NewsComponent from '../components/NewsComponent'
+import { CoverImage } from '../components/Page/ImageFrame'
+import NewsComponent from '../components/News/NewsComponent'
 
 // Import Image
 import friends from '../../images/friends.jpg'
@@ -11,8 +11,8 @@ import melvin from '../../images/MelvinJones.jpg'
 import mutirao from '../../images/LEOCampanha.png'
 
 // Import translations
-import { translates }  from 'translations/translates'
-import withLanguage from '../withLanguage'
+import { translates }  from '../contexts/language/translations/translates'
+import withLanguage from '../components/HOCs/withLanguage'
 
 
 export class LEO extends Component {

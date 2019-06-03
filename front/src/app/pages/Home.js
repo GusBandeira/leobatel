@@ -4,21 +4,22 @@ import AOS from 'aos'
 import BlockUi from 'react-block-ui';
 
 // Import translations
-import withLanguage from '../withLanguage'
+import withLanguage from '../components/HOCs/withLanguage'
 
 // Components
-import { Carousel } from '../components/Carousel'
-import { NewsLink } from '../components/NewsFrame'
-import { LoadingImage } from '../components/Loaders'
+import { Carousel } from '../components/Slider/Carousel'
+import { NewsLink } from '../components/News/NewsFrame'
+import { LoadingImage } from '../components/Loaders/Loaders'
 
 // Import Service
-import NewsService from '../../services/news'
+
+import NewsService from '../services/news'
 
 // Import Images
 import LEOBatelLogo from '../../images/LEOBatelLogoPB.png'
 
 // Import Models
-import { HomeNews } from '../Models/NewsModel'
+import { HomeNews } from '../models/NewsModel'
 
 class Home extends React.Component {
   
@@ -39,7 +40,7 @@ class Home extends React.Component {
   getBannerList = async() => {
     try {
         this.setState({ bannerList: [], bannerLoading: true })
-        const { data } = await NewsService.getNewsList(5)
+        const { data } = await NewsService.getNewsList({ limit: 5, desc: true })
         this.setState({ bannerList: data, bannerLoading: false })
     } catch(e){
       

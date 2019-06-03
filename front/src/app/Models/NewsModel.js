@@ -12,7 +12,7 @@ import maria from '../../images/news/1/mariaFumaca.png'
 export const HomeNews = [
     {
         name: "O que é o LEO?",
-        photo: ['uploads/Banners.jpg'],
+        photo: ['uploads/OLEO.jpeg'],
         link: '/LEO',
         subtitle: "Conheça o movimento LEO, o Lions e o movimento LEOístico presente no Brasil e no mundo."
     },
@@ -24,7 +24,7 @@ export const HomeNews = [
     },
     {
         name: "Quer nos ajudar?",
-        photo: ['uploads/LEOCampanhaIdoso.png'],
+        photo: ['uploads/LEOCampanha.jpeg'],
         link: '/contact',
         subtitle: "Quer fazer uma doação? Quer ajudar em alguma campanha? Quer participar do LEO? Fala com a gente!."
     },

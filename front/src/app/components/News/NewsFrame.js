@@ -71,9 +71,11 @@ const ImageContent = ({ photo: { photo, name, subtitle, _id, link }}) => (
       <ImageLabel link={'News/' + _id}>
         <ImageName>{name}</ImageName>
         <ImageDescription>{subtitle}&nbsp;
-          {link && link.charAt(0) === '/' ? 
-            <Link to={_id ? 'News/' + _id : link}> Leia mais... </Link> :
-            <a href={link} target="_blank" rel="noopener noreferrer"> Leia mais... </a>
+          {link ? 
+            link.charAt(0) === '/' ? 
+              <Link to={link}> Leia mais... </Link> :
+              <a href={link} target="_blank" rel="noopener noreferrer"> Leia mais... </a> :
+            <Link to={'News/' + _id}> Leia mais... </Link>
           }
         </ImageDescription>
       </ImageLabel>

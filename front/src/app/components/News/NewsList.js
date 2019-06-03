@@ -5,7 +5,7 @@ import { NewsLink } from './NewsFrame'
 
 // Import Service
 import NewsService from '../../services/news'
-import LoadingContent from './LoadingContent';
+import LoadingContent from '../Loaders/LoadingContent';
 
 
 export class NewsList extends Component {
@@ -22,7 +22,7 @@ export class NewsList extends Component {
   getNewsList = async() => {
     try {
       this.setState({ newsList: [], loadingNews: true, error: false })
-      const { data } = await NewsService.getNewsList()
+      const { data } = await NewsService.getNewsList({ desc: true })
       this.setState({ newsList: data, loadingNews: false })
     }
     catch(e){

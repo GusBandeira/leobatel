@@ -1,10 +1,10 @@
 import React from 'react'
 import AOS from 'aos'
-import withLanguage from '../withLanguage'
+import withLanguage from '../components/HOCs/withLanguage'
 
 //Import Components
-import NewsList from '../components/NewsList'
-import { CoverImage } from '../components/ImageFrame'
+import NewsList from '../components/News/NewsList'
+import { CoverImage } from '../components/Page/ImageFrame'
 
 // Import images
 import help from '../../images/Helping.jpg'

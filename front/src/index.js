@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from 'serviceWorker'
 
 // Import context provider
-import { MyProvider } from 'context'
+import { MyProvider } from './app/contexts/language/languageContext'
 
 // Import Main component
 import Main from './app/Main'

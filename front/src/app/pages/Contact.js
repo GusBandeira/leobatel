@@ -3,9 +3,9 @@ import { Formik } from "formik";
 import { Container, Row, Col } from 'reactstrap'
 
 // Import Components
-import { FormRow, Input, ErrorText, Button, Label, Textarea } from "../components/Form";
-import { Title } from '../components/Page.js'
-import { CoverImage } from '../components/ImageFrame'
+import { FormRow, Input, ErrorText, Button, Label, Textarea } from "../components/Page/Form";
+import { Title } from '../components/Page/Page.js'
+import { CoverImage } from '../components/Page/ImageFrame'
 import { validate } from '../validations/ContactValidation'
 
 // Import Image
@@ -13,11 +13,11 @@ import friends from '../../images/friends.jpg'
 import logo from '../../images/LEOBatelLogo.png'
 
 // Import Services
-import ContactService from '../../services/contact'
+import ContactService from '../services/contact'
 
 // Import translations
-import { translates }  from 'translations/translates'
-import withLanguage from '../withLanguage'
+import { translates }  from '../contexts/language/translations/translates'
+import withLanguage from '../components/HOCs/withLanguage'
 export class Contact extends Component {
 
   onSubmit = async(values) => {

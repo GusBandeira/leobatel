@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Formik } from "formik";
-import { FormRow, Input, ErrorText, Button, Label, LabelDiv, TextareaNews } from "../Form";
+import { FormRow, Input, ErrorText, Button, Label, LabelDiv, TextareaNews } from "../Page/Form";
 import DropzonePreview from '../Dropzone/DropzonePreview'
 import { validateNews } from '../../validations/ContentValidation'
-import { ModalSuccess, ModalError } from '../../../utils/constants'
+import { ModalSuccess, ModalError } from '../../utils/constants'
 import { Modal } from '../Modal/Modal';
 import { ModalContent } from '../Modal/ModalContent';
-import NewsService from '../../../services/news';
+
+import NewsService from '../../services/news';
+import LoadingContent from '../Loaders/LoadingContent';
 export class NewsForm extends Component {
 
     state = {
@@ -16,7 +18,8 @@ export class NewsForm extends Component {
         imageCounter: 0,
         modalIsOpen: false,
         modal: {},
-        removingFile: false
+        removingFile: false,
+        isLoading: false
     }
 
     
@@ -26,6 +29,10 @@ export class NewsForm extends Component {
             errorImage: files.length > 0 ? "" : "Adicione uma imagem!",
             imageDetails: imageDetails
         })
+    }
+
+    setLoading = (bool) => {
+        this.setState({ isLoading: bool })
     }
 
     resetImage = () => {
@@ -41,6 +48,8 @@ export class NewsForm extends Component {
     
     submitForm = async(values, resetForm) => {
         const { state } = this
+
+        this.setLoading(true)
 
         let formData = new FormData()
         formData.append('title', values.title)
@@ -60,12 +69,14 @@ export class NewsForm extends Component {
             const result = await NewsService.postNews(objToSend, headers)
 
             if(result.status === 200) {
+                this.setLoading(false)
                 this.toggleModal(true, result.data.message)
                 resetForm({ title: '', subtitle: '', body: '' })
                 this.resetImage()
             }
         }
         catch(e) {
+            this.setLoading(false)
             this.toggleModal(false, e.message)
         }
     }
@@ -136,61 +147,63 @@ export class NewsForm extends Component {
                         </ModalContent>
                     </Modal>
                 }
-                <Formik
-                    onSubmit={(values, { resetForm }) => {
-                        this.submitForm(values, resetForm)
-                    }}
-                    validate={validateNews}
-                    initialValues={{ title: '', subtitle: '', body: '' }}
-                    render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
-                        <form onSubmit={handleSubmit}>
-                            <React.Fragment>
-                                <FormRow size='10' offset='1'>
-                                    <Label>
-                                        Título
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.title} error={touched.title && errors.title}
-                                            type="text" name="title" placeholder="Qual a manchete de hoje?" max="100" />
-                                        <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Label>
-                                        Subtítulo
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.subtitle} error={touched.subtitle && errors.subtitle}
-                                            type="text" name="subtitle" placeholder="Faça uma breve descrição do ocorrido" max="140" />
-                                        <ErrorText color="red" error={touched.subtitle && errors.subtitle}>{errors.subtitle}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'>
-                                    <Label>
-                                        Corpo do texto
-                                        <TextareaNews onChange={handleChange} onBlur={handleBlur} value={values.body} error={touched.body && errors.body}
-                                            type="text" name="body" placeholder="Mensagem" />
-                                        <ErrorText color="red" error={touched.body && errors.body}>{errors.body}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'>
-                                    <LabelDiv last>
-                                        Fotos
-                                        <DropzonePreview
-                                            multi
-                                            imageDetails
-                                            maxSize={1 * 1024 * 1024} //1MB
-                                            accept={'image/png, image/jpg, image/jpeg'}
-                                            setImage={(e, k) => this.setImage(e, k)}
-                                            error={state.errorImage}
-                                            removeFile={state.removingFile}
-                                        />
-                                        <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>
-                                    </LabelDiv>
-                                </FormRow>
-                                <FormRow size='10' offset='1'>
-                                    <Button right type="submit" onClick={() => this.checkValidation()}>Adicionar Notícia</Button>
-                                </FormRow>
-                            </React.Fragment>
-                        </form>
-                    )}
-                />
+                <LoadingContent isLoading={state.isLoading}>
+                    <Formik
+                        onSubmit={(values, { resetForm }) => {
+                            this.submitForm(values, resetForm)
+                        }}
+                        validate={validateNews}
+                        initialValues={{ title: '', subtitle: '', body: '' }}
+                        render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
+                            <form onSubmit={handleSubmit}>
+                                <React.Fragment>
+                                    <FormRow size='10' offset='1'>
+                                        <Label>
+                                            Título
+                                            <Input onChange={handleChange} onBlur={handleBlur} value={values.title} error={touched.title && errors.title}
+                                                type="text" name="title" placeholder="Qual a manchete de hoje?" max="100" />
+                                            <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
+                                        </Label>
+                                    </FormRow>
+                                    <FormRow size='10' offset='1'> 
+                                        <Label>
+                                            Subtítulo
+                                            <Input onChange={handleChange} onBlur={handleBlur} value={values.subtitle} error={touched.subtitle && errors.subtitle}
+                                                type="text" name="subtitle" placeholder="Faça uma breve descrição do ocorrido" max="140" />
+                                            <ErrorText color="red" error={touched.subtitle && errors.subtitle}>{errors.subtitle}</ErrorText>
+                                        </Label>
+                                    </FormRow>
+                                    <FormRow size='10' offset='1'>
+                                        <Label>
+                                            Corpo do texto
+                                            <TextareaNews onChange={handleChange} onBlur={handleBlur} value={values.body} error={touched.body && errors.body}
+                                                type="text" name="body" placeholder="Mensagem" />
+                                            <ErrorText color="red" error={touched.body && errors.body}>{errors.body}</ErrorText>
+                                        </Label>
+                                    </FormRow>
+                                    <FormRow size='10' offset='1'>
+                                        <LabelDiv last>
+                                            Fotos
+                                            <DropzonePreview
+                                                multi
+                                                imageDetails
+                                                maxSize={1 * 1024 * 1024} //1MB
+                                                accept={'image/png, image/jpg, image/jpeg'}
+                                                setImage={(e, k) => this.setImage(e, k)}
+                                                error={state.errorImage}
+                                                removeFile={state.removingFile}
+                                            />
+                                            <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>
+                                        </LabelDiv>
+                                    </FormRow>
+                                    <FormRow size='10' offset='1'>
+                                        <Button right type="submit" onClick={() => this.checkValidation()}>Adicionar Notícia</Button>
+                                    </FormRow>
+                                </React.Fragment>
+                            </form>
+                        )}
+                    />
+                </LoadingContent>
             </React.Fragment>
         )
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import LEOBatelLogo from '../../images/LEOBatelLogoPB.png'
+import LEOBatelLogo from '../../../images/LEOBatelLogoPB.png'
 import { Row, Col, Container } from 'reactstrap'
 
 

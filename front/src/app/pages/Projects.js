@@ -1,22 +1,22 @@
 import React from 'react'
 import AOS from 'aos'
-import withLanguage from '../withLanguage'
+import withLanguage from '../components/HOCs/withLanguage'
 
 //Import Components
-import { CoverImage } from '../components/ImageFrame'
-import { Project } from '../components/Project'
+import { CoverImage } from '../components/Page/ImageFrame'
+import { Project } from '../components/Page/Project'
 
 // Import images
 import cat from '../../images/homelessCat.jpg'
 
 // Import Service
-import ProjectsService from '../../services/projects'
+import ProjectsService from '../services/projects'
 
 // Import CSS
 import 'app/styles/grid.css'
 import 'app/styles/components/links.css'
 import 'app/styles/pages/about.css'
-import LoadingContent from '../components/LoadingContent';
+import LoadingContent from '../components/Loaders/LoadingContent';
 
 class Projects extends React.Component {
 

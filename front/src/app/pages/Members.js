@@ -3,14 +3,14 @@ import AOS from 'aos'
 
 // Import translations
 //import { translates }  from 'translations/translates'
-import withLanguage from '../withLanguage'
+import withLanguage from '../components/HOCs/withLanguage'
 
 //Import Components
-import { Image, CoverImage } from '../components/ImageFrame'
-import LoadingContent from '../components/LoadingContent'
+import { Image, CoverImage } from '../components/Page/ImageFrame'
+import LoadingContent from '../components/Loaders/LoadingContent'
 
 // Import Service
-import MembersService from '../../services/members'
+import MembersService from '../services/members'
 
 // Import images
 import group from '../../images/Group.png'
