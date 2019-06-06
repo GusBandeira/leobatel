@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import * as serviceWorker from 'serviceWorker'
 
 // Import context provider
-import { MyProvider } from './app/contexts/language/languageContext'
+import { MyLanguageProvider } from './app/contexts/language/languageContext'
 
 // Import Main component
 import Main from './app/Main'
@@ -17,14 +17,32 @@ import 'app/styles/layout.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-block-ui/style.css';
 
+// Redux
+import { createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import { Provider as ReduxProvider } from 'react-redux'
+import rootReducer from './app/redux/rootReducers'
+
+const reduxStore = createStore(
+  rootReducer,
+  {},
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);
+
+
 // Create App component
 const App = () => {
   return (
-    <MyProvider>
-      <BrowserRouter>
-        <Main />
-      </BrowserRouter>
-    </MyProvider>
+    <ReduxProvider store={reduxStore}>
+      <MyLanguageProvider>
+        <BrowserRouter>
+          <Main />
+        </BrowserRouter>
+      </MyLanguageProvider>
+    </ReduxProvider>
   )
 }
 

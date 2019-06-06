@@ -1,25 +1,31 @@
 const express = require('express')
 const restful = require('node-restful')
+const auth = require('../api/auth/auth')
 const mongoose = restful.mongoose
 
-module.exports = function(server) {
-    
-    // Definir URL base para todas as rotas 
-    const router = express.Router()
-    server.use('/api', router)
+module.exports = function (server) {
+
+    /*
+    * JWT Token protected routes
+    */
+    const protectedApi = express.Router()
+    server.use('/api', protectedApi)
     const multer = require('multer')
-    
+
+    protectedApi.use(auth)
+
     const storage = multer.diskStorage({
-        destination: function(req, file, cb) {
+        destination: function (req, file, cb) {
             cb(null, './uploads/')
         },
-        filename: function(req, file, cb) {
+        filename: function (req, file, cb) {
             cb(null, file.originalname)
         }
     })
     const upload = multer({ storage: storage })
-    
-    router.post('/Members', upload.single('member'), (req, res, next) => {
+
+    // Members insertion in the database (POST)
+    protectedApi.post('/Members', upload.single('member'), (req, res, next) => {
         const member = new Members({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
@@ -30,7 +36,9 @@ module.exports = function(server) {
             .then(success => res.status(200).json({ status: 200, message: 'Membro adicionado com sucesso' }))
             .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção do Membro', error: err }))
     })
-    router.post('/Projects', upload.single('project'), (req, res, next) => {
+
+    // Projects insertion in the database (POST)
+    protectedApi.post('/Projects', upload.single('project'), (req, res, next) => {
         const project = new Projects({
             _id: new mongoose.Types.ObjectId(),
             title: req.body.title,
@@ -41,7 +49,9 @@ module.exports = function(server) {
             .then(success => res.status(200).json({ status: 200, message: 'Projeto adicionado com sucesso' }))
             .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção do Projeto', error: err }))
     })
-    router.post('/News', upload.array('news', 12), (req, res, next) => {
+
+    // News insertion in the database (POST)
+    protectedApi.post('/News', upload.array('news', 12), (req, res, next) => {
         const paths = req.files.map(file => file.path)
         const news = new News({
             _id: new mongoose.Types.ObjectId(),
@@ -51,6 +61,7 @@ module.exports = function(server) {
             photo: paths,
             detail: req.body.detail,
             author: req.body.author,
+            
             date: req.body.date
         })
         news.save()
@@ -58,14 +69,27 @@ module.exports = function(server) {
             .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção da Notícia', error: err }))
     })
 
-    // Rotas de Membros
+    // Members Routes
     const Members = require('../api/members/membersService')
-    Members.register(router, '/Members')
-    // Rotas de Projetos
+    Members.register(protectedApi, '/Members')
+    // Projects Routes
     const Projects = require('../api/projects/projectsService')
-    Projects.register(router, '/Projects')
-    // Rotas de Notícias
+    Projects.register(protectedApi, '/Projects')
+    // News Routes
     const News = require('../api/news/newsService')
-    News.register(router, '/News')
+    News.register(protectedApi, '/News')
 
+    //REMOVER USER ROUTES
+    const User = require('../api/users/userService')
+    User.register(protectedApi, '/User')
+
+    /*
+    * Open routes
+    */
+    const openApi = express.Router()
+    server.use('/oapi', openApi)
+    const AuthService = require('../api/auth/AuthService')
+    openApi.post('/login', AuthService.login)
+    openApi.post('/signup', AuthService.signup)
+    openApi.post('/validateToken', AuthService.validateToken)
 }

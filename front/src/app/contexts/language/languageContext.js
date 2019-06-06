@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import Cookie from 'universal-cookie'
 
 // Create new context
-export const MyContext = React.createContext()
+export const MyLanguageContext = React.createContext()
 
 // Then create a Provider Component
-export class MyProvider extends Component {
+export class MyLanguageProvider extends Component {
   state = {
     isNavOpen: false,
     language: ''
@@ -28,14 +28,14 @@ export class MyProvider extends Component {
 
   render() {
     return (
-      <MyContext.Provider value={{
+      <MyLanguageContext.Provider value={{
         language: this.state.language,
         state: this.state,
         changeLanguage: this.changeLanguage,
         toggleNav: this.toggleNav
       }}>
         {this.props.children}
-      </MyContext.Provider>
+      </MyLanguageContext.Provider>
     )
   }
 }

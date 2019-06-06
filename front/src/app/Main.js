@@ -5,7 +5,7 @@ import Footer from '../app/components/Static/Footer'
 import { Container } from 'reactstrap'
 
 // Import Context
-import { MyContext } from './contexts/language/languageContext'
+import { MyLanguageContext } from './contexts/language/languageContext'
 
 // Import pages
 import AsyncComponent from "./utils/AsyncComponent";
@@ -32,17 +32,19 @@ const Projects = AsyncComponent(() => import('./pages/Projects'));
 const About = AsyncComponent(() => import('./pages/About'));
 const LEO = AsyncComponent(() => import('./pages/LEO'));
 const InsertContent = AsyncComponent(() => import('./pages/InsertContent'));
+const Login = AsyncComponent(() => import('./pages/Login'));
+const CreateAccount = AsyncComponent(() => import('./pages/CreateAccount'));
 
 // Component Implementation
 const Main = () => {
   return (
     <React.Fragment>
-      <MyContext.Consumer >
+      <MyLanguageContext.Consumer >
         {context => <Header context={context}/>}
-      </MyContext.Consumer>
+      </MyLanguageContext.Consumer>
 
       <Container className="content">
-        <Route exact={true} path="/" component={Home} />
+        <Route exact path="/" component={Home} />
         <Route path="/members" component={Members} />
         <Route exact path="/news" component={NewsPageList} />
         <Route path="/news/:id" component={News} />
@@ -51,6 +53,8 @@ const Main = () => {
         <Route path="/about" component={About} />
         <Route path="/LEO" component={LEO} />
 
+        <Route path="/login" component={Login} />
+        <Route path="/create-account" component={CreateAccount} />
         <Route path="/insert-content" component={InsertContent} />
       </Container>
 
