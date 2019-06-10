@@ -11,16 +11,34 @@ class Auth extends Component {
         this.state = { loginMode: true }
     }
 
+    componentDidMount(){
+        const { props } = this
+        if(props.user) {
+            props.history.push('/')
+        }
+    }
+    
+    componentDidUpdate(prevProps) {
+        const { props } = this
+        if(JSON.stringify(prevProps.user) !== JSON.stringify(props.user) && props.user){
+            props.history.push('/')
+        }
+    }
+
     changeMode() {
         this.setState({ loginMode: !this.state.loginMode })
     }
 
-    onSubmit(values, resetForm) { 
-        const { login } = this.props
+    onSubmit = (values, resetForm) => { 
+        const { props } = this
 
-        login(values)
+        try {
+            props.login(values)
+        }
+        catch(e) {
 
-        resetForm()
+        }
+
     }
 
     render() {
@@ -70,5 +88,7 @@ class Auth extends Component {
     }
 }
 
+const mapStateToProps = state => ({ user: state.authReducer.user })
 const mapDispatchToProps = dispatch => bindActionCreators({ login, signup }, dispatch)
-export default connect(null, mapDispatchToProps)(Auth)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

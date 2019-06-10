@@ -19,12 +19,6 @@ export class InsertContent extends Component {
         contentType: "Selecione",
     }
 
-    onSubmit = values => {
-        console.log(values)
-    }
-
-    
-
     render() {
 
         const { state } = this

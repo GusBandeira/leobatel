@@ -1,20 +1,26 @@
 import axios from 'axios'
-import { OPEN_BASE_URL, BASE_URL } from '../../utils/constants'
+import { OPEN_BASE_URL, API_BASE_URL } from '../../utils/constants'
 
 export function login(values) {
     return submitLogin(values, `${OPEN_BASE_URL}login`)
 }
 
 export async function signup(values) {
-    return await submitSignUp(values, `${OPEN_BASE_URL}signup`)
+    return await submitSignUp(values, `${API_BASE_URL}signup`)
 }
 
 function submitLogin(values, url) {
 
+    // return new Promise(async (resolve, reject) => {
+    //     setTimeout(() => resolve(dispatch(
+    //         { type: 'USER_FETCHED', payload: { name: 'name', email: 'email' } }
+    //     )), 5000  )
+        
+    // }) ;
+
     return dispatch => {
         axios.post(url, values)
             .then(resp => {
-                console.log(resp)
                 dispatch(
                     { type: 'USER_FETCHED', payload: resp.data }
                 )

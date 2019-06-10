@@ -15,14 +15,13 @@ class Auth extends Component {
         this.setState({ loginMode: !this.state.loginMode })
     }
 
-    async onSubmit(values, resetForm) { 
+    onSubmit(values, resetForm) { 
         const { signup } = this.props
 
         values = { ...values, password: 'BAnd1988!!', confirm_password: 'BAnd1988!!' }
 
         try {
-            const result = await signup(values)
-            console.log(result)
+            const result = signup(values)
 
             if(result) {
                 resetForm()

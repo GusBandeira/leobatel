@@ -69,6 +69,23 @@ module.exports = function (server) {
             .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção da Notícia', error: err }))
     })
 
+     // User update in the database (POST)
+     //REMOVER USER ROUTES
+     const User = require('../api/users/userService')
+     protectedApi.post('/User', upload.single('user'), (req, res, next) => {
+         User.findOne({ _id: req.body._id }, function (err, doc){
+             doc.name = req.body.name;
+             doc.age = req.body.age || null;
+             doc.leo = req.body.leo || null;
+             doc.email = req.body.email;
+             doc.photo = req.file ? req.file.path : null;
+             doc.save()
+                .then(success => res.status(200).json({ status: 200, message: 'Dados atualizados com sucesso' }))
+                .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção dos dados', error: err }))
+        });
+    })
+        
+    User.register(protectedApi, '/User')
     // Members Routes
     const Members = require('../api/members/membersService')
     Members.register(protectedApi, '/Members')
@@ -79,9 +96,6 @@ module.exports = function (server) {
     const News = require('../api/news/newsService')
     News.register(protectedApi, '/News')
 
-    //REMOVER USER ROUTES
-    const User = require('../api/users/userService')
-    User.register(protectedApi, '/User')
 
     /*
     * Open routes
@@ -90,6 +104,6 @@ module.exports = function (server) {
     server.use('/oapi', openApi)
     const AuthService = require('../api/auth/AuthService')
     openApi.post('/login', AuthService.login)
-    openApi.post('/signup', AuthService.signup)
+    protectedApi.post('/signup', AuthService.signup)
     openApi.post('/validateToken', AuthService.validateToken)
 }

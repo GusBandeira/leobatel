@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import LEOBatelLogo from '../../../images/LEOBatelLogoPB.png'
 import { Row, Col, Container } from 'reactstrap'
+import { withRouter } from 'react-router-dom'
 
 
 const CopyRight = styled.div`
@@ -34,7 +35,14 @@ const SocialLink = styled.a`
   }
 `
 
+
 class Footer extends Component {
+
+  goLogin = () => {
+    const { props } = this
+    props.history.push('/login')
+  }
+
   render() {
     return (
       <footer>
@@ -42,7 +50,7 @@ class Footer extends Component {
             <Container>
               <Row>
                 <Col lg={{ offset: 2, size: 3 }} sm="12">
-                  <img src={LEOBatelLogo} alt="Logo Leo Batel" height="170"/>
+                  <img src={LEOBatelLogo} alt="Logo Leo Batel" height="170" onClick={this.goLogin}/>
                 </Col>
                 <Col lg="4" sm="12" className="margin-auto">
                     <SocialLink href='http://facebook.com/leoclubebatel' target='_blank'>
@@ -66,4 +74,4 @@ class Footer extends Component {
   }
 }
 
-export default Footer;
+export default withRouter(Footer);

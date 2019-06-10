@@ -15,6 +15,7 @@ export const ThumbsContainer = styled.aside`
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 16px;
+    margin-bottom: 12px;
   `;
 
 export const Remove = styled.div`

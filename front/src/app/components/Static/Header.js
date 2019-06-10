@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Container } from 'reactstrap'
+import { Container, Row } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 // Import CSS
@@ -66,7 +66,7 @@ class Header extends Component {
         
     render() {
 
-        const { props, props: { language, user } } = this
+        const { props, props: { language, user }, state } = this
         const text = translates[`translation${language}`]
 
         let name, email = null
@@ -119,13 +119,35 @@ class Header extends Component {
                                     </MenuListItem>
                                     {props.user ? 
                                         <MenuListItem>
-                                            <Link className='link' to="/contact" onClick={this.props.context.toggleNav} onMouseLeave={() => this.changeOpen()}>
-                                                <FontAwesomeIcon icon={['fas', 'paw']} />
-                                                <span>{name}<small>{email}</small></span>
-                                            </Link>
-                                            {this.state.open &&
-                                                <a href="/#" onClick={() => { this.props.logout(); this.changeOpen() }}
-                                                    className="btn btn-default btn-flat">Sair</a>
+                                            <div className='link' to="/contact" onClick={() => this.changeOpen()}>
+                                                <div>{name.substring(0, name.indexOf(' '))}</div>
+                                                <small>{email}</small>
+                                                <FontAwesomeIcon icon={['fas', state.open ? 'chevron-up' : 'chevron-down']} />
+                                            </div>
+                                            {state.open &&
+                                                <div >
+                                                    <Row>
+                                                        <Link to="/insert-content" onClick={() => { this.changeOpen() }}>
+                                                            Inserir Conteúdo
+                                                        </Link>
+                                                    </Row>
+                                                    <Row>
+                                                        <Link to="/create-account" onClick={() => { this.changeOpen() }}>
+                                                            Cadastrar Usuário
+                                                        </Link>
+                                                    </Row>
+                                                    <Row>
+                                                        <Link to="/my-profile" onClick={() => { this.changeOpen() }}>
+                                                            Meu perfil
+                                                        </Link>
+                                                    </Row>
+                                                    <Row>
+                                                        <Link to="/" onClick={() => { props.logout(); this.changeOpen() }}>
+                                                            Sair
+                                                        </Link>
+                                                    </Row>
+                                                </div>
+
                                                 }
                                         </MenuListItem>
                                         :

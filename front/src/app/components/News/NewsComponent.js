@@ -88,8 +88,6 @@ export class NewsComponent extends Component {
         data.unshift(this.formatTextType(values.subtitle, 's'))
         data.unshift(this.formatTextType(values.title, 't'))
 
-        console.log(data)
-
         this.setState({ news: data })
     }
 

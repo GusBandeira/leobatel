@@ -43,7 +43,7 @@ export class Contact extends Component {
           </Title>
           <Row>
             <Col>
-
+            
             </Col>
           </Row>
           <Formik

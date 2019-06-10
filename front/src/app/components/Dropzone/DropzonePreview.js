@@ -6,6 +6,7 @@ import { ModalContent } from '../Modal/ModalContent';
 import { Thumb, ThumbInner, ThumbImg, ThumbClose, Remove, ThumbsContainer, InfoMessage, DropzoneContainer, ImageTitle } from './DropzoneComponents'
 import ImageForm from '../InsertForms/ImageForm'
 import ModalImageContent from '../Modal/ModalImageContent';
+import { Button } from '../Page/Form'
 
 
 
@@ -197,32 +198,56 @@ class DropzonePreview extends React.Component {
 			<section>
 				{this.renderModalError()}
 				{this.renderModalDetails()}
-				{multi && state.files.length > 0 &&
-					<ThumbsContainer >
-						{thumbs}
-					</ThumbsContainer>
-				}
 				{state.files.length === 0 || multi ?
-					<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} accept={accept} maxSize={maxSize} >
-						{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
-							return (
-								<DropzoneContainer
-									style={{ borderColor: error ? '#ff0000' : '#666' }}
-									isDragActive={isDragActive}
-									isDragReject={isDragReject}
-									{...getRootProps()}
-								>
-									<input {...getInputProps()} />
-									<InfoMessage>
-										Clique ou arraste sua imagem
-                              			<span>
-											Tamanho máximo 1MB.
-                              			</span>
-									</InfoMessage>
-								</DropzoneContainer>
-							)
-						}}
-					</Dropzone>
+					<React.Fragment>
+
+						<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} 
+								accept={accept} maxSize={maxSize}>
+							{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
+								return (
+									<div isDragActive={isDragActive}
+										 isDragReject={isDragReject}
+										 {...getRootProps()}>
+										<input {...getInputProps()} />
+											<Button type="button">
+												Inserir Anexo
+											</Button>
+									</div>
+								)
+							}}
+						</Dropzone>
+						<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} 
+								accept={accept} maxSize={maxSize} disableClick>
+							{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
+								return (
+									<DropzoneContainer
+										style={{ borderColor: error ? '#ff0000' : '#666', 
+												 height: state.files.length > 0 ? '100%' : '200px',
+												 marginBottom: state.files.length > 0 ? '20px' : '0' }}
+										isDragActive={isDragActive}
+										isDragReject={isDragReject}
+										{...getRootProps()}
+									>
+										<input {...getInputProps()} />
+										<InfoMessage>
+											{multi && state.files.length > 0 ?
+												<ThumbsContainer >
+													{thumbs}
+												</ThumbsContainer>
+												:
+												<React.Fragment>
+													Arraste sua imagem
+													<span>
+														Tamanho máximo 1MB.
+													</span>
+												</React.Fragment>
+											}
+										</InfoMessage>
+									</DropzoneContainer>
+								)
+							}}
+						</Dropzone>
+					</React.Fragment>
 					:
 					<ThumbsContainer >
 						{thumbs}

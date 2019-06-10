@@ -33,7 +33,8 @@ const About = AsyncComponent(() => import('./pages/About'));
 const LEO = AsyncComponent(() => import('./pages/LEO'));
 const InsertContent = AsyncComponent(() => import('./pages/InsertContent'));
 const Login = AsyncComponent(() => import('./pages/Login'));
-const CreateAccount = AsyncComponent(() => import('./pages/CreateAccount'));
+const CreateAccount = AsyncComponent(() => import('./pages/CreateAccount')); 
+const Profile = AsyncComponent(() => import('./pages/Profile')); 
 
 // Component Implementation
 const Main = () => {
@@ -56,6 +57,7 @@ const Main = () => {
         <Route path="/login" component={Login} />
         <Route path="/create-account" component={CreateAccount} />
         <Route path="/insert-content" component={InsertContent} />
+        <Route path="/my-profile" component={Profile} />
       </Container>
 
       <Footer />
