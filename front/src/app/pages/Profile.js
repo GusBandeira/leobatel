@@ -7,9 +7,11 @@ import { Formik } from "formik";
 import { FormRow, Input, ErrorText, Button, Label, Textarea, LabelDiv } from "../components/Page/Form";
 import DropzonePreview from '../components/Dropzone/DropzonePreview'
 import { connect } from 'react-redux'
+import { CoverImage } from '../components/Page/ImageFrame'
+import friends from '../../images/friends.jpg'
 
-import ProjectsService from '../services/projects';
 import UserService from '../services/user';
+import PasswordForm from '../components/InsertForms/PasswordForm';
 
 export class Profile extends Component {
 
@@ -20,7 +22,8 @@ export class Profile extends Component {
         modal: {},
         removingFile: false,
         isLoading: false,
-        userData: {}
+        userData: {},
+        passwordModalIsOpen:  false
     }
 
     async componentDidMount(){
@@ -33,7 +36,12 @@ export class Profile extends Component {
         this.setLoading(true)
         const result = await UserService.getSingleUser(props.user._id)
     
-        this.setState({ userData: result.data}, () => this.setLoading(false))
+        this.setState({ userData: result.data }, () => {
+            this.setLoading(false);
+            if(result.data.changePassword){
+                this.toggleModalPassword()
+            }   
+        })
     }
 
     submitForm = async(values, resetForm) => { 
@@ -103,91 +111,114 @@ export class Profile extends Component {
         })
     }
 
+    toggleModalPassword = (bool) => {
+        const { state } = this
+        this.setState({ passwordModalIsOpen: bool || !state.passwordModalIsOpen })
+    }
+    
+    changePassword = () => {
+        this.toggleModalPassword(false)
+    }
+
     render() {
 
         const { state, props } = this
 
         return (
-            <React.Fragment>
-            {state.modalIsOpen && 
-                <Modal buttonConfirm="Ok" isOpen={state.modalIsOpen} toggle={this.toggleModal} cancel={this.toggleModal} confirm={this.toggleModal} noHeader>
-                    <ModalContent icon={state.modal.icon} color={state.modal.color}>
-                        {state.modal.message}
-                    </ModalContent>
-                </Modal>
-            }
-            <LoadingContent isLoading={state.isLoading}>
-                <Formik
-                    onSubmit={(values, { resetForm }) => {
-                        this.submitForm(values, resetForm)
-                    }}
-                    // validate={validateProject}
-                    initialValues={state.userData}
-                    render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
-                        <form onSubmit={handleSubmit}>
-                            <React.Fragment>
-                                <FormRow size='10' offset='1'> 
-                                    <LabelDiv last>
-                                        Foto
-                                        <DropzonePreview
-                                            maxSize={1 * 1024 * 1024} //1MB
-                                            accept={'image/png, image/jpg, image/jpeg'}
-                                            setImage={e => this.setImage(e)}
-                                            error={state.errorImage}
-                                            removeFile={state.removingFile}
-                                        />
-                                        <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>
-                                    </LabelDiv>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Label>
-                                        Nome de Usuário
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.userName} error={touched.userName && errors.userName}
-                                            type="text" name="userName" placeholder="Insira o nome do projeto" max="70" readOnly/>
-                                        <ErrorText color="red" error={touched.userName && errors.userName}>{errors.userName}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Label>
-                                        Nome
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.name} error={touched.name && errors.name}
-                                            type="text" name="name" placeholder="Insira o nome do projeto" max="70"/>
-                                        <ErrorText color="red" error={touched.name && errors.name}>{errors.name}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Label>
-                                        E-mail
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.email} error={touched.email && errors.email}
-                                            type="text" name="email" placeholder="Insira o nome do projeto" max="70"/>
-                                        <ErrorText color="red" error={touched.email && errors.email}>{errors.email}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Label>
-                                        Leo Club
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.leo} error={touched.leo && errors.leo}
-                                            type="text" name="leo" placeholder="Insira o nome do projeto" max="70"/>
-                                        <ErrorText color="red" error={touched.leo && errors.leo}>{errors.leo}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Label>
-                                        Idade
-                                        <Input onChange={handleChange} onBlur={handleBlur} value={values.age} error={touched.age && errors.age}
-                                            type="text" name="age" placeholder="Insira o nome do projeto" max="70"/>
-                                        <ErrorText color="red" error={touched.age && errors.age}>{errors.age}</ErrorText>
-                                    </Label>
-                                </FormRow>
-                                <FormRow size='10' offset='1'> 
-                                    <Button right type="submit">Salvar</Button>
-                                </FormRow>
-                            </React.Fragment>
-                        </form>
-                    )}
-                />
-            </LoadingContent>
-        </React.Fragment>
+            <div className="page">
+                <CoverImage>
+                    <img src={friends} alt='About' />
+                </CoverImage>
+                <React.Fragment>
+                    {state.modalIsOpen && 
+                        <Modal buttonConfirm="Ok" isOpen={state.modalIsOpen} toggle={this.toggleModal} cancel={this.toggleModal} confirm={this.toggleModal} noHeader>
+                            <ModalContent icon={state.modal.icon} color={state.modal.color}>
+                                {state.modal.message}
+                            </ModalContent>
+                        </Modal>
+                    }
+                    {state.passwordModalIsOpen && 
+                        <Modal isOpen={state.passwordModalIsOpen} 
+                               toggle={this.toggleModalPassword} cancel={this.toggleModalPassword} confirm={this.changePassword}>
+                            <ModalContent icon={state.modal.icon} color={state.modal.color}>
+                                <PasswordForm confirmPassword={this.changePassword}/>
+                            </ModalContent>
+                        </Modal>
+                    }
+                    <LoadingContent isLoading={state.isLoading}>
+                        <Formik
+                            onSubmit={(values, { resetForm }) => {
+                                this.submitForm(values, resetForm)
+                            }}
+                            // validate={validateProject}
+                            initialValues={state.userData}
+                            render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
+                                <form onSubmit={handleSubmit}>
+                                    <React.Fragment>
+                                        <FormRow size='10' offset='1'> 
+                                            <LabelDiv last>
+                                                Foto
+                                                <DropzonePreview
+                                                    maxSize={1 * 1024 * 1024} //1MB
+                                                    accept={'image/png, image/jpg, image/jpeg'}
+                                                    setImage={e => this.setImage(e)}
+                                                    error={state.errorImage}
+                                                    removeFile={state.removingFile}
+                                                />
+                                                <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>
+                                            </LabelDiv>
+                                        </FormRow>
+                                        <FormRow size='10' offset='1'> 
+                                            <Label>
+                                                Nome de Usuário
+                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.userName} error={touched.userName && errors.userName}
+                                                    type="text" name="userName" placeholder="Insira o nome do projeto" max="70" readOnly/>
+                                                <ErrorText color="red" error={touched.userName && errors.userName}>{errors.userName}</ErrorText>
+                                            </Label>
+                                        </FormRow>
+                                        <FormRow size='10' offset='1'> 
+                                            <Label>
+                                                Nome
+                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.name} error={touched.name && errors.name}
+                                                    type="text" name="name" placeholder="Insira o nome do projeto" max="70"/>
+                                                <ErrorText color="red" error={touched.name && errors.name}>{errors.name}</ErrorText>
+                                            </Label>
+                                        </FormRow>
+                                        <FormRow size='10' offset='1'> 
+                                            <Label>
+                                                E-mail
+                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.email} error={touched.email && errors.email}
+                                                    type="text" name="email" placeholder="Insira o nome do projeto" max="70"/>
+                                                <ErrorText color="red" error={touched.email && errors.email}>{errors.email}</ErrorText>
+                                            </Label>
+                                        </FormRow>
+                                        <FormRow size='10' offset='1'> 
+                                            <Label>
+                                                Leo Club
+                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.leo} error={touched.leo && errors.leo}
+                                                    type="text" name="leo" placeholder="Insira o nome do projeto" max="70"/>
+                                                <ErrorText color="red" error={touched.leo && errors.leo}>{errors.leo}</ErrorText>
+                                            </Label>
+                                        </FormRow>
+                                        <FormRow size='10' offset='1'> 
+                                            <Label>
+                                                Idade
+                                                <Input onChange={handleChange} onBlur={handleBlur} value={values.age} error={touched.age && errors.age}
+                                                    type="text" name="age" placeholder="Insira o nome do projeto" max="70"/>
+                                                <ErrorText color="red" error={touched.age && errors.age}>{errors.age}</ErrorText>
+                                            </Label>
+                                        </FormRow>
+                                        <FormRow size='10' offset='1'> 
+                                            <Button left type="button" onClick={() => this.setState({ passwordModalIsOpen: true })}>Alterar Senha</Button>
+                                            <Button right type="submit">Salvar</Button>
+                                        </FormRow>
+                                    </React.Fragment>
+                                </form>
+                            )}
+                        />
+                    </LoadingContent>
+                </React.Fragment>
+            </div>
         )
     }
 }

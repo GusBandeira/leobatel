@@ -23,7 +23,7 @@ const login = (req, res, next) => {
                 expiresIn: "1 day"
             })
             const { name, email, userName, age, leo, _id } = user
-            res.json({ name, email, userName, age, leo, token, _id })
+            res.json({ name, email, userName, age, leo, token, changePassword, _id })
         } else {
             return res.status(401).send({ errors: ['Usuário/Senha inválidos'] })
         }
@@ -64,7 +64,7 @@ const signup = (req, res, next) => {
         } else if (user) {
             return res.status(400).send({ errors: ['Usuário já cadastrado.'] })
         } else {
-            const newUser = new User({ name, email, password: passwordHash, userName })
+            const newUser = new User({ name, email, password: passwordHash, userName, changePassword: true })
             newUser.save(err => {
                 if (err) {
                     return sendErrorsFromDB(res, err)
@@ -78,4 +78,38 @@ const signup = (req, res, next) => {
     })
 }
 
-module.exports = { login, signup, validateToken }
+const changePassword = (req, res, next) => {
+
+    const oldPassword = req.body.oldPassword || ''
+    const password = req.body.newPassword || ''
+    const confirmPassword = req.body.confirmPassword || ''
+    const userName = req.body.userName || ''
+
+    if (!password.match(passwordRegex)) {
+        return res.status(400).send({
+            errors: [
+                "Senha precisar ter: uma letra maiúscula, uma letra minúscula, um número, uma caractere especial(@#$ %) e tamanho entre 6 - 12."
+            ]
+        })
+    }
+    const salt = bcrypt.genSaltSync()
+    const passwordHash = bcrypt.hashSync(password, salt)
+    if (!bcrypt.compareSync(confirmPassword, passwordHash)) {
+        return res.status(400).send({ errors: ['Senhas não conferem.'] })
+    }
+    User.findOne({ userName }, (err, user) => {
+        if (err) {
+            return sendErrorsFromDB(res, err)
+        } else if (!bcrypt.compareSync(oldPassword, user.password)) {
+            return res.status(400).send({ errors: ['Senha incorreta.'] })
+        } else {
+            user.password = passwordHash;
+            user.changePassword = false;
+            user.save()
+                .then(success => res.status(200).json({ status: 200, message: 'Dados atualizados com sucesso' }))
+                .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção dos dados', error: err }))
+        }
+    })
+}
+
+module.exports = { login, signup, changePassword, validateToken }

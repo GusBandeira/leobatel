@@ -9,6 +9,9 @@ class UserService {
     static postUser(obj, headers = {}) {
         return Api.post(`User/`, obj, headers);
     }
+    static postChangePassword(obj, headers = {}) {
+        return Api.post(`password`, obj, headers);
+    }
 }
 
 export default UserService;

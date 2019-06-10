@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux'
 import { login, signup } from '../redux/authReducer/authActions'
 import { Formik } from "formik";
 import { FormRow, Input, ErrorText, Button, Label } from "../components/Page/Form";
+import { CoverImage } from '../components/Page/ImageFrame'
+import friends from '../../images/friends.jpg'
 
 class Auth extends Component {
     constructor(props) {
@@ -37,10 +39,9 @@ class Auth extends Component {
         return (
             
             <div className="page">
-                <div className="login-logo"><b> My</b> Money</div>
-                <div className="login-box-body">
-                    <p className="login-box-msg">Bem vindo!</p>
-
+                    <CoverImage>
+                        <img src={friends} alt='About' />
+                    </CoverImage>
                     <Formik
                         onSubmit={(values, { resetForm }) => {
                             this.onSubmit(values, resetForm)
@@ -82,7 +83,6 @@ class Auth extends Component {
                         )}
                     />
                 </div>
-            </div>
         )
     }
 }

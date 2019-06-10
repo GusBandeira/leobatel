@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, min: 6, max: 12, required: true },
   leo: { type: String, required: false },
   age: { type: Number, required: false },
-  photo: { type: String, required: false }
+  photo: { type: String, required: false },
+  changePassword: { type: Boolean, default: true }
 })
 module.exports = restful.model('User', userSchema)

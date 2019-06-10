@@ -82,6 +82,10 @@ export class MemberForm extends Component {
         })
     }
 
+    setLoading = (bool) => {
+        this.setState({ isLoading: bool })
+    }
+
     render() {
 
         const { state } = this

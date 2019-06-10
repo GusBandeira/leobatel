@@ -84,6 +84,18 @@ module.exports = function (server) {
                 .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção dos dados', error: err }))
         });
     })
+    protectedApi.post('/User', upload.single('user'), (req, res, next) => {
+        User.findOne({ _id: req.body._id }, function (err, doc) {
+            doc.name = req.body.name;
+            doc.age = req.body.age || null;
+            doc.leo = req.body.leo || null;
+            doc.email = req.body.email;
+            doc.photo = req.file ? req.file.path : null;
+            doc.save()
+                .then(success => res.status(200).json({ status: 200, message: 'Dados atualizados com sucesso' }))
+                .catch(err => res.status(500).json({ status: 500, message: 'Ocorreu um erro na inserção dos dados', error: err }))
+        });
+    })
         
     User.register(protectedApi, '/User')
     // Members Routes
@@ -105,5 +117,6 @@ module.exports = function (server) {
     const AuthService = require('../api/auth/AuthService')
     openApi.post('/login', AuthService.login)
     protectedApi.post('/signup', AuthService.signup)
+    protectedApi.post('/password', AuthService.changePassword)
     openApi.post('/validateToken', AuthService.validateToken)
 }
