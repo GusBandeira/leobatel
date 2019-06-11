@@ -6,6 +6,8 @@ import { Title, SubTitle, ImageWrapper, ImageSubtitle, Author } from '../Page/Pa
 import { Quotes } from '../Page/Quotes'
 import { CoverImage } from '../Page/ImageFrame'
 import { BASE_URL } from '../../utils/constants'
+import LoadingContent from '../Loaders/LoadingContent.js';
+import UserService from '../../services/user';
 
 const NewsImage = styled.img`
   margin: auto;
@@ -15,7 +17,8 @@ const NewsImage = styled.img`
 
 const INITIAL_STATE = {
     imageCounter: 0,
-    news: []
+    news: [],
+    userData: null
 }
 
 export class NewsComponent extends Component {
@@ -23,14 +26,29 @@ export class NewsComponent extends Component {
     state = { ...INITIAL_STATE }
 
     componentDidMount(){
-        const { props } = this
     }
     
     componentDidUpdate(prevProps){
         const { props } = this
         if(JSON.stringify(prevProps.news) !== JSON.stringify(props.news) && props.news){
-            this.setState({ imageCounter: 0 }, () => this.formatBodyText(props.news))
+            this.setState({ imageCounter: 0 }, () => this.getAuthorData(props.news))
         }
+    }
+    
+    getAuthorData = async(values) => {
+       
+        this.setLoading(true)
+        const result = await UserService.getSingleUser(values.author)
+    
+        this.setState({ userData: result.data }, () => {
+            this.setLoading(false);
+        })
+
+        this.formatBodyText(values)
+    }
+
+    setLoading = (bool) => {
+        this.setState({ isLoading: bool })
     }
 
     formatImage = (sp, imageCounter) => {
@@ -60,12 +78,14 @@ export class NewsComponent extends Component {
         return paragraph
     }
 
-    formatAuthor = (author, date) => {
+    formatAuthor = (date) => {
+        const { state } = this
+        const { name } = state.userData
         const credits = {
             type: 'a',
-            author: author,
+            author: name.substring(0, name.indexOf(' ')) + name.substring(name.lastIndexOf(' '), name.length),
             date: moment(date).format("DD MMMM"),
-            url: 'uploads\\LEOBatelLogo.png'
+            url: state.userData.photo
         }
         return credits
     }
@@ -84,7 +104,7 @@ export class NewsComponent extends Component {
             }
         })
 
-        data.unshift(this.formatAuthor(values.author, values.date))
+        data.unshift(this.formatAuthor(values.date))
         data.unshift(this.formatTextType(values.subtitle, 's'))
         data.unshift(this.formatTextType(values.title, 't'))
 
@@ -120,7 +140,9 @@ export class NewsComponent extends Component {
         const { state } = this
         return (
             <div className='page page-news'>
-                {state.news && state.news.map((item, index) => this.renderNewsItem(item, index))}
+                <LoadingContent isLoading={state.isLoading}>
+                    {state.news && state.news.map((item, index) => this.renderNewsItem(item, index))}
+                </LoadingContent>
             </div>
         )
     }

@@ -7,6 +7,7 @@ import { Thumb, ThumbInner, ThumbImg, ThumbClose, Remove, ThumbsContainer, InfoM
 import ImageForm from '../InsertForms/ImageForm'
 import ModalImageContent from '../Modal/ModalImageContent';
 import { Button } from '../Page/Form'
+import { BASE_URL } from '../../utils/constants'
 
 
 
@@ -16,8 +17,17 @@ class DropzonePreview extends React.Component {
 		this.state = {
 			files: [],
 			imageDetails: [],
-			editting: false
+			editting: false,
+			stashFile: null
 		};
+	}
+
+	componentDidMount() {
+		const { props } = this
+		if(props.inputImage){
+			this.inputImage(props.inputImage)
+		}
+
 	}
 
 	componentDidUpdate(prevProps){
@@ -38,6 +48,10 @@ class DropzonePreview extends React.Component {
 		// Make sure to revoke the data uris to avoid memory leaks
 		const { state } = this
 		state.files.forEach(file => URL.revokeObjectURL(file.preview))
+	}
+
+	inputImage = (inputImage) => {
+		this.setState({ files: [{ preview: `${BASE_URL}${inputImage.replace('\\', '/')}` }] })
 	}
 
 	onDropAccepted(files) {
@@ -165,24 +179,52 @@ class DropzonePreview extends React.Component {
 		this.toggleModalDetails()
 	}
 
-	render() {
-		const { state, props: { accept, maxSize, multi, error } } = this;
+	stashImage = () => {
+		const { state } = this
+		this.setState({ stashImage: state.files, files: [] })
+	}
+	unstashImage = () => {
+		const { state } = this
+		this.setState({ files: state.stashImage, stashImage: null })
+	}
 
-		const thumbs = state.files.map((file, index) => (
-			<Thumb key={index} onMouseEnter={() => this.imageMouseEvent(false)} onMouseLeave={() => this.imageMouseEvent(false)}>
+	renderProfileThumbs() {
+		const { state, props } = this;
+	
+		// Normal thumbs
+		return state.files.map((file, index) => (
+			<Thumb key={index} onMouseEnter={() => this.imageMouseEvent(false)} onMouseLeave={() => this.imageMouseEvent(false)} multi={props.multi} noBorder>
+				<ThumbInner>
+					<ThumbImg src={file.preview} alt="imagem de perfil" onMouseOver={() => this.imageMouseEvent(true)} profile/>
+				</ThumbInner>
+				<Remove onClick={() => this.stashImage()}>
+					<FontAwesomeIcon icon={['fas', 'pen']} className="green"/>
+					<span>Alterar</span>
+				</Remove>
+				
+			</Thumb>
+		));
+	}
+
+	renderNormalThumbs() {
+		const { state, props } = this;
+	
+		// Normal thumbs
+		return state.files.map((file, index) => (
+			<Thumb key={index} onMouseEnter={() => this.imageMouseEvent(false)} onMouseLeave={() => this.imageMouseEvent(false)} multi={props.multi}>
 				<ThumbInner>
 					<ThumbImg src={file.preview} alt="imagem de perfil" onMouseOver={() => this.imageMouseEvent(true)} />
-					{state.close && !multi &&
+					{state.close && !props.multi &&
 						<ThumbClose onClick={() => this.removeFile(index)} />
 					}
 				</ThumbInner>
 				{state.imageDetails[index] && state.imageDetails[index].title &&
 					<React.Fragment>
 						<ImageTitle>
-							<span> {state.imageDetails[index].title} </span>
+							{state.imageDetails[index].title} 
 						</ImageTitle>
 						<Remove onClick={() => this.editImage(index + 1)}>
-							<FontAwesomeIcon icon={['fas', 'pen']}  className="green"/>
+							<FontAwesomeIcon icon={['fas', 'pen']} className="green"/>
 							<span>Editar</span>
 						</Remove>
 					</React.Fragment>
@@ -193,6 +235,10 @@ class DropzonePreview extends React.Component {
 				</Remove>
 			</Thumb>
 		));
+	}
+
+	render() {
+		const { state, props: { accept, maxSize, multi, error, profile } } = this;
 
 		return (
 			<section>
@@ -201,29 +247,35 @@ class DropzonePreview extends React.Component {
 				{state.files.length === 0 || multi ?
 					<React.Fragment>
 
+						{!profile &&
+							<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} 
+									accept={accept} maxSize={maxSize}>
+								{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
+									return (
+										<div isDragActive={isDragActive}
+												isDragReject={isDragReject}
+												{...getRootProps()}>
+											<input {...getInputProps()} />
+												<Button type="button">
+													Inserir Anexo
+												</Button>
+										</div>
+									)
+								}}
+							</Dropzone>
+						}
 						<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} 
-								accept={accept} maxSize={maxSize}>
-							{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
-								return (
-									<div isDragActive={isDragActive}
-										 isDragReject={isDragReject}
-										 {...getRootProps()}>
-										<input {...getInputProps()} />
-											<Button type="button">
-												Inserir Anexo
-											</Button>
-									</div>
-								)
-							}}
-						</Dropzone>
-						<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} 
-								accept={accept} maxSize={maxSize} disableClick>
+								accept={accept} maxSize={maxSize} disableClick={profile ? false : true} profile={profile}>
 							{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
 								return (
 									<DropzoneContainer
 										style={{ borderColor: error ? '#ff0000' : '#666', 
 												 height: state.files.length > 0 ? '100%' : '200px',
-												 marginBottom: state.files.length > 0 ? '20px' : '0' }}
+												 margin: 'auto',
+												 marginBottom: state.files.length > 0 ? '20px' : '0',
+												 borderRadius: profile ? '100px' : 0,
+												 width: profile ? '200px' : 'auto', 
+												}}
 										isDragActive={isDragActive}
 										isDragReject={isDragReject}
 										{...getRootProps()}
@@ -232,11 +284,15 @@ class DropzonePreview extends React.Component {
 										<InfoMessage>
 											{multi && state.files.length > 0 ?
 												<ThumbsContainer >
-													{thumbs}
+													{profile ? 
+														this.renderProfileThumbs() 
+														:
+														this.renderNormalThumbs()
+													}
 												</ThumbsContainer>
 												:
 												<React.Fragment>
-													Arraste sua imagem
+													Arraste sua imagem {profile && ' ou clique aqui'}
 													<span>
 														Tamanho máximo 1MB.
 													</span>
@@ -250,8 +306,18 @@ class DropzonePreview extends React.Component {
 					</React.Fragment>
 					:
 					<ThumbsContainer >
-						{thumbs}
+						{profile ? 
+							this.renderProfileThumbs() 
+							:
+							this.renderNormalThumbs()
+						}	
 					</ThumbsContainer>
+				}
+				{state.stashImage &&
+					<Remove onClick={() => this.unstashImage()}>
+						<FontAwesomeIcon icon={['fas', 'undo']} className="green"/>
+						<span>Retornar Imagem</span>
+					</Remove>
 				}
 			</section>
 		);

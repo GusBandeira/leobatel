@@ -12,6 +12,7 @@ import friends from '../../images/friends.jpg'
 
 import UserService from '../services/user';
 import PasswordForm from '../components/InsertForms/PasswordForm';
+import { PhotoContainer } from '../components/Dropzone/DropzoneComponents';
 
 export class Profile extends Component {
 
@@ -50,7 +51,6 @@ export class Profile extends Component {
         this.setLoading(true)
 
         let formData = new FormData()
-        formData.append('user', state.files[0])
         formData.append('name', values.name)
         formData.append('userName', values.userName)
         formData.append('leo', values.leo)
@@ -58,6 +58,9 @@ export class Profile extends Component {
         formData.append('email', values.email)
         formData.append('_id', props.user._id)
         
+        if(state.files.length > 0){
+            formData.append('user', state.files[0])
+        }
 
         let headers = {}
         headers['Content-Type'] = 'multipart/form-data'
@@ -68,7 +71,7 @@ export class Profile extends Component {
             const result = await UserService.postUser(objToSend, headers)
 
             if(result.status === 200) {
-                this.setLoading(false)
+                this.getUserData()
                 this.toggleModal(true, result.data.message)
             }
         }
@@ -156,17 +159,18 @@ export class Profile extends Component {
                                 <form onSubmit={handleSubmit}>
                                     <React.Fragment>
                                         <FormRow size='10' offset='1'> 
-                                            <LabelDiv last>
-                                                Foto
+                                            <PhotoContainer>
                                                 <DropzonePreview
                                                     maxSize={1 * 1024 * 1024} //1MB
                                                     accept={'image/png, image/jpg, image/jpeg'}
                                                     setImage={e => this.setImage(e)}
                                                     error={state.errorImage}
                                                     removeFile={state.removingFile}
+                                                    profile
+                                                    inputImage={state.userData.photo}
                                                 />
                                                 <ErrorText color="red" error={state.errorImage}>{state.errorImage}</ErrorText>
-                                            </LabelDiv>
+                                            </PhotoContainer>
                                         </FormRow>
                                         <FormRow size='10' offset='1'> 
                                             <Label>

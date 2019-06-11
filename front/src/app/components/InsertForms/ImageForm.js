@@ -26,7 +26,7 @@ export class ProjectForm extends Component {
                                 <Label>
                                     Título
                                     <Input onChange={handleChange} onBlur={handleBlur} value={values.title} error={touched.title && errors.title}
-                                        type="text" name="title" placeholder="Título da imagem" max="70" />
+                                        type="text" name="title" placeholder="Título da imagem" maxLength="40" />
                                     <ErrorText color="red" error={touched.title && errors.title}>{errors.title}</ErrorText>
                                 </Label>
                             </FormRow>

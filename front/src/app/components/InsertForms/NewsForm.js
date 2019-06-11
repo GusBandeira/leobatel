@@ -6,6 +6,7 @@ import { validateNews } from '../../validations/ContentValidation'
 import { ModalSuccess, ModalError } from '../../utils/constants'
 import { Modal } from '../Modal/Modal';
 import { ModalContent } from '../Modal/ModalContent';
+import { connect } from 'react-redux'
 
 import NewsService from '../../services/news';
 import LoadingContent from '../Loaders/LoadingContent';
@@ -47,7 +48,7 @@ export class NewsForm extends Component {
     }
     
     submitForm = async(values, resetForm) => {
-        const { state } = this
+        const { state, props } = this
 
         this.setLoading(true)
 
@@ -56,7 +57,7 @@ export class NewsForm extends Component {
         formData.append('subtitle', values.subtitle)
         formData.append('body', values.body)
         formData.append(`date`, new Date())
-        formData.append(`author`, 'Gustavo Bandeira')
+        formData.append(`author`, props.user._id)
         state.files.forEach((file, index) => formData.append(`news`, file));
         state.imageDetails.forEach((file, index) => formData.append(`detail`, file.title));
         
@@ -209,4 +210,6 @@ export class NewsForm extends Component {
     }
 }
 
-export default NewsForm
+const mapStateToProps = state => ({ user: state.authReducer.user })
+
+export default connect(mapStateToProps)(NewsForm)

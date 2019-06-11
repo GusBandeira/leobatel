@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
 export const getColor = (props) => {
-	if (props.isDragReject) {
-		return '#c66';
-	}
-	if (props.isDragActive) {
-		return '#6c6';
-	}
-	return '#666';
+    if (props.isDragReject) {
+        return '#c66';
+    }
+    if (props.isDragActive) {
+        return '#6c6';
+    }
+    return '#666';
 };
 
 export const ThumbsContainer = styled.aside`
@@ -44,23 +44,18 @@ export const ImageTitle = styled.div`
   font-size: 14px;
   opacity: 0.8;
   margin: 10px 0;
-
-  span{
-    font-weight: 700;
-    margin-left: 5px;
-  }
+  font-weight: 700;
+  padding-left: 5px;
+  width: 200px;
 `
 
 export const Thumb = styled.div`
     display: block;
     border-radius: 2px;
     border: ${props => props.noBorder ? "" : "1px solid #eaeaea"};
-    margin-bottom: 8px;
-    margin-right: 8px;
     padding: 4px;
     box-sizing: border-box;
-    margin: auto;
-    margin-top: 10px;
+    margin: ${props => props.multi ? '10px 5px auto' : '10px auto'};
   `;
 
 export const ThumbInner = styled.div`
@@ -75,6 +70,7 @@ export const ThumbInner = styled.div`
 export const ThumbImg = styled.img`
     display: block;
     width: auto;
+    border-radius: ${props => props.profile ? '100px' : '0'};
   `;
 
 export const DropzoneContainer = styled.div`
@@ -89,6 +85,10 @@ export const DropzoneContainer = styled.div`
     margin-top: 5px;
     display: flex;
   `;
+
+export const PhotoContainer = styled.div`
+    text-align: center
+`
 
 export const InfoMessage = styled.span`
     margin: auto;

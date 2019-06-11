@@ -24,23 +24,24 @@ export const SubTitle = styled.h4`
   margin-bottom: 50px;
 `
 
-const AuthorName = styled.div`
+export const AuthorName = styled.div`
   font-weight: 400;
 `
-const PostDate = styled.div`
+export const PostDate = styled.div`
   opacity: 0.6;
   font-size: 12px;
 `
-const CreditsContainer = styled.div`
+export const CreditsContainer = styled.div`
   display: inline-flex;
   margin-bottom: 20px;
 `
-const AuthorImage = styled.img`
-  height: 50px;
-  width: 50px;
+export const AuthorImage = styled.img`
+  height: 40px;
+  width: 40px;
   border-radius: 50px;
+  margin-right: 5px;
 `
-const AuthorContainer = styled.div`
+export const AuthorContainer = styled.div`
   margin: auto;
 `
 

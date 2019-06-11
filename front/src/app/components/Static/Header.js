@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 import { Container, Row } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+// Import components
+import { BASE_URL } from '../../utils/constants'
+import { AuthorImage } from '../Page/Page'
+
 // Import CSS
 import 'app/styles/components/header.css'
 import 'app/styles/components/links.css'
@@ -127,10 +131,11 @@ class Header extends Component {
         const { props, props: { language, user }, state } = this
         const text = translates[`translation${language}`]
 
-        let name, email = null
+        let name, photo, email = null
         if (user) {
             name = props.user.name
             email = props.user.email
+            photo = props.user.photo || 'uploads/LEOLogo.png'
         }
 
 
@@ -179,6 +184,7 @@ class Header extends Component {
                                         {props.user ?
                                             <React.Fragment>
                                                 <MenuListItem>
+                                                    <AuthorImage src={`${BASE_URL}${photo.replace('\\', '/')}`} alt={'leo'} />
                                                     <LoggedContainer onClick={() => this.changeOpen()}>
                                                         {name.substring(0, name.indexOf(' '))}
                                                         <IconContainer open={state.open}>
