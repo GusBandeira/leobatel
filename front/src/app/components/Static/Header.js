@@ -11,6 +11,7 @@ import 'app/styles/components/links.css'
 // Import translations
 import { translates } from '../../contexts/language/translations/translates'
 import withLanguage from '../HOCs/withLanguage'
+import { withRouter } from 'react-router-dom'
 
 // Import Image
 import LEOLogo from '../../../images/LEOLogo.png'
@@ -53,6 +54,57 @@ const MenuListItem = styled.li`
     }
   }
 `
+const OptionsDrop = styled.div`
+    opacity: ${props => props.open ? 1 : 0};
+    margin-top: ${props => props.open ? '0px' : '-15px'};
+    float: right;
+    transition: all .3s ease-in-out;
+    background-color: white;
+    box-shadow: 0 0 3px #ccc;
+    padding:  ${props => props.open ? '10px' : '0'};
+    width: 220px;
+
+    height: ${props => props.open ? 'auto' : '0'};
+
+    div:last-child {
+        border-bottomn: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+    }
+`
+const OptionsRow = styled.div`
+    padding: 10px 15px;
+    border-bottomn: 1px solid lightgray;
+    display: flex;
+    flex-wrap: wrap;
+    
+
+    :hover{
+        background-color: hsl(150, 40%, 30%);
+        color: white;
+        cursor: pointer;
+    }
+`
+const LoggedContainer = styled.div`
+    margin: auto;
+    font-size: 16px;
+    color: hsla(0, 100%, 100%, 1);
+    display: inline-flex;
+    cursor: pointer;
+`
+const IconContainer = styled.div`
+    margin-left: 10px;
+
+    transform: rotate(${props => props.open ? '180deg' : '0deg'});
+    -ms-transform: rotate(${props => props.open ? '180deg' : '0deg'});
+    -webkit-transform: rotate(${props => props.open ? '180deg' : '0deg'});
+
+    -webkit-transition: -webkit-transform .4s ease-in-out;
+    -ms-transition: -ms-transform .4s ease-in-out;
+    transition: transform .4s ease-in-out;  
+`
 
 class Header extends Component {
 
@@ -63,113 +115,113 @@ class Header extends Component {
     changeOpen() {
         this.setState({ open: !this.state.open })
     }
-        
+
+    onClickOption = (link) => {
+        const { props } = this
+        props.history.push(link)
+        this.changeOpen()
+    }
+
     render() {
 
         const { props, props: { language, user }, state } = this
         const text = translates[`translation${language}`]
 
         let name, email = null
-        if(user){
+        if (user) {
             name = props.user.name
             email = props.user.email
         }
 
 
         return (
-            <header className="header">
-                <HeaderBar className='md__show'>
-                    <Link to='/'>
-                        <img src={LEOLogo} alt="LEO Logo" width="100" height="100" />
-                    </Link>
-                </HeaderBar>
-                <Container>
-                    <nav className="nav-wrapper">
-                        {<div className={`js-nav nav ${!this.props.context.state.isNavOpen && 'js-nav-hide'}`}>
-                            <Logo className="lg__show">
-                                <Link className='link' to="/" onClick={this.props.context.toggleNav}>
-                                    <img src={LEOLogo} alt="LEO Logo" width="100" height="100" />
-                                </Link>
-                            </Logo>
-                            <Menu>
-                                <ul className="nav-list">
-                                    <MenuListItem>
-                                        <Link className='link' to="/about" onClick={this.props.context.toggleNav}>
-                                            <FontAwesomeIcon icon={['fas', 'info-circle']} />
-                                            <span>{text.nav.about}</span>
-                                        </Link>
-                                    </MenuListItem>
-                                    <MenuListItem>
-                                        <Link className='link' to="/members" onClick={this.props.context.toggleNav}>
-                                            <FontAwesomeIcon icon={['fas', 'user-circle']} />
-                                            <span>{text.nav.members}</span>
-                                        </Link>
-                                    </MenuListItem>
-                                    <MenuListItem>
-                                        <Link className='link' to="/projects" onClick={this.props.context.toggleNav}>
-                                            <FontAwesomeIcon icon={['fas', 'cannabis']} />
-                                            <span>{text.nav.projects}</span>
-                                        </Link>
-                                    </MenuListItem>
-                                    <MenuListItem>
-                                        <Link className='link' to="/news" onClick={this.props.context.toggleNav}>
-                                            <FontAwesomeIcon icon={['fas', 'globe-americas']} />
-                                            <span>{text.nav.news}</span>
-                                        </Link>
-                                    </MenuListItem>
-                                    {props.user ? 
+            <div>
+                <header className="header">
+                    <HeaderBar className='md__show'>
+                        <Link to='/'>
+                            <img src={LEOLogo} alt="LEO Logo" width="100" height="100" />
+                        </Link>
+                    </HeaderBar>
+                    <Container>
+                        <nav className="nav-wrapper">
+                            {<div className={`js-nav nav ${!this.props.context.state.isNavOpen && 'js-nav-hide'}`}>
+                                <Logo className="lg__show">
+                                    <Link className='link' to="/" onClick={this.props.context.toggleNav}>
+                                        <img src={LEOLogo} alt="LEO Logo" width="100" height="100" />
+                                    </Link>
+                                </Logo>
+                                <Menu>
+                                    <ul className="nav-list">
                                         <MenuListItem>
-                                            <div className='link' to="/contact" onClick={() => this.changeOpen()}>
-                                                <div>{name.substring(0, name.indexOf(' '))}</div>
-                                                <small>{email}</small>
-                                                <FontAwesomeIcon icon={['fas', state.open ? 'chevron-up' : 'chevron-down']} />
-                                            </div>
-                                            {state.open &&
-                                                <div >
-                                                    <Row>
-                                                        <Link to="/insert-content" onClick={() => { this.changeOpen() }}>
-                                                            Inserir Conteúdo
-                                                        </Link>
-                                                    </Row>
-                                                    <Row>
-                                                        <Link to="/create-account" onClick={() => { this.changeOpen() }}>
-                                                            Cadastrar Usuário
-                                                        </Link>
-                                                    </Row>
-                                                    <Row>
-                                                        <Link to="/my-profile" onClick={() => { this.changeOpen() }}>
-                                                            Meu perfil
-                                                        </Link>
-                                                    </Row>
-                                                    <Row>
-                                                        <Link to="/" onClick={() => { props.logout(); this.changeOpen() }}>
-                                                            Sair
-                                                        </Link>
-                                                    </Row>
-                                                </div>
-
-                                                }
-                                        </MenuListItem>
-                                        :
-                                        <MenuListItem>
-                                            <Link className='link' to="/contact" onClick={this.props.context.toggleNav}>
-                                                <FontAwesomeIcon icon={['fas', 'paw']} />
-                                                <span>{text.nav.join}</span>
+                                            <Link className='link' to="/about" onClick={this.props.context.toggleNav}>
+                                                <FontAwesomeIcon icon={['fas', 'info-circle']} />
+                                                <span>{text.nav.about}</span>
                                             </Link>
                                         </MenuListItem>
-                                    }
-                                </ul>
-                            </Menu>
-                        </div>}
-                    </nav>
-                    {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'} 
-                                type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}>
-                        <span />
-                        <span />
-                        <span />
-                    </button>}
-                </Container>
-            </header>
+                                        <MenuListItem>
+                                            <Link className='link' to="/members" onClick={this.props.context.toggleNav}>
+                                                <FontAwesomeIcon icon={['fas', 'user-circle']} />
+                                                <span>{text.nav.members}</span>
+                                            </Link>
+                                        </MenuListItem>
+                                        <MenuListItem>
+                                            <Link className='link' to="/projects" onClick={this.props.context.toggleNav}>
+                                                <FontAwesomeIcon icon={['fas', 'cannabis']} />
+                                                <span>{text.nav.projects}</span>
+                                            </Link>
+                                        </MenuListItem>
+                                        <MenuListItem>
+                                            <Link className='link' to="/news" onClick={this.props.context.toggleNav}>
+                                                <FontAwesomeIcon icon={['fas', 'globe-americas']} />
+                                                <span>{text.nav.news}</span>
+                                            </Link>
+                                        </MenuListItem>
+                                        {props.user ?
+                                            <React.Fragment>
+                                                <MenuListItem>
+                                                    <LoggedContainer onClick={() => this.changeOpen()}>
+                                                        {name.substring(0, name.indexOf(' '))}
+                                                        <IconContainer open={state.open}>
+                                                            <FontAwesomeIcon icon={['fas', 'chevron-down']}/>
+                                                        </IconContainer>
+                                                    </LoggedContainer>
+                                                </MenuListItem>
+                                            </React.Fragment>
+                                            :
+                                            <MenuListItem>
+                                                <Link className='link' to="/contact" onClick={this.props.context.toggleNav}>
+                                                    <FontAwesomeIcon icon={['fas', 'paw']} />
+                                                    <span>{text.nav.join}</span>
+                                                </Link>
+                                            </MenuListItem>
+                                        }
+                                    </ul>
+                                    <OptionsDrop open={state.open}>
+                                        <OptionsRow onClick={() => this.onClickOption("/insert-content")}>
+                                            Inserir Conteúdo
+                                        </OptionsRow>
+                                        <OptionsRow onClick={() => this.onClickOption("/create-account")}>
+                                            Cadastrar Usuário
+                                        </OptionsRow>
+                                        <OptionsRow  onClick={() => this.onClickOption("/my-profile")}>
+                                            Meu perfil
+                                        </OptionsRow>
+                                        <OptionsRow  onClick={() => { props.logout(); this.onClickOption("/")}}>
+                                            Sair
+                                        </OptionsRow>
+                                    </OptionsDrop>
+                                </Menu>
+                            </div>}
+                        </nav>
+                        {<button className={this.props.context.state.isNavOpen ? 'nav-toggler nav-toggler--open' : 'nav-toggler'}
+                            type="button" aria-label="Toggle navigation" onClick={this.props.context.toggleNav}>
+                            <span />
+                            <span />
+                            <span />
+                        </button>}
+                    </Container>
+                </header>
+            </div>
         )
     }
 }
@@ -177,4 +229,4 @@ class Header extends Component {
 const mapStateToProps = state => ({ user: state.authReducer.user })
 const mapDispatchToProps = dispatch => bindActionCreators({ logout }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withLanguage(Header))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withLanguage(Header)))
