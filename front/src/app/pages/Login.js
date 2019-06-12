@@ -44,7 +44,6 @@ class Auth extends Component {
     }
 
     render() {
-        const { loginMode } = this.state
         return (
             
             <div className="page">

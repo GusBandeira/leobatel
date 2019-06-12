@@ -4,7 +4,7 @@ import { Modal } from '../components/Modal/Modal';
 import { ModalContent } from '../components/Modal/ModalContent';
 import LoadingContent from '../components/Loaders/LoadingContent';
 import { Formik } from "formik";
-import { FormRow, Input, ErrorText, Button, Label, Textarea, LabelDiv } from "../components/Page/Form";
+import { FormRow, Input, ErrorText, Button, Label } from "../components/Page/Form";
 import DropzonePreview from '../components/Dropzone/DropzonePreview'
 import { connect } from 'react-redux'
 import { CoverImage } from '../components/Page/ImageFrame'
@@ -125,7 +125,7 @@ export class Profile extends Component {
 
     render() {
 
-        const { state, props } = this
+        const { state } = this
 
         return (
             <div className="page">
@@ -141,10 +141,10 @@ export class Profile extends Component {
                         </Modal>
                     }
                     {state.passwordModalIsOpen && 
-                        <Modal isOpen={state.passwordModalIsOpen} 
+                        <Modal isOpen={state.passwordModalIsOpen} noFooter
                                toggle={this.toggleModalPassword} cancel={this.toggleModalPassword} confirm={this.changePassword}>
                             <ModalContent icon={state.modal.icon} color={state.modal.color}>
-                                <PasswordForm confirmPassword={this.changePassword}/>
+                                <PasswordForm confirmPassword={this.changePassword} cancel={this.toggleModalPassword}/>
                             </ModalContent>
                         </Modal>
                     }

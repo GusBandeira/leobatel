@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Container, Row } from 'reactstrap'
+import { Container } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import onClickOutside from 'react-onclickoutside'
 
 // Import components
 import { BASE_URL } from '../../utils/constants'
@@ -69,6 +70,7 @@ const OptionsDrop = styled.div`
     width: 220px;
 
     height: ${props => props.open ? 'auto' : '0'};
+    display: ${props => props.open ? 'block' : 'none'};
 
     div:last-child {
         border-bottomn: none;
@@ -119,6 +121,9 @@ class Header extends Component {
     changeOpen() {
         this.setState({ open: !this.state.open })
     }
+    changeOpenBool(bool) {
+        this.setState({ open: bool })
+    }
 
     onClickOption = (link) => {
         const { props } = this
@@ -126,15 +131,21 @@ class Header extends Component {
         this.changeOpen()
     }
 
+    handleClickOutside = () => {
+        const { state } = this
+        if(state.open){
+            this.changeOpenBool(false)
+        }
+    }
+
     render() {
 
         const { props, props: { language, user }, state } = this
         const text = translates[`translation${language}`]
 
-        let name, photo, email = null
+        let name, photo
         if (user) {
             name = props.user.name
-            email = props.user.email
             photo = props.user.photo || 'uploads/LEOLogo.png'
         }
 
@@ -235,4 +246,4 @@ class Header extends Component {
 const mapStateToProps = state => ({ user: state.authReducer.user })
 const mapDispatchToProps = dispatch => bindActionCreators({ logout }, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withLanguage(Header)))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(withLanguage(onClickOutside(Header))))

@@ -38,14 +38,22 @@ export class ModalContent extends Component {
 
     return (
       <ContentRow>
-        <Col sm="12" md="4">
-            <IconDetail color={color}>
-                <FontAwesomeIcon icon={icon} size='3x'/>
-            </IconDetail>
-        </Col>
-        <Col sm="12" md="8">
-            {children}
-        </Col>
+        {icon ?
+          <React.Fragment>
+            <Col sm="12" md="4">
+                <IconDetail color={color}>
+                    <FontAwesomeIcon icon={icon} size='3x'/>
+                </IconDetail>
+            </Col>
+            <Col sm="12" md="8">
+                {children}
+            </Col>
+          </React.Fragment>
+          :
+          <Col sm="12" md="12">
+              {children}
+          </Col>
+        }
       </ContentRow>
     )
   }

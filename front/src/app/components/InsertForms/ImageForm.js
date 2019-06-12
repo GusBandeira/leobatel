@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Formik } from "formik";
-import { FormRow, Input, ErrorText, Button, Label, Textarea } from "../Page/Form";
+import { FormRow, Input, ErrorText, Button, Label } from "../Page/Form";
 import { validateProject } from '../../validations/ContentValidation';
 
 export class ProjectForm extends Component {

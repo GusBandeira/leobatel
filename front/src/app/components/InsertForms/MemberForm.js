@@ -69,7 +69,7 @@ export class MemberForm extends Component {
     }
 
     toggleModal = (status, message) => {
-        const { state, props } = this
+        const { state } = this
         const modal = status ? 
             { ...ModalSuccess, message: message || ModalSuccess.message } 
             :

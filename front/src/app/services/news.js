@@ -10,7 +10,7 @@ class NewsService {
     static getNewsList({ limit, desc }) {
         let queryString = `?
             ${limit ? 'limit=' + limit + '&' : ''}    
-            ${desc ? 'sort=-date' + '&' : ''}    
+            ${desc ? 'sort=-date&' : ''}    
         `
         queryString = queryString.replace(new RegExp(' ', 'g'), '')
 

@@ -84,7 +84,7 @@ export class NewsComponent extends Component {
         const credits = {
             type: 'a',
             author: name.substring(0, name.indexOf(' ')) + name.substring(name.lastIndexOf(' '), name.length),
-            date: moment(date).format("DD MMMM"),
+            date: moment(date).format("DD MMMM YY"),
             url: state.userData.photo
         }
         return credits
@@ -93,13 +93,13 @@ export class NewsComponent extends Component {
     formatBodyText(values) {
         const split = values.body.split("\n")
         let data = []
-        let imageCounter = 0
+        let imageCounter = 1
         split.forEach(sp => {
-            if (sp.trim().substring(0, 6).includes('/image')) {
+            if (sp.trim().substring(0, 6).includes('/image') && values.photo[imageCounter]) {
                 data.push(this.formatImage(sp, imageCounter))
                 imageCounter++
             }
-            else if (sp.trim()) {
+            else if (sp.trim() && !sp.includes('/image')) {
                 data.push(this.formatTextType(sp, 'p'))
             }
         })
@@ -107,6 +107,7 @@ export class NewsComponent extends Component {
         data.unshift(this.formatAuthor(values.date))
         data.unshift(this.formatTextType(values.subtitle, 's'))
         data.unshift(this.formatTextType(values.title, 't'))
+        data.unshift(this.formatTextType(`${BASE_URL}${values.photo[0].replace('\\', '/')}`, 'c'))
 
         this.setState({ news: data })
     }
@@ -139,7 +140,7 @@ export class NewsComponent extends Component {
     render() {
         const { state } = this
         return (
-            <div className='page page-news'>
+            <div className='page'>
                 <LoadingContent isLoading={state.isLoading}>
                     {state.news && state.news.map((item, index) => this.renderNewsItem(item, index))}
                 </LoadingContent>

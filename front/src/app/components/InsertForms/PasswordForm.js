@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
 import { Formik } from "formik";
-import { FormRow, Input, ErrorText, Button, Label, LabelDiv } from "../Page/Form";
-import DropzonePreview from '../Dropzone/DropzonePreview'
+import { FormRow, Input, ErrorText, Button, Label } from "../Page/Form";
 import { validateMember } from '../../validations/ContentValidation';
-import MembersService from '../../services/members'
-import { ModalSuccess, ModalError } from '../../utils/constants'
 import { connect } from 'react-redux'
 
-import { Modal } from '../Modal/Modal';
-import { ModalContent } from '../Modal/ModalContent';
 import LoadingContent from '../Loaders/LoadingContent';
 import UserService from '../../services/user';
 
@@ -19,7 +14,7 @@ export class PasswordForm extends Component {
     }
 
     submitForm = async(values, resetForm) => {
-        const { state, props } = this
+        const { props } = this
 
         this.setLoading(true)
      
@@ -40,6 +35,7 @@ export class PasswordForm extends Component {
             }
         }
         catch(e) {
+            props.cancel('Ocorreu um erro na alteração da senha')
             this.setLoading(false)
         }
     }
@@ -50,7 +46,7 @@ export class PasswordForm extends Component {
 
     render() {
 
-        const { state } = this
+        const { state, props } = this
 
         return (
             <React.Fragment>
@@ -64,7 +60,7 @@ export class PasswordForm extends Component {
                         render={({ touched, errors, values, handleChange, handleBlur, handleSubmit }) => (
                             <form onSubmit={handleSubmit}>
                                 <React.Fragment>
-                                    <FormRow size='10' offset='1'>
+                                    <FormRow size='8' paddingLess>
                                         <Label>
                                             Senha atual
                                             <Input onChange={handleChange} onBlur={handleBlur} value={values.oldPassword} error={touched.oldPassword && errors.oldPassword}
@@ -72,7 +68,7 @@ export class PasswordForm extends Component {
                                             <ErrorText color="red" error={touched.oldPassword && errors.oldPassword}>{errors.oldPassword}</ErrorText>
                                         </Label>
                                     </FormRow>
-                                    <FormRow size='10' offset='1'>
+                                    <FormRow size='8' paddingLess>
                                         <Label>
                                             Nova senha
                                             <Input onChange={handleChange} onBlur={handleBlur} value={values.newPassword} error={touched.newPassword && errors.newPassword}
@@ -80,7 +76,7 @@ export class PasswordForm extends Component {
                                             <ErrorText color="red" error={touched.newPassword && errors.newPassword}>{errors.newPassword}</ErrorText>
                                         </Label>
                                     </FormRow>
-                                    <FormRow size='10' offset='1'>
+                                    <FormRow size='8' paddingLess>
                                         <Label>
                                             Confirmação de nova senha
                                             <Input onChange={handleChange} onBlur={handleBlur} value={values.confirmPassword} error={touched.confirmPassword && errors.confirmPassword}
@@ -88,10 +84,11 @@ export class PasswordForm extends Component {
                                             <ErrorText color="red" error={touched.confirmPassword && errors.confirmPassword}>{errors.confirmPassword}</ErrorText>
                                         </Label>
                                     </FormRow>
-                                    <FormRow size='10' offset='1'>
-                                        <Button right type="button" onClick={() => this.submitForm(values)}>Alterar senha</Button>
-                                    </FormRow>
                                 </React.Fragment>
+                                <FormRow size='12' paddingLess>
+                                    <Button left type="button" onClick={() => props.cancel()}>Cancelar</Button>
+                                    <Button right type="button" onClick={() => this.submitForm(values)}>Alterar senha</Button>
+                                </FormRow>
                             </form>
                         )}
                     />

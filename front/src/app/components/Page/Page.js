@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Col, Row } from 'reactstrap'
 import { BASE_URL } from '../../utils/constants'
 
 export const ImageSubtitle = styled.span`
@@ -34,6 +33,8 @@ export const PostDate = styled.div`
 export const CreditsContainer = styled.div`
   display: inline-flex;
   margin-bottom: 20px;
+  width: 100%;
+  justify-content: flex-end;
 `
 export const AuthorImage = styled.img`
   height: 40px;
@@ -42,7 +43,7 @@ export const AuthorImage = styled.img`
   margin-right: 5px;
 `
 export const AuthorContainer = styled.div`
-  margin: auto;
+  margin: auto 0;
 `
 
 

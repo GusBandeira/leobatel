@@ -3,7 +3,7 @@ import Dropzone from 'react-dropzone'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Modal } from '../Modal/Modal';
 import { ModalContent } from '../Modal/ModalContent';
-import { Thumb, ThumbInner, ThumbImg, ThumbClose, Remove, ThumbsContainer, InfoMessage, DropzoneContainer, ImageTitle } from './DropzoneComponents'
+import { Thumb, ThumbInner, ThumbImg, ThumbClose, Action, ThumbsContainer, InfoMessage, DropzoneContainer, ImageTitle } from './DropzoneComponents'
 import ImageForm from '../InsertForms/ImageForm'
 import ModalImageContent from '../Modal/ModalImageContent';
 import { Button } from '../Page/Form'
@@ -31,11 +31,10 @@ class DropzonePreview extends React.Component {
 	}
 
 	componentDidUpdate(prevProps){
-		const { props, state } = this
+		const { props } = this
 
 		if(props.removeFile !== prevProps.removeFile && props.removeFile){
 			if(props.multi){
-				const files = [...state.files]
 				this.setState({ files: [], imageDetails: [] })
 			}
 			else {
@@ -197,10 +196,10 @@ class DropzonePreview extends React.Component {
 				<ThumbInner>
 					<ThumbImg src={file.preview} alt="imagem de perfil" onMouseOver={() => this.imageMouseEvent(true)} profile/>
 				</ThumbInner>
-				<Remove onClick={() => this.stashImage()}>
+				<Action onClick={() => this.stashImage()}>
 					<FontAwesomeIcon icon={['fas', 'pen']} className="green"/>
 					<span>Alterar</span>
-				</Remove>
+				</Action>
 				
 			</Thumb>
 		));
@@ -223,16 +222,16 @@ class DropzonePreview extends React.Component {
 						<ImageTitle>
 							{state.imageDetails[index].title} 
 						</ImageTitle>
-						<Remove onClick={() => this.editImage(index + 1)}>
+						<Action onClick={() => this.editImage(index + 1)}>
 							<FontAwesomeIcon icon={['fas', 'pen']} className="green"/>
 							<span>Editar</span>
-						</Remove>
+						</Action>
 					</React.Fragment>
 				}
-				<Remove onClick={() => this.removeFile(index)}>
+				<Action onClick={() => this.removeFile(index)}>
 					<FontAwesomeIcon icon={['fas', 'times']} size='lg' className="red"/>
 					<span>Remover</span>
-				</Remove>
+				</Action>
 			</Thumb>
 		));
 	}
@@ -265,7 +264,7 @@ class DropzonePreview extends React.Component {
 							</Dropzone>
 						}
 						<Dropzone onDropAccepted={this.onDropAccepted.bind(this)} onDropRejected={this.onDropRejected.bind(this)} 
-								accept={accept} maxSize={maxSize} disableClick={profile ? false : true} profile={profile}>
+								accept={accept} maxSize={maxSize} onClick={evt => profile ? false : evt.preventDefault()} profile={profile}>
 							{({ getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject, acceptedFiles }) => {
 								return (
 									<DropzoneContainer
@@ -313,12 +312,12 @@ class DropzonePreview extends React.Component {
 						}	
 					</ThumbsContainer>
 				}
-				{state.stashImage &&
-					<Remove onClick={() => this.unstashImage()}>
-						<FontAwesomeIcon icon={['fas', 'undo']} className="green"/>
-						<span>Retornar Imagem</span>
-					</Remove>
-				}
+					{state.stashImage &&
+						<Action onClick={() => this.unstashImage()}>
+							<FontAwesomeIcon icon={['fas', 'undo']} className="green"/>
+							<span>Retornar Imagem</span>
+						</Action>
+					}
 			</section>
 		);
 	}

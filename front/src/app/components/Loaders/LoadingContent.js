@@ -45,7 +45,7 @@ class LoadingContent extends Component {
                 }
                 {isLoading ? 
                     <LoadingRow>
-                        <Col xs="12" className="">
+                        <Col xs="12">
                             {/* <span className="custom-loader loading g margin-auto" /> */}
                             <LoadingImage src={LEOBatelLogo} alt="Logo Leo Batel"/>
                         </Col>

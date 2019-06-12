@@ -18,7 +18,7 @@ export const ThumbsContainer = styled.aside`
     margin-bottom: 12px;
   `;
 
-export const Remove = styled.div`
+export const Action = styled.div`
   text-align: center;
   font-size: 14px;
   opacity: 0.8;

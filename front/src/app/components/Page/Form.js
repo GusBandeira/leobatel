@@ -4,8 +4,8 @@ import withCounter from '../HOCs/withCounter'
 import { Row, Col } from 'reactstrap'
 
 export const FormRow = (props) => (
-  <Row>
-    <Col lg={{ offset: props.offset, size: props.size }} sm="12">
+  <Row >
+    <Col lg={{ offset: props.offset, size: props.size }} sm="12" style={{ padding: props.paddingLess ? '0' : '0 15px' }}>
       {props.children}
     </Col>
   </Row>
@@ -109,6 +109,7 @@ export const Button = styled.button`
 
   @media screen and (max-width: 768px){
     width: 100%;
+    margin-bottom: 10px;
   }
 `;
 
