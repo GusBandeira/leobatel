@@ -35,6 +35,7 @@ const InsertContent = AsyncComponent(() => import('./pages/InsertContent'));
 const Login = AsyncComponent(() => import('./pages/Login'));
 const CreateAccount = AsyncComponent(() => import('./pages/CreateAccount')); 
 const Profile = AsyncComponent(() => import('./pages/Profile')); 
+const Messages = AsyncComponent(() => import('./pages/Messages')); 
 
 // Component Implementation
 const Main = () => {
@@ -58,6 +59,7 @@ const Main = () => {
         <Route path="/create-account" component={CreateAccount} />
         <Route path="/insert-content" component={InsertContent} />
         <Route path="/my-profile" component={Profile} />
+        <Route path="/messages" component={Messages} />
       </Container>
 
       <Footer />

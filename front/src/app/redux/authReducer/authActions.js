@@ -2,11 +2,11 @@ import axios from 'axios'
 import { OPEN_BASE_URL, API_BASE_URL } from '../../utils/constants'
 
 export function login(values) {
-    return submitLogin(values, `${OPEN_BASE_URL}login`)
+    return submitLogin(values, `${OPEN_BASE_URL}/login`)
 }
 
 export async function signup(values) {
-    return await submitSignUp(values, `${API_BASE_URL}signup`)
+    return await submitSignUp(values, `${API_BASE_URL}/signup`)
 }
 
 function submitLogin(values, url) {

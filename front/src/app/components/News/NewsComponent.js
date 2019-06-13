@@ -24,9 +24,6 @@ const INITIAL_STATE = {
 export class NewsComponent extends Component {
 
     state = { ...INITIAL_STATE }
-
-    componentDidMount(){
-    }
     
     componentDidUpdate(prevProps){
         const { props } = this
@@ -54,8 +51,7 @@ export class NewsComponent extends Component {
     formatImage = (sp, imageCounter) => {
 
         const { props } = this
-        sp = sp.replace('/image', '')
-        sp = sp ? Number(sp.trim()) - 1 : imageCounter
+        sp = imageCounter
 
         if(props.news.detail[sp] && props.news.detail[sp]){
             const image = {
@@ -95,11 +91,11 @@ export class NewsComponent extends Component {
         let data = []
         let imageCounter = 1
         split.forEach(sp => {
-            if (sp.trim().substring(0, 6).includes('/image') && values.photo[imageCounter]) {
+            if (sp.includes('/image') && values.photo[imageCounter]) {
                 data.push(this.formatImage(sp, imageCounter))
                 imageCounter++
             }
-            else if (sp.trim() && !sp.includes('/image')) {
+            else if (sp.length && sp.trim() && !sp.includes('/image')) {
                 data.push(this.formatTextType(sp, 'p'))
             }
         })

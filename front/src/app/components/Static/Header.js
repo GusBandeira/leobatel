@@ -223,6 +223,9 @@ class Header extends Component {
                                         <OptionsRow  onClick={() => this.onClickOption("/my-profile")}>
                                             Meu perfil
                                         </OptionsRow>
+                                        <OptionsRow  onClick={() => this.onClickOption("/messages")}>
+                                            Mensagens
+                                        </OptionsRow>
                                         <OptionsRow  onClick={() => { props.logout(); this.onClickOption("/")}}>
                                             Sair
                                         </OptionsRow>

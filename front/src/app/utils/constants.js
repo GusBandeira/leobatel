@@ -15,7 +15,7 @@ export { ModalError, ModalSuccess }
 
 //** BASE URLS **//
 const BASE_URL = process.env.REACT_APP_BASE_URL;
-const API_BASE_URL = process.env.REACT_APP_BASE_URL + 'api/';
-const OPEN_BASE_URL = process.env.REACT_APP_BASE_URL + 'oapi/';
+const API_BASE_URL = process.env.REACT_APP_BASE_URL + 'api';
+const OPEN_BASE_URL = process.env.REACT_APP_BASE_URL + 'oapi';
 
 export { BASE_URL, OPEN_BASE_URL, API_BASE_URL }

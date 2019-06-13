@@ -107,16 +107,20 @@ module.exports = function (server) {
     // News Routes
     const News = require('../api/news/newsService')
     News.register(protectedApi, '/News')
-
-
+    // Message Routes
+    
+    
     /*
     * Open routes
     */
-    const openApi = express.Router()
-    server.use('/oapi', openApi)
-    const AuthService = require('../api/auth/AuthService')
-    openApi.post('/login', AuthService.login)
-    protectedApi.post('/signup', AuthService.signup)
-    protectedApi.post('/password', AuthService.changePassword)
-    openApi.post('/validateToken', AuthService.validateToken)
+   const openApi = express.Router()
+   server.use('/oapi', openApi)
+   const AuthService = require('../api/auth/AuthService')
+   openApi.post('/login', AuthService.login)
+   protectedApi.post('/signup', AuthService.signup)
+   protectedApi.post('/password', AuthService.changePassword)
+   openApi.post('/validateToken', AuthService.validateToken)
+
+   const Message = require('../api/message/messageService')
+   Message.register(openApi, '/Message')
 }
