@@ -61,16 +61,16 @@ const MenuListItem = styled.li`
 `
 const OptionsDrop = styled.div`
     opacity: ${props => props.open ? 1 : 0};
-    margin-top: ${props => props.open ? '0px' : '-15px'};
+    margin-top: ${props => props.open ? '0px' : '0px'};
     float: right;
-    transition: all .3s ease-in-out;
+    transition: all .2s ease-in-out;
     background-color: white;
     box-shadow: 0 0 3px #ccc;
     padding:  ${props => props.open ? '10px' : '0'};
     width: 220px;
 
     height: ${props => props.open ? 'auto' : '0'};
-    display: ${props => props.open ? 'block' : 'none'};
+    display: ${props => props.open ? 'block' : 'inline'};
 
     div:last-child {
         border-bottomn: none;
@@ -85,6 +85,7 @@ const OptionsRow = styled.div`
     border-bottomn: 1px solid lightgray;
     display: flex;
     flex-wrap: wrap;
+    color: ${props => props.open ? 'black' : 'transparent'};
     
 
     :hover{
@@ -214,19 +215,19 @@ class Header extends Component {
                                         }
                                     </ul>
                                     <OptionsDrop open={state.open}>
-                                        <OptionsRow onClick={() => this.onClickOption("/insert-content")}>
+                                        <OptionsRow open={state.open} onClick={() => this.onClickOption("/insert-content")}>
                                             Inserir Conteúdo
                                         </OptionsRow>
-                                        <OptionsRow onClick={() => this.onClickOption("/create-account")}>
+                                        <OptionsRow open={state.open} onClick={() => this.onClickOption("/create-account")}>
                                             Cadastrar Usuário
                                         </OptionsRow>
-                                        <OptionsRow  onClick={() => this.onClickOption("/my-profile")}>
+                                        <OptionsRow open={state.open} onClick={() => this.onClickOption("/my-profile")}>
                                             Meu perfil
                                         </OptionsRow>
-                                        <OptionsRow  onClick={() => this.onClickOption("/messages")}>
+                                        <OptionsRow open={state.open} onClick={() => this.onClickOption("/messages")}>
                                             Mensagens
                                         </OptionsRow>
-                                        <OptionsRow  onClick={() => { props.logout(); this.onClickOption("/")}}>
+                                        <OptionsRow open={state.open} onClick={() => { props.logout(); this.onClickOption("/")}}>
                                             Sair
                                         </OptionsRow>
                                     </OptionsDrop>

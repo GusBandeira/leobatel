@@ -23,17 +23,19 @@ export const SelectSpan = styled.span`
     font-size: 14px;
     cursor: pointer;
     outline: none;
+    margin: 5px 0 auto;
   }
 
   ::after {
     content: "";
     position: absolute;
     width: 30px;
-    height: 100%;
+    height:  calc(100% - 5px);
     border-radius: 0 5px 5px 0;
     background-color: darkcyan;
     right: 15px;
     pointer-events: none;
+    margin: 5px 0;
   }
 
   ::before{
@@ -45,7 +47,7 @@ export const SelectSpan = styled.span`
     border-right: 7px solid transparent;
     border-top: 7px solid white;
     right: 23px;
-    TOP: 12px;
+    top: 16px;
     z-index: 1;
     pointer-events: none;
   }

@@ -3,9 +3,10 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { login, signup } from '../redux/authReducer/authActions'
 import { Formik } from "formik";
-import { FormRow, Input, ErrorText, Button, Label } from "../components/Page/Form";
+import { FormRow, Input, ErrorText, Button, Label, Select } from "../components/Page/Form";
 import { CoverImage } from '../components/Page/ImageFrame'
 import friends from '../../images/friends.jpg'
+import { Col } from 'reactstrap'
 
 class Auth extends Component {
     constructor(props) {
@@ -71,6 +72,22 @@ class Auth extends Component {
                                             Nome de Usuário
                                             <Input onChange={handleChange} onBlur={handleBlur} value={values.userName} error={touched.userName && errors.userName}
                                                 type="text" name="userName" placeholder="Nome de Usuário" maxLength='50' />
+                                            <ErrorText color="red" error={touched.userName && errors.userName}>{errors.userName}</ErrorText>
+                                        </Label>
+                                    </FormRow>
+                                    <FormRow size='10' offset='1'>
+                                        <Label>
+                                            Cargo
+                                            <Col sm={{ size: 4 }} className="no-padding-left">
+                                                <Select name="type" onChange={e => this.setState({ contentType: e.target.value })} 
+                                                        readOnly={false}>
+                                                    <option default hidden>Selecione</option>
+                                                    <option value={1} title="Membros normais">Membro</option>
+                                                    <option value={2}>Editor</option>
+                                                    <option value={3}>Administrador</option>
+                                                    <option value={5}>Master</option>
+                                                </Select>
+                                            </Col>
                                             <ErrorText color="red" error={touched.userName && errors.userName}>{errors.userName}</ErrorText>
                                         </Label>
                                     </FormRow>
