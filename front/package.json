@@ -33,7 +33,7 @@
     "yup": "^0.26.10"
   },
   "devDependencies": {
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "node-sass-chokidar": "0.0.3"
   },
   "engines": {
